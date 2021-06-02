@@ -27,10 +27,10 @@
                         ตรวจสอบวันนัดรับบริการวัคซีน</a>
                     <a class="btn btn-success" type="button" target="_blank"
                         href="<?php echo site_url('org_vaccine');?>"><i class="fa fa-file"></i> Report</a>
-                    <a class="btn btn-success" type="button"
+                    <a class="btn btn-success disabled" type="button"
                         href="<?php echo site_url('whitelist_organization/add_whitelist')?>" id=""><i
                             class="fa fa-plus-circle"></i> ลงทะเบียนฉีดวัคซีน</a>
-                    <a href="<?php echo site_url('excel_export/whitelist_org/'); ?>" class="btn  btn-success"
+                    <a href="<?php echo site_url('excel_export/whitelist_org/'); ?>" class="btn  btn-success dia"
                         type="button">
                         <i class="fa fa-file-excel-o"></i> ส่งออก Excel </a>
                 </div>

@@ -31,6 +31,7 @@ class Whitelist_organization extends CI_Controller
     }
     public function add_whitelist()
     {
+        redirect(site_url("whitelist_organization"));
         //$data["campur"] = $this->crud->get_campur();
         $data["cchangwat"] = $this->crud->get_cchangwat();
         $this->layout->view('whitelist_organization/add_whitelist',$data);
@@ -58,7 +59,7 @@ class Whitelist_organization extends CI_Controller
                 $sub_array[] = $row->tel;
                
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
-                <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
+                <button class="btn btn-outline btn-danger hidden" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
                 $data[] = $sub_array;
         }
         $output = array(
