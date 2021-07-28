@@ -164,5 +164,14 @@ class Basic_model extends CI_Model
 
         return count($rs) > 0 ? $rs->hmain : '-';
     }
+    public function set_toggle_data($id, $val, $table, $filed)
+    {
+        if($val==1){$val=0;} else if($val==0){$val=1;}
+        $rs = $this->db
+            ->set($filed,$val)
+            ->where('id', $id)
+            ->update($table);
+        return $rs;
+    }
 
 }

@@ -31,7 +31,7 @@ class Whitelist_organization extends CI_Controller
     }
     public function add_whitelist()
     {
-        redirect(site_url("whitelist_organization"));
+        //redirect(site_url("whitelist_organization"));
         //$data["campur"] = $this->crud->get_campur();
         $data["cchangwat"] = $this->crud->get_cchangwat();
         $this->layout->view('whitelist_organization/add_whitelist',$data);

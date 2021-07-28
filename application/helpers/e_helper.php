@@ -139,7 +139,28 @@ if(!function_exists('to_thai_date'))
         }
     }
 }
+if(!function_exists('mysql_to_eng_date'))
+{
+    function mysql_to_eng_date($mysql_date)
+    {
+        if(strlen($mysql_date) != 10)
+        {
+            return ' ';
+        }
+        else
+        {
+            $new_date = explode('-', $mysql_date);
 
+            $new_y = $new_date[0];
+            $new_m = $new_date[1];
+            $new_d = $new_date[2];
+
+            $thai_date = $new_d . '/' . $new_m . '/' . $new_y;
+
+            return $thai_date;
+        }
+    }
+}
 if(!function_exists('get_thai_month'))
 {
     function get_thai_month()
@@ -942,6 +963,67 @@ if(!function_exists('get_hospmain'))
 
         return $hospmain;
     }
+}
+
+if(!function_exists('get_process_status'))
+{
+
+    function get_process_status()
+    {
+        $ci = get_instance();
+        $rs = $ci->db
+            ->select('name')
+            ->get('cprocess_status')
+            ->result_array();
+        return $rs;
+
+    }
+}
+if(!function_exists('get_lab_type'))
+{
+
+    function get_lab_type()
+    {
+        $ci = get_instance();
+        $rs = $ci->db
+            ->select('name')
+            ->get('clab_type')
+            ->result_array();
+        return $rs;
+
+    }
+
+    if(!function_exists('get_ctravel_status'))
+    {
+
+    function get_ctravel_status()
+    {
+        $ci = get_instance();
+        $rs = $ci->db
+            ->select('name')
+            ->get('ctravel_status')
+            ->result_array();
+        return $rs;
+
+    }
+}
+
+if(!function_exists('get_ctravel_type'))
+    {
+
+    function get_ctravel_type()
+    {
+        $ci = get_instance();
+        $rs = $ci->db
+            ->select('name')
+            ->get('ctravel_type')
+            ->result_array();
+        return $rs;
+
+    }
+}
+
+
 }
 /* End of file epidem_helper.php */
 /* Location: ./application/helpers/epidem_helper.php */
