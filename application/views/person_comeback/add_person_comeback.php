@@ -159,7 +159,6 @@
                     <div class="form-group">
                         <label for="lab_type">ประเภทผล Lab</label>
                         <select class="form-control" id="lab_type" placeholder="ประเภท Lab" value="" style="width:100%">
-                            <option></option>
                             <?php
                              foreach ($clab_type as $r) { 
                                 $sl='';
@@ -173,7 +172,6 @@
                     <label for="from_province">หน่วยบริการตามทะเบียนบ้าน</label>
                     <select class="form-control" id="hospcode" placeholder="หน่วยบริการวัคซีน" value=""
                         style="width:100%">
-                        <option></option>
                         <?php
                              foreach ($chospmain as $r) { 
                                 $sl='';
@@ -187,7 +185,6 @@
                         <label for="travel_type">ประเภทการเดินทาง</label>
                         <select class="form-control" id="travel_type" placeholder="ประเภทการเดินทาง" value=""
                             style="width:100%">
-                            <option></option>
                             <?php
                              foreach ($ctravel_type as $r) { 
                                 $sl='';
@@ -202,7 +199,6 @@
                         <label for="travel_status">สถานะการเดินทาง</label>
                         <select class="form-control" id="travel_status" placeholder="สถานะการเดินทาง" value=""
                             style="width:100%">
-                            <option></option>
                             <?php
                              foreach ($ctravel_status as $r) {  
                                 $sl='';
@@ -239,7 +235,6 @@
                         <label for="travel_status">***สถานะดำเนินการ*** </label>
                         <select class="form-control" id="process_status" placeholder="สถานะการเดินทาง" value=""
                             style="width:100%">
-                            <option></option>
                             <?php
                             
                              foreach ($cprocess_status as $r) {  
