@@ -252,6 +252,12 @@ $(document).on("click", 'button[data-btn="btn_edit"]', function (e) {
   window.location = site_url + "/person_comeback/add_person_comeback/" + id;
 });
 
+$(document).on("click", 'button[data-btn="btn_files"]', function (e) {
+  e.preventDefault();
+  var id = $(this).data("id");
+  window.location = site_url + "/person_comeback/files/" + id;
+});
+
 $(document).on("click", 'button[data-btn="btn_view"]', function (e) {
   e.preventDefault();
   var id = $(this).data("id");

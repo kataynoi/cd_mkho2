@@ -8,10 +8,11 @@ class Person_comeback extends CI_Controller
     {
         parent::__construct();
 
-        //if($this->session->userdata("user_type") != 1)
-        //   redirect(site_url("user/login"));
+        if(!$this->session->userdata("comeback_login"))
+           redirect(site_url("user/login_comeback"));
         // $this->layout->setLeft("layout/left_admin");
-        $this->layout->setLayout('print_layout');
+        $this->layout->setHeader('layout/header_comeback');
+        $this->layout->setLayout('comeback_layout');
         $this->load->model('Person_comeback_model', 'crud');
     }
 
@@ -45,13 +46,14 @@ class Person_comeback extends CI_Controller
 
             if($row->sat_confirm_bed==1){$color_b='btn-success';$fa_b='fa-check';}else{$color_b='btn-danger';$fa_b='fa-times';};
             if($row->sat_confirm_travel==1){$color_t='btn-success';$fa_t='fa-check';}else{$color_t='btn-danger';$fa_t='fa-times';};
-            //if($row->sat_confirm_travel==1){$confirm_travel=$sat_confirm_travel[1];}else{$confirm_travel=$sat_confirm_travel[0];};
-            $sat_confirm_bed='<button class="btn  btn-xs '.$color_b.'" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
-            $sat_confirm_travel='<button class="btn  btn-xs '.$color_t.'" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
+            $sat_confirm_bed='<button class="btn  btn-xs '.$color_b.'" alt="แจ้งSATได้เตียง" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
+            $sat_confirm_travel='<button class="btn  btn-xs  '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
+            $attach_files='<a class="btn btn-info btn-xs" href="'.site_url('person_comeback/files/').$row->id.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
+            แนบไฟลล์</a>';
             $sub_array = array();
             $sub_array[] = to_thai_date_time($row->date_input);
-            $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.'</div></p>';
-            //$sub_array[] =$test;
+            $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.'</div></p>';
+        
             $sub_array[] = $process_status[$row->process_status-1]["name"];
             $sub_array[] = $travel_status[$row->travel_status-1]["name"];;
             $sub_array[] = $lab_type[$row->lab_type-1]["name"];
@@ -175,5 +177,9 @@ class Person_comeback extends CI_Controller
         }
 
         render_json($json);
+    }
+    public function files ($id){
+        $data['files']= "";
+        $this->layout->view('person_comeback/files',$data);
     }
 }

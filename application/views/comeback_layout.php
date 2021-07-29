@@ -10,9 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <?PHP
-    $theme = 'https://www.w3schools.com/lib/w3-theme-blue.css'; ?>
-    <title><?php echo version();?></title>
+
+    <title></title>
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
     <!-- Bootstrap Core CSS -->
@@ -27,7 +26,7 @@
     <link href="<?php echo base_url()?>assets/vendor/css/freeow.css" rel="stylesheet">
     <!--Set Color Page-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <!--
         https://www.w3schools.com/w3css/w3css_color_themes.asp
     -->
@@ -47,7 +46,7 @@
 <style>
 body {
     font-family: 'Kanit', sans-serif;
-    font-size: 100%;
+    font-size: 90%;
 }
 </style>
 <!-- Custom Fonts -->
@@ -88,25 +87,19 @@ var site_url = '<?php echo site_url()?>';
 var base_url = '<?php echo base_url()?>';
 var user_id = '<?php echo $this->session->userdata('id')?>';
 var user_name = '<?php echo $this->session->userdata('fullname')?>';
-var year = '<?php echo date('Y')+543;?>'
+var year = '<?php echo date('Y')+543;?>';
+var n_date = '<?php echo date('d/m/');?>' + year;
 var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+console.log(n_date);
 </script>
 
 <body>
 
     <div id="wrapper">
-
+        <div>
+            <?php echo $header_for_layout?>
+        </div>
         <!-- Navigation -->
-        <nav class="navbar w3-theme" role="" style="margin-bottom: 0;">
-            <div>
-
-            </div>
-            <!-- /.navbar-static-side -->
-            <div id="left_menu" style="padding-left: 2%;border: 0px;">
-                <?php echo $left_for_layout?>
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
         <div>
             <div id="page-wrapper" style="padding-left: 3%;border: 0px;">
                 <!-- <button id="hide_left" data-show="true">Hide</button>-->

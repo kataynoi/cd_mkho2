@@ -9,7 +9,7 @@ class Person extends CI_Controller
     {
         parent::__construct();
 
-        if (!$this->session->userdata("login"))
+        if (!$this->session->userdata("login_comeback"))
             redirect(site_url("user/login"));
         $this->load->model('Person_model', 'crud');
         $this->hdc = $this->load->database('hdc', true);

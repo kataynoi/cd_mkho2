@@ -14,7 +14,7 @@ class Person_comeback_model extends CI_Model
 
     function make_query()
     {
-        $this->db->from($this->table);
+        $this->db->where('owner',$this->session->userdata('id'))->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
             $this->db->like("cid", $_POST["search"]["value"]);

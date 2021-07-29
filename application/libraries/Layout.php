@@ -29,7 +29,7 @@ class Layout
     $this->leftAdmin=$txt;
 }
     function  setHeader($txt='layout/header'){
-        $this->left=$txt;
+        $this->header=$txt;
     }
     function  setHeader_cer($txt='layout/header_cer'){
         $this->left=$txt;
