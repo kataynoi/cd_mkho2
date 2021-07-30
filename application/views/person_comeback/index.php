@@ -21,20 +21,29 @@
             </div>
             <div class="panel-body">
 
-                <table id="table_data" class="table table-responsive">
+                <table id="table_data" class="table table-responsive" style="width:180%">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>วันที่บันทึก</th>
                             <th>แจ้งSATได้เตียง | แจ้งSATเดินทาง</th>
                             <th>สถานะดำเนินการ</th>
-                            <th>สถานะการเดินทาง</th>
-                            <th>ผล LAB</th>
-                            <th>เลขบัตรประชาชน</th>
                             <th>ชื่อ-สกุล</th>
+                            <th>เลขบัตรประชาชน</th>
+                            <th>ผล LAB</th>
+                            <th>วันที่ตรวจ Lab</th>
                             <th>เบอร์โทร</th>
-                            <th>ที่อยู่</th>
                             <th>สถานะการเดินทาง</th>
-                            <th>#</th>
+                            <th>วันที่เดินทางมาถึง</th>
+                            <th>ที่อยู่</th>
+                            <th>ประเภทการเดินทาง</th>
+                            <th>อายุ</th>
+                            <th>เพศ</th>
+                            <th>น้ำหนัก</th>
+                            <th>อาการ</th>
+                            <th>โรคประจำตัว</th>
+                            <th>บันทึกเพิ่มเติม</th>
+
                         </tr>
                     </thead>
 

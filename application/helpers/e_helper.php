@@ -716,7 +716,16 @@ if(!function_exists('DateTimeDiff'))
         return $second;
     }
 }
-
+if(!function_exists('DateDiff'))
+{
+    
+    function DateDiff($strDateTime1) {
+            $now = date('Y-m-d');
+            $second = strtotime ( $now ) - strtotime ( $strDateTime1 );
+            $re = (floor ( $second / 86400 ) % 30.5) . " วัน ";
+        return $re;
+    }
+}
 if(!function_exists('DateFormatDiff'))
 {
 
@@ -1022,7 +1031,16 @@ if(!function_exists('get_ctravel_type'))
 
     }
 }
-
+if(!function_exists('get_chronic'))
+    {function get_chronic(){
+        $ci = get_instance();
+        $rs = $ci->db
+            ->select('name')
+            ->get('cchronic')
+            ->result_array();
+        return $rs;
+    }
+}
 
 }
 /* End of file epidem_helper.php */

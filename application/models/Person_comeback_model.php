@@ -69,7 +69,17 @@ class Person_comeback_model extends CI_Model
     public function save_person_comeback($data)
     {
         $birth= to_mysql_date($data["birth"]);
-        $travel_date= to_mysql_date($data["travel_date"]);
+        if($data["lab_type"]==1){
+            $lab_date=null;
+        }else{
+            $lab_date= to_mysql_date($data["lab_date"]);
+        }
+        if($data["travel_status"]!=2){
+            $travel_date=null;
+        }else{
+            $travel_date= to_mysql_date($data["travel_date"]);
+        }
+        
         $rs = $this->db
             ->set("id", $data["id"])
             //->set("sat_confirm_bed", $data["sat_confirm_bed"])
@@ -91,14 +101,15 @@ class Person_comeback_model extends CI_Model
             ->set("name", $data["name"])
             ->set("lname", $data["lname"])
             ->set("sex", $data["sex"])
+            ->set("chronic", $data["chronic"])
+            ->set("weight", $data["weight"])
+            ->set("lab_date", $lab_date)
             ->set("birth", $birth)
             ->set("age_y", $data["age_y"])
             ->set("tel", $data["tel"])
             ->set("date_input", date('Y-m-d H:i:s'))
             ->set("note", $data["note"])
             ->set("symptom", $data["symptom"])
-            //->set("confirm_case", $data["confirm_case"])
-            //->set("call_confirm", $data["call_confirm"])
             ->insert('person_comeback');
 
         return $this->db->insert_id();
@@ -106,34 +117,45 @@ class Person_comeback_model extends CI_Model
     public function update_person_comeback($data)
     {
         $birth= to_mysql_date($data["birth"]);
-        $travel_date= to_mysql_date($data["travel_date"]);
+        if($data["lab_type"]==4){
+            $lab_date=null;
+        }else{
+            $lab_date= to_mysql_date($data["lab_date"]);
+        }
+        if($data["travel_status"] <=3 || $data["travel_status"] ==9){
+            $travel_date=null;
+        }else{
+            $travel_date= to_mysql_date($data["travel_date"]);
+        }
         $rs = $this->db
 
-            ->set("process_status", $data["process_status"])
-            ->set("travel_status", $data["travel_status"])
-            ->set("travel_date", $travel_date)
-            ->set("travel_type", $data["travel_type"])
-            ->set("lab_type", $data["lab_type"])
-            ->set("prov", $data["prov"])
-            ->set("amp", $data["ampur"])
-            ->set("tambon", $data["tambon"])
-            ->set("moo", $data["moo"])
-            ->set("no", $data["no"])
-            ->set("address", $data["address"])
-            ->set("hospcode", $data["hospcode"])
-            ->set("cid", $data["cid"])
-            ->set("prename", $data["prename"])
-            ->set("name", $data["name"])
-            ->set("lname", $data["lname"])
-            ->set("sex", $data["sex"])
-            ->set("birth", $birth)
-            ->set("age_y", $data["age_y"])
-            ->set("tel", $data["tel"])
-            //->set("date_input", date('Y-m-d H:i:s'))
-            ->set("note", $data["note"])
-            ->set("symptom", $data["symptom"])
-            ->where("id", $data["id"])
-             ->update('person_comeback');
+        ->set("process_status", $data["process_status"])
+        ->set("travel_status", $data["travel_status"])
+        ->set("travel_date", $travel_date)
+        ->set("travel_type", $data["travel_type"])
+        ->set("lab_type", $data["lab_type"])
+        ->set("prov", $data["prov"])
+        ->set("amp", $data["ampur"])
+        ->set("tambon", $data["tambon"])
+        ->set("moo", $data["moo"])
+        ->set("no", $data["no"])
+        ->set("address", $data["address"])
+        ->set("hospcode", $data["hospcode"])
+        ->set("cid", $data["cid"])
+        ->set("prename", $data["prename"])
+        ->set("name", $data["name"])
+        ->set("lname", $data["lname"])
+        ->set("sex", $data["sex"])
+        ->set("chronic", $data["chronic"])
+        ->set("weight", $data["weight"])
+        ->set("lab_date", $lab_date)
+        ->set("birth", $birth)
+        ->set("age_y", $data["age_y"])
+        ->set("tel", $data["tel"])
+        ->set("note", $data["note"])
+        ->set("symptom", $data["symptom"])
+        ->where("id", $data["id"])
+        ->update('person_comeback');
 
         return $rs;
     }
@@ -227,6 +249,12 @@ class Person_comeback_model extends CI_Model
     public function get_cprocess_status()
     {       $rs = $this->db
             ->get("cprocess_status")
+            ->result();
+        return $rs;
+    }
+    public function get_cchronic()
+    {       $rs = $this->db
+            ->get("cchronic")
             ->result();
         return $rs;
     }

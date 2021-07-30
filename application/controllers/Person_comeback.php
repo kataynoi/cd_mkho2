@@ -33,13 +33,7 @@ class Person_comeback extends CI_Controller
         $process_status = get_process_status();
         $travel_status = get_ctravel_status();
         $travel_type = get_ctravel_type();
-        //$sat_confirm_bed = array('<div class="btn btn-danger btn-xs "><i class="fa fa-times" aria-hidden="true"></i>
-        //</div>','<div class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></div>');
-        //$sat_confirm_travel = array('<div class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i>
-        
-        //</div>','<div class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></div>');
-  
-        //echo $lab_type;
+        $chronic = get_chronic();
         $row_id1=1;
         $row_id2=1;
         foreach ($fetch_data as $row) {
@@ -50,38 +44,33 @@ class Person_comeback extends CI_Controller
             $sat_confirm_travel='<button class="btn  btn-xs  '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
             $attach_files='<a class="btn btn-info btn-xs" href="'.site_url('person_comeback/files/').$row->id.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
             แนบไฟลล์</a>';
+           
             $sub_array = array();
+            $sub_array[] = '<div class="btn-group pull-right" role="group" >
+            <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
+           
             $sub_array[] = to_thai_date_time($row->date_input);
             $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.'</div></p>';
-        
             $sub_array[] = $process_status[$row->process_status-1]["name"];
-            $sub_array[] = $travel_status[$row->travel_status-1]["name"];;
-            $sub_array[] = $lab_type[$row->lab_type-1]["name"];
-            $sub_array[] = $row->cid;
             $sub_array[] = $row->prename.$row->name."  ".$row->lname;
+            $sub_array[] = $row->cid;
+            $sub_array[] = $lab_type[$row->lab_type-1]["name"];
+            $sub_array[] =  $row->lab_date ? to_thai_date($row->lab_date)."  <br>ตรวจมาแล้ว ".DateDiff($row->lab_date)."":"";
             $sub_array[] = $row->tel;
+            $sub_array[] = $travel_status[$row->travel_status-1]["name"];
+            $sub_array[] = to_thai_date($row->travel_date);
             $sub_array[] = "". $row->no." ".get_address($row->moo);
-            $sub_array[] = $travel_type[$row->travel_type-1]["name"];
-
-
-           
-            $sub_array[] = '<div class="btn-group pull-right" role="group" >
-                <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>
-                <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
-                $sub_array[] = $row->travel_date;
-           
-        
-                $sub_array[] = $row->hospcode;
-                
-    
-                $sub_array[] = $row->sex;
-                $sub_array[] = $row->birth;
-                $sub_array[] = $row->age_y;
-                $sub_array[] = $row->hsub;
-                
-                $sub_array[] = $row->note;
-                $sub_array[] = $row->confirm_case;
-                $sub_array[] = $row->call_confirm;
+            $sub_array[] = $travel_type[$row->travel_type-1]["name"];  
+            $sub_array[] = $row->age_y;
+            $sub_array[] = $row->sex==1 ? 'ชาย':'หญิง';
+            $sub_array[] = $row->weight;
+            $sub_array[] = $row->symptom;
+            $sub_array[] = $chronic[$row->chronic-1]["name"];
+            $sub_array[] = $row->note;
+           // $sub_array[] = $row->confirm_case;
+           //     $sub_array[] = $row->call_confirm;
+               // $sub_array[] = $row->birth;
                 $data[] = $sub_array;
                 $row_id1++;$row_id2++;
         }
@@ -154,6 +143,7 @@ class Person_comeback extends CI_Controller
         $data["ctravel_type"] = $this->crud->get_ctravel_type();
         $data["cprocess_status"] = $this->crud->get_cprocess_status();
         $data["chospmain"] = $this->crud->get_hospmain();
+        $data["chronic"] = $this->crud->get_cchronic();
         $this->layout->view('person_comeback/add_person_comeback', $data);
     }
 

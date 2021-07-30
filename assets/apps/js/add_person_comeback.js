@@ -2,23 +2,23 @@ $(document).ready(function () {
   //$("#prov").select2();
   var birth = $("#birth").val();
   var travel_date = $("#travel_date").val();
-  $(".datepicker")
-    .datepicker({
-      format: "dd/mm/yyyy",
-      todayBtn: false,
-      language: "th", //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-      thaiyear: true, //Set เป็นปี พ.ศ.
-      autoclose: true,
-    })
-    .datepicker("setDate", "0");
+  var lab_date = $("#lab_date").val();
+  $(".datepicker").datepicker({
+    format: "dd/mm/yyyy",
+    todayBtn: false,
+    language: "th", //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+    thaiyear: true, //Set เป็นปี พ.ศ.
+    autoclose: true,
+  });
   if (birth) {
     $("#birth").datepicker("setDate", birth);
   }
   if (travel_date) {
     $("#travel_date").datepicker("setDate", travel_date);
   }
-
-  $("#date_in").datepicker();
+  if (lab_date) {
+    $("#lab_date").datepicker("setDate", lab_date);
+  }
 });
 
 var crud = {};
@@ -133,27 +133,6 @@ crud.get_update = function (id, row_id) {
   });
 };
 
-crud.set_update = function (data, row_id) {
-  $("#row_id").val(row_id);
-  $("#id").val(data.rows["id"]);
-  $("#organization").val(data.rows["organization"]);
-  $("#target_type").val(data.rows["target_type"]);
-  $("#prov").val(data.rows["prov"]);
-  $("#amp").val(data.rows["amp"]);
-  $("#tambon").val(data.rows["tambon"]);
-  $("#moo").val(data.rows["moo"]);
-  $("#hospname").val(data.rows["hospname"]);
-  $("#hospcode").val(data.rows["hospcode"]);
-  $("#cid").val(data.rows["cid"]);
-  $("#prename").val(data.rows["prename"]);
-  $("#name").val(data.rows["name"]);
-  $("#lname").val(data.rows["lname"]);
-  $("#sex").val(data.rows["sex"]);
-  $("#birth").val(data.rows["birth"]);
-  $("#tel").val(data.rows["tel"]);
-  $("#vaccine").val(data.rows["vaccine"]);
-};
-
 $("#btn_save").on("click", function (e) {
   e.preventDefault();
   var action;
@@ -174,8 +153,11 @@ $("#btn_save").on("click", function (e) {
   items.birth = $("#birth").val();
   items.age_y = $("#age_y").val();
   items.tel = $("#tel").val();
+  items.weight = $("#weight").val();
+  items.chronic = $("#chronic").val();
 
   items.lab_type = $("#lab_type").val();
+  items.lab_date = $("#lab_date").val();
   items.travel_date = $("#travel_date").val();
   items.travel_type = $("#travel_type").val();
   items.travel_status = $("#travel_status").val();
@@ -221,6 +203,9 @@ function validate(items) {
     $("#prov").focus();
   } else if (!items.ampur) {
     swal("กรุณาระบุอำเภอ");
+    $("#amp").focus();
+  } else if (items.lab_type != 4 && !items.lab_date) {
+    swal("กรุณาระบุวันที่ตรวจ Lab");
     $("#amp").focus();
   } else if (!items.process_status) {
     swal("กรุณาระบุสถานะดำเนินการ");

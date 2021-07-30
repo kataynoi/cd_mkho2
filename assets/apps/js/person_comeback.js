@@ -3,6 +3,7 @@ $(document).ready(function () {
     createdRow: function (row, data, dataIndex) {
       $(row).attr("name", "row" + dataIndex);
     },
+    scrollX: true,
     processing: true,
     serverSide: true,
     order: [],

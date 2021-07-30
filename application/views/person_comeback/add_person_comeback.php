@@ -11,20 +11,12 @@
 <title>มหาสารคาม พร้อม!!</title>
 
 <body>
-    <div id="register">
 
+    <div id="register">
+        <br>
         <div class="panel panel-info ">
             <div class="panel-heading w3-theme">
                 <i class="fa fa-user fa-2x "></i> ยินดีต้อนรับ ชาวมหาสารคามกลับบ้าน
-            </div>
-            <div class="alert alert-primary" role="alert">
-                <ul style="list-style-type: none">
-                    <li>1. xxx </li>
-                    <li>2. xxx </li>
-                    <li>3. xxx </li>
-                    <li>4. xxx </li>
-                    <li>5. xxx </li>
-                </ul>
             </div>
             <form>
                 <input type="hidden" id="action" value="<?php echo $action;?>">
@@ -71,19 +63,8 @@
                     <div class="form_group col-md-3">
                         <label for="birth">วันเกิด</label>
                         <input type="text" id="birth" data-type="date" class="form-control datepicker"
-                            data-date-language="th" placeholder="01/04/2563" title="ระบุวันที่" data-rel="tooltip"
+                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
                             value="<?php echo isset($person->birth) ? mysql_to_eng_date($person->birth) :""; ?>">
-                    </div>
-                    <div class="form_group col-md-3">
-                        <label for="birth">อายุ</label>
-                        <input type="text" id="age_y" class="form-control "
-                            value="<?php echo isset($person->age_y) ? $person->age_y :""; ?>">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="tel">โทร</label>
-                        <input type="text" class="form-control" id="tel" placeholder="โทร"
-                            value="<?php echo isset($person->tel) ? $person->tel :""; ?>"
-                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                     </div>
 
                     <div class="form-group col-md-3">
@@ -146,6 +127,44 @@
                         <input type="text" class="form-control" id="no" placeholder="บ้านเลขที่"
                             value="<?php echo isset($person->no) ? $person->no :""; ?>">
                     </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="tel">โทร</label>
+                        <input type="text" class="form-control" id="tel" placeholder="โทร"
+                            value="<?php echo isset($person->tel) ? $person->tel :""; ?>"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="tel">น้ำหนัก</label>
+                        <input type="text" class="form-control" id="weight" placeholder="น้ำหนัก"
+                            value="<?php echo isset($person->weight) ? $person->weight :""; ?>"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="moo">โรคประจำตัว</label>
+                        <select class="form-control" id="chronic" placeholder="โรคประจำตัว" value="">
+                            <option></option>
+                            <?php
+                           
+                                foreach ($chronic as $r) {
+                                    $sl='';
+                                    if($r->id==$person->chronic){ $sl = 'selected';}
+                                echo "<option value=$r->id $sl > $r->name </option>";
+                                }
+                            
+                             ?>
+                        </select>
+                        <input type="hidden" id="villagecode">
+                    </div>
+
+                    <div class="form_group col-md-3">
+                        <label for="birth">อายุ</label>
+                        <input type="text" id="age_y" class="form-control "
+                            value="<?php echo isset($person->age_y) ? $person->age_y :""; ?>">
+                    </div>
+
                 </div>
             </form>
         </div>
@@ -168,6 +187,15 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group col-md-3">
+                    <div class="form-group">
+                        <label for="travel_date">วันที่ตรวจ</label>
+                        <input type="text" id="lab_date" data-type="date" class="form-control datepicker"
+                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
+                            value="<?php echo isset($person->lab_date) ? mysql_to_eng_date($person->lab_date) :""; ?>">
+                    </div>
+                </div>
+
                 <div class="form-group col-md-3">
                     <label for="from_province">หน่วยบริการตามทะเบียนบ้าน</label>
                     <select class="form-control" id="hospcode" placeholder="หน่วยบริการวัคซีน" value=""
@@ -212,7 +240,7 @@
                     <div class="form-group">
                         <label for="travel_date">วันที่เดินทางมาถึง</label>
                         <input type="text" id="travel_date" data-type="date" class="form-control datepicker"
-                            data-date-language="th" placeholder="01/04/2563" title="ระบุวันที่" data-rel="tooltip"
+                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
                             value="<?php echo isset($person->travel_date) ? mysql_to_eng_date($person->travel_date) :""; ?>">
                     </div>
                 </div>
