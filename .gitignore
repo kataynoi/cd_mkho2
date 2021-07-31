@@ -20,7 +20,7 @@ assets/apps/js/create_report.js
 assets/images/banner/*
 assets/images/users/*
 assets/images/
-assets/uploads/*
+/uploads
 
 /crud
 /report
