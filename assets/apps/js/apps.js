@@ -66,6 +66,20 @@ var app = {
       return age;
     }
   },
+  count_age_date_thai: function (d) {
+    if (!d) {
+      return 0;
+    } else {
+      var d = d.split("/");
+      var year_birth = d[2];
+      var year_current = new Date();
+      var year_current2 = year_current.getFullYear();
+
+      var age = year_current2 + 543 - parseInt(year_birth);
+
+      return age;
+    }
+  },
 
   go_to_url: function (url) {
     location.href = site_url + url;

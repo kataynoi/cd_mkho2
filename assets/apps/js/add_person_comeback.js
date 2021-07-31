@@ -1,5 +1,6 @@
 $(document).ready(function () {
   //$("#prov").select2();
+  /*
   var birth = $("#birth").val();
   var travel_date = $("#travel_date").val();
   var lab_date = $("#lab_date").val();
@@ -18,7 +19,7 @@ $(document).ready(function () {
   }
   if (lab_date) {
     $("#lab_date").datepicker("setDate", lab_date);
-  }
+  }*/
 });
 
 var crud = {};
@@ -185,10 +186,7 @@ $("#add_data").on("click", function (e) {
 });
 
 function validate(items) {
-  if (!items.prename) {
-    swal("กรุณาระบุคำนำหน้า");
-    $("#prename").focus();
-  } else if (!items.name) {
+  if (!items.name) {
     swal("กรุณาระบุชื่อ");
     $("#name").focus();
   } else if (!items.lname) {
@@ -204,9 +202,10 @@ function validate(items) {
   } else if (!items.ampur) {
     swal("กรุณาระบุอำเภอ");
     $("#amp").focus();
-  } else if (items.lab_type != 4 && !items.lab_date) {
-    swal("กรุณาระบุวันที่ตรวจ Lab");
-    $("#amp").focus();
+    // }
+    // else if (items.lab_type >= 3 && !items.lab_date) {
+    //// swal("กรุณาระบุวันที่ตรวจ Lab");
+    // $("#amp").focus();
   } else if (!items.process_status) {
     swal("กรุณาระบุสถานะดำเนินการ");
     $("#process_status").focus();
@@ -343,6 +342,13 @@ $("#new_regis").on("click", function () {
   $("#register").show();
   $("#hos_regis").html("");
   $("#q").html("");
+});
+
+$("#birth").on("change", function () {
+  var birth = $(this).val();
+  var age_y = app.count_age_date_thai(birth);
+  //alert(age_y);
+  $("#age_y").val(age_y);
 });
 
 $(".btn-toggle").click(function () {

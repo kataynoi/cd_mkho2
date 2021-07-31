@@ -14,7 +14,13 @@ class Person_comeback_model extends CI_Model
 
     function make_query()
     {
-        $this->db->where('owner',$this->session->userdata('id'))->from($this->table);
+        if($this->session->userdata('user_level')==1){
+            $id = '<> ""';
+        }else{
+            $id = $this->session->userdata('id');
+        }
+        
+        $this->db->where('owner',$id)->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
             $this->db->like("cid", $_POST["search"]["value"]);
@@ -69,16 +75,9 @@ class Person_comeback_model extends CI_Model
     public function save_person_comeback($data)
     {
         $birth= to_mysql_date($data["birth"]);
-        if($data["lab_type"]==1){
-            $lab_date=null;
-        }else{
-            $lab_date= to_mysql_date($data["lab_date"]);
-        }
-        if($data["travel_status"]!=2){
-            $travel_date=null;
-        }else{
-            $travel_date= to_mysql_date($data["travel_date"]);
-        }
+        $lab_date= to_mysql_date($data["lab_date"]);
+        $travel_date= to_mysql_date($data["travel_date"]);
+      
         
         $rs = $this->db
             ->set("id", $data["id"])
@@ -117,16 +116,8 @@ class Person_comeback_model extends CI_Model
     public function update_person_comeback($data)
     {
         $birth= to_mysql_date($data["birth"]);
-        if($data["lab_type"]==4){
-            $lab_date=null;
-        }else{
-            $lab_date= to_mysql_date($data["lab_date"]);
-        }
-        if($data["travel_status"] <=3 || $data["travel_status"] ==9){
-            $travel_date=null;
-        }else{
-            $travel_date= to_mysql_date($data["travel_date"]);
-        }
+        $lab_date= to_mysql_date($data["lab_date"]);
+        $travel_date= to_mysql_date($data["travel_date"]);
         $rs = $this->db
 
         ->set("process_status", $data["process_status"])

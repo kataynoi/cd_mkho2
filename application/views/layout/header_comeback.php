@@ -6,7 +6,7 @@
 
 <ul class="nav navbar-top-links w3-theme ">
     <li class="dropdown">
-        <a href="<?php echo base_url('/person_comeback'); ?>">
+        <a href="<?php echo site_url('/person_comeback'); ?>">
             <i class="fa fa-home fa-fw"></i> Home
         </a>
     </li>

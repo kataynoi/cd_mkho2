@@ -62,9 +62,9 @@
                     </div>
                     <div class="form_group col-md-3">
                         <label for="birth">วันเกิด</label>
-                        <input type="text" id="birth" data-type="date" class="form-control datepicker"
-                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
-                            value="<?php echo isset($person->birth) ? mysql_to_eng_date($person->birth) :""; ?>">
+                        <input type="text" id="birth" data-type="date" class="form-control" data-date-language="th"
+                            placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
+                            value="<?php echo isset($person->birth) ? to_thai_date($person->birth) :""; ?>">
                     </div>
 
                     <div class="form-group col-md-3">
@@ -115,7 +115,7 @@
                                 foreach ($cvillage as $r) {
                                     $sl='';
                                     if($r->villagecodefull==$person->moo){ $sl = 'selected';}
-                                echo "<option value=$r->villagecodefull $sl > $r->villagename </option>";
+                                echo "<option value=$r->villagecodefull $sl > ".substr($r->villagecodefull,-2).":".$r->villagename." </option>";
                                 }
                             }
                              ?>
@@ -189,9 +189,9 @@
                 <div class="form-group col-md-3">
                     <div class="form-group">
                         <label for="travel_date">วันที่ตรวจ</label>
-                        <input type="text" id="lab_date" data-type="date" class="form-control datepicker"
-                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
-                            value="<?php echo isset($person->lab_date) ? mysql_to_eng_date($person->lab_date) :""; ?>">
+                        <input type="text" id="lab_date" data-type="date" class="form-control " data-date-language="th"
+                            placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
+                            value="<?php echo isset($person->lab_date) ? to_thai_date($person->lab_date) :""; ?>">
                     </div>
                 </div>
 
@@ -238,9 +238,9 @@
                 <div class="form-group col-md-3">
                     <div class="form-group">
                         <label for="travel_date">วันที่เดินทางมาถึง</label>
-                        <input type="text" id="travel_date" data-type="date" class="form-control datepicker"
+                        <input type="text" id="travel_date" data-type="date" class="form-control "
                             data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
-                            value="<?php echo isset($person->travel_date) ? mysql_to_eng_date($person->travel_date) :""; ?>">
+                            value="<?php echo isset($person->travel_date) ? to_thai_date($person->travel_date) :""; ?>">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
