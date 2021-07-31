@@ -947,7 +947,18 @@ if(!function_exists('get_ampur_name'))
         return $amp_name;
     }
 }
+if(!function_exists('get_ampur_name_ampcode'))
+{
 
+    function get_ampur_name_ampcode($amp)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Basic_model', 'basic');
+        $amp_name = $ci->basic->get_ampur_name_ampcode($amp);
+
+        return $amp_name;
+    }
+}
 if(!function_exists('get_org_name'))
 {
 

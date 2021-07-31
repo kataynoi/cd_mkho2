@@ -145,7 +145,6 @@
                     <div class="form-group col-md-3">
                         <label for="moo">โรคประจำตัว</label>
                         <select class="form-control" id="chronic" placeholder="โรคประจำตัว" value="">
-                            <option></option>
                             <?php
                            
                                 foreach ($chronic as $r) {
@@ -196,7 +195,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-3 hidden">
                     <label for="from_province">หน่วยบริการตามทะเบียนบ้าน</label>
                     <select class="form-control" id="hospcode" placeholder="หน่วยบริการวัคซีน" value=""
                         style="width:100%">

@@ -109,6 +109,15 @@ class Basic_model extends CI_Model
         return count($rs) > 0 ? $rs->ampurname : '-';
     }
 
+    public function get_ampur_name_ampcode($amp)
+    {
+        $rs = $this->db
+            ->where('ampurcodefull', $amp)
+            ->get('campur')
+            ->row();
+
+        return count($rs) > 0 ? $rs->ampurname : '-';
+    }
     public function get_tmb_name($chw, $amp, $tmb)
     {
         $rs = $this->db

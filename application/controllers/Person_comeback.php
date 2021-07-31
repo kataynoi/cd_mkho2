@@ -40,15 +40,18 @@ class Person_comeback extends CI_Controller
 
             if($row->sat_confirm_bed==1){$color_b='btn-success';$fa_b='fa-check';}else{$color_b='btn-danger';$fa_b='fa-times';};
             if($row->sat_confirm_travel==1){$color_t='btn-success';$fa_t='fa-check';}else{$color_t='btn-danger';$fa_t='fa-times';};
-            $sat_confirm_bed='<button class="btn  btn-xs '.$color_b.'" alt="แจ้งSATได้เตียง" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
-            $sat_confirm_travel='<button class="btn  btn-xs  '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
-            $attach_files='<a class="btn btn-info btn-xs" href="'.site_url('person_comeback/files/').$row->id.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
+            $sat_confirm_bed='<button class="btn   '.$color_b.'" alt="แจ้งSATได้เตียง" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
+            $sat_confirm_travel='<button class="btn    '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
+            $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
             แนบไฟลล์</a>';
-           
+           if($this->session->userdata('user_level')==1){
+               $delete = '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button>';
+           }else{
+            $delete = "";
+              }
             $sub_array = array();
             $sub_array[] = '<div class="btn-group pull-right" role="group" >
-            <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
+            <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>'.$delete.'</div>';
            
             $sub_array[] = to_thai_date_time($row->date_input);
             $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.'</div></p>';
@@ -56,17 +59,17 @@ class Person_comeback extends CI_Controller
             $sub_array[] = $row->prename.$row->name."  ".$row->lname;
             $sub_array[] = $row->cid;
             $sub_array[] = $lab_type[$row->lab_type-1]["name"];
-            $sub_array[] =  $row->lab_date ? to_thai_date($row->lab_date)."  <br>ตรวจมาแล้ว ".DateDiff($row->lab_date)."":"";
+            $sub_array[] = $row->lab_date ? to_thai_date($row->lab_date)."  <br>ตรวจแล้ว ".DateDiff($row->lab_date)."":"";
             $sub_array[] = $row->tel;
             $sub_array[] = $travel_status[$row->travel_status-1]["name"];
             $sub_array[] = to_thai_date($row->travel_date);
-            $sub_array[] = "". $row->no." ".get_address($row->moo);
+            $sub_array[] = ($row->address)? $row->address ." อ.".get_ampur_name_ampcode($row->amp):$row->no." ".get_address($row->moo);
             $sub_array[] = $travel_type[$row->travel_type-1]["name"];  
             $sub_array[] = $row->age_y;
-            $sub_array[] = $row->sex==1 ? 'ชาย':'หญิง';
+            $sub_array[] = ($row->sex==1 ? 'ชาย':($row->sex==2 ? 'หญิง':''));
             $sub_array[] = $row->weight;
             $sub_array[] = $row->symptom;
-            $sub_array[] = $chronic[$row->chronic-1]["name"];
+            $sub_array[] = ($row->chronic !=NULL)? $chronic[$row->chronic-1]["name"]:'';
             $sub_array[] = $row->note;
            // $sub_array[] = $row->confirm_case;
            //     $sub_array[] = $row->call_confirm;

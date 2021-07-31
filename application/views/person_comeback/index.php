@@ -21,7 +21,7 @@
             </div>
             <div class="panel-body">
 
-                <table id="table_data" class="table table-responsive" style="width:180%">
+                <table id="table_data" class="table table-striped" style="width:180%">
                     <thead>
                         <tr>
                             <th>#</th>
