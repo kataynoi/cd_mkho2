@@ -44,11 +44,9 @@ class Person_comeback extends CI_Controller
             $sat_confirm_travel='<button class="btn    '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
             $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
             แนบไฟลล์</a>';
-           if($this->session->userdata('user_level')==1){
-               $delete = '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button>';
-           }else{
-            $delete = "";
-              }
+           
+            $delete = '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button>';
+          
             $sub_array = array();
             $sub_array[] = '<div class="btn-group pull-right" role="group" >
             <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>'.$delete.'</div>';
