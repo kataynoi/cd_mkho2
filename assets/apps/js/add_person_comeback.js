@@ -350,7 +350,14 @@ $("#birth").on("change", function () {
   //alert(age_y);
   $("#age_y").val(age_y);
 });
-
+$("#lab_date").on("click", function () {
+  var date_now = app.date_now_thai();
+  $("#lab_date").val(date_now);
+});
+$("#travel_date").on("click", function () {
+  var date_now = app.date_now_thai();
+  $("#travel_date").val(date_now);
+});
 $(".btn-toggle").click(function () {
   $(this).find(".btn").toggleClass("active");
 
