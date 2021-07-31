@@ -189,9 +189,9 @@
                 <div class="form-group col-md-3">
                     <div class="form-group">
                         <label for="travel_date">วันที่ตรวจ</label>
-                        <input type="text" id="lab_date" data-type="date" class="form-control " data-date-language="th"
-                            placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
-                            value="<?php echo isset($person->lab_date) ? to_thai_date($person->lab_date) :""; ?>">
+                        <input type="text" id="lab_date" data-type="date" class="form-control datepicker "
+                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
+                            value="<?php echo isset($person->lab_date) ? mysql_to_eng_date($person->lab_date) :""; ?>">
                     </div>
                 </div>
 
@@ -238,9 +238,9 @@
                 <div class="form-group col-md-3">
                     <div class="form-group">
                         <label for="travel_date">วันที่เดินทางมาถึง</label>
-                        <input type="text" id="travel_date" data-type="date" class="form-control "
-                            data-date-language="th" placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
-                            value="<?php echo isset($person->travel_date) ? to_thai_date($person->travel_date) :""; ?>">
+                        <input type="text" id="travel_date" data-type="date" class="form-control datepicker"
+                            placeholder="../../...." title="ระบุวันที่" data-rel="tooltip"
+                            value="<?php echo isset($person->travel_date) ? mysql_to_eng_date($person->travel_date) :""; ?>">
                     </div>
                 </div>
                 <div class="form-group col-md-3">

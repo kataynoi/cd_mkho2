@@ -1,6 +1,6 @@
 $(document).ready(function () {
   //$("#prov").select2();
-  /*
+
   var birth = $("#birth").val();
   var travel_date = $("#travel_date").val();
   var lab_date = $("#lab_date").val();
@@ -11,15 +11,12 @@ $(document).ready(function () {
     thaiyear: true, //Set เป็นปี พ.ศ.
     autoclose: true,
   });
-  if (birth) {
-    $("#birth").datepicker("setDate", birth);
-  }
   if (travel_date) {
     $("#travel_date").datepicker("setDate", travel_date);
   }
   if (lab_date) {
     $("#lab_date").datepicker("setDate", lab_date);
-  }*/
+  }
 });
 
 var crud = {};
@@ -350,6 +347,7 @@ $("#birth").on("change", function () {
   //alert(age_y);
   $("#age_y").val(age_y);
 });
+/*
 $("#lab_date").on("click", function () {
   var date_now = app.date_now_thai();
   $("#lab_date").val(date_now);
@@ -358,6 +356,7 @@ $("#travel_date").on("click", function () {
   var date_now = app.date_now_thai();
   $("#travel_date").val(date_now);
 });
+*/
 $(".btn-toggle").click(function () {
   $(this).find(".btn").toggleClass("active");
 
