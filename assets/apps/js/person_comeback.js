@@ -8,7 +8,7 @@ $(document).ready(function () {
     serverSide: true,
     order: [],
 
-    pageLength: 50,
+    pageLength: 10,
     ajax: {
       url: site_url + "/person_comeback/fetch_person_comeback",
       data: {
