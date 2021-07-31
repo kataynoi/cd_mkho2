@@ -16,7 +16,7 @@
         <br>
         <div class="panel panel-info ">
             <div class="panel-heading w3-theme">
-                <i class="fa fa-user fa-2x "></i> ยินดีต้อนรับ ชาวมหาสารคามกลับบ้าน
+                <i class="fa fa-user fa-2x "></i> ยินดีต้อนรับชาวมหาสารคามกลับบ้าน
             </div>
             <form>
                 <input type="hidden" id="action" value="<?php echo $action;?>">
@@ -27,6 +27,10 @@
                 <input type="hidden" class="form-control" id="organization" placeholder="ID"
                     value="<?php echo $this->session->userdata('id')?>">
                 <div class="panel-body">
+
+                    <?php echo  isset($person->date_input)? "วันที่บันทึกข้อมูล :".to_thai_date_time($person->date_input):"";
+                     echo  isset($person->d_update)? "<br>วันที่ปรังปรุงข้อมูล :".to_thai_date_time($person->d_update):"";
+                     ?><br>
                     <div class="form-group col-md-3">
                         <label for="cid">เลขบัตรประชาชน</label>
                         <input type="text" class="form-control" id="cid" placeholder="เลขบัตรประชาชน"

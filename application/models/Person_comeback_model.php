@@ -145,6 +145,7 @@ class Person_comeback_model extends CI_Model
         ->set("tel", $data["tel"])
         ->set("note", $data["note"])
         ->set("symptom", $data["symptom"])
+        ->set("d_update", date('Y-m-d H:i:s'))
         ->where("id", $data["id"])
         ->update('person_comeback');
 

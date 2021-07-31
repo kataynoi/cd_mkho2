@@ -51,7 +51,8 @@ class Person_comeback extends CI_Controller
             $sub_array[] = '<div class="btn-group pull-right" role="group" >
             <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>'.$delete.'</div>';
            
-            $sub_array[] = to_thai_date_time($row->date_input);
+            $sub_array[] = "save:".to_thai_date_time($row->date_input). "<br>update:".to_thai_date_time($row->d_update);
+            //$sub_array[] = "save:".to_thai_date_time($row->date_input). "<br>update:".to_thai_date_time($row->d_update);
             $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.'</div></p>';
             $sub_array[] = $process_status[$row->process_status-1]["name"];
             $sub_array[] = $row->prename.$row->name."  ".$row->lname;
