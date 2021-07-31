@@ -42,7 +42,7 @@ class Person_comeback extends CI_Controller
             if($row->sat_confirm_travel==1){$color_t='btn-success';$fa_t='fa-check';}else{$color_t='btn-danger';$fa_t='fa-times';};
             $sat_confirm_bed='<button class="btn   '.$color_b.'" alt="แจ้งSATได้เตียง" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
             $sat_confirm_travel='<button class="btn    '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
-            $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
+            $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'/'.$row->cid.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
             แนบไฟลล์</a>';
            
             $delete = '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button>';
@@ -51,7 +51,7 @@ class Person_comeback extends CI_Controller
             $sub_array[] = '<div class="btn-group pull-right" role="group" >
             <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>'.$delete.'</div>';
            
-            $sub_array[] = "save:".to_thai_date_time($row->date_input). "<br>update:".to_thai_date_time($row->d_update);
+            $sub_array[] = "บันทึก:".substr(to_thai_date_time($row->date_input),0,10). "<br>ปรับปรุง:".substr(to_thai_date_time($row->d_update),0,10);
             //$sub_array[] = "save:".to_thai_date_time($row->date_input). "<br>update:".to_thai_date_time($row->d_update);
             $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.'</div></p>';
             $sub_array[] = $process_status[$row->process_status-1]["name"];
@@ -170,8 +170,45 @@ class Person_comeback extends CI_Controller
 
         render_json($json);
     }
-    public function files ($id){
-        $data['files']= "";
+    public function files ($id,$cid=null){
+        $data['id']= $id;
+        $data['cid']= $cid;
+        $data['file_type'] =  $this->crud->get_cfile_type();
+        $data['doc'] = $this->crud->get_doc($id);
+        //$data['error'] = "";
         $this->layout->view('person_comeback/files',$data);
     }
+
+    public function upload_file(){
+ 
+        $id = $this->input->post('id');
+        $cid = $this->input->post('cid');
+        $file_type = $this->input->post('file_type');
+        $config['upload_path']   = './uploads/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+        $config['allowed_types'] = 'gif|jpg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+        $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['max_height']    = 0;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['encrypt_name']  = False; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
+        $config['file_name'] = ($cid !='' ? $cid."_".$file_type: $id."_".$file_type);
+        
+        $this->load->library('upload', $config);
+        
+           //ตรวจสอบว่า การ Upload สำเร็จหรือไม่    
+        if ( ! $this->upload->do_upload('userfile')) {
+            $data['error'] = array('error' => $this->upload->display_errors());
+            $this->layout->view('person_comeback/files',$data);
+        }else { 
+            $data = array();
+            $data['filename'] = $config['file_name'] ;
+            $data['filetype'] = $this->upload->data('file_ext') ;
+            $data['file_size'] = $this->upload->data('file_size') ;
+            $data['cid'] = $cid;
+            $data['pid_comeback'] = $id;
+            $data['doc_type'] = $file_type;
+            $rs = $this->crud->save_file($data);
+            redirect('/person_comeback/files/'.$id.'/'.$cid, 'refresh');
+           
+        } 
+   }
 }

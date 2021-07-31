@@ -151,6 +151,22 @@ class Person_comeback_model extends CI_Model
 
         return $rs;
     }
+
+    public function save_file($data)
+    {
+        
+        $rs = $this->db
+            ->set("filename", $data["filename"])
+            ->set("filetype", $data["filetype"])
+            ->set("created_by", $this->session->userdata('id'))
+            ->set("cid", $data["cid"])
+            ->set("created", date('Y-m-d H:i:s'))
+            ->set("pid_comeback", $data["pid_comeback"])
+            ->set("doc_type", $data["doc_type"])
+            ->insert('files');
+
+        return $rs;
+    }
     public function get_person_comeback($id)
     {
         $rs = $this->db
@@ -247,6 +263,23 @@ class Person_comeback_model extends CI_Model
     public function get_cchronic()
     {       $rs = $this->db
             ->get("cchronic")
+            ->result();
+        return $rs;
+    }
+    public function get_cfile_type()
+    {       $rs = $this->db
+            ->get("cfile_type")
+            ->result();
+        return $rs;
+    }
+
+    public function get_doc($code)
+    {
+        $rs = $this->db
+            ->select('b.name ,a.*')
+            ->join('cfile_type b ','a.doc_type = b.id')
+            ->where('pid_comeback', $code)
+            ->get("files a ")
             ->result();
         return $rs;
     }

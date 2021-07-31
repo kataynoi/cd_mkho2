@@ -258,6 +258,8 @@ if(!function_exists('to_thai_date_time'))
         }
     }
 }
+
+
 if(!function_exists('to_mysql_date'))
 {
     function to_mysql_date($thai_date)

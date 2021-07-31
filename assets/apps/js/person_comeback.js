@@ -256,7 +256,9 @@ $(document).on("click", 'button[data-btn="btn_edit"]', function (e) {
 $(document).on("click", 'button[data-btn="btn_files"]', function (e) {
   e.preventDefault();
   var id = $(this).data("id");
-  window.location = site_url + "/person_comeback/files/" + id;
+  var cid = $(this).data("cid");
+  alert(cid);
+  window.location = site_url + "/person_comeback/files/" + id + "/" + cid;
 });
 
 $(document).on("click", 'button[data-btn="btn_view"]', function (e) {
