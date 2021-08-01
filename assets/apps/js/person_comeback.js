@@ -130,6 +130,7 @@ crud.sendToLine = function (sms, id) {
       swal(err);
     } else {
       swal("ส่ง Line เรียบร้อยแล้ว");
+      $("#smsModal").modal("toggle");
     }
   });
 };
@@ -292,7 +293,7 @@ $(document).on("click", 'button[data-btn="btn_line"]', function (e) {
 $("#Line").on("click", function (e) {
   var text = $("#sms").val();
   var id = $("#id_to_line").val();
-  alert(id);
+  //alert(id);
   crud.sendToLine(text, id);
 });
 
