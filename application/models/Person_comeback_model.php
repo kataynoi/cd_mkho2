@@ -69,6 +69,13 @@ class Person_comeback_model extends CI_Model
             ->delete('person_comeback');
         return $rs;
     }
+    public function delete_file($id)
+    {
+        $rs = $this->db
+            ->where('id', $id)
+            ->delete('files');
+        return $rs;
+    }
 
 
 

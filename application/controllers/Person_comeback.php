@@ -189,6 +189,7 @@ class Person_comeback extends CI_Controller
         $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
         $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
         $config['max_height']    = 0;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['overwrite'] = TRUE;
         $config['encrypt_name']  = False; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
         $config['file_name'] = ($cid !='' ? $cid."_".$file_type: $id."_".$file_type);
         
@@ -210,5 +211,13 @@ class Person_comeback extends CI_Controller
             redirect('/person_comeback/files/'.$id.'/'.$cid, 'refresh');
            
         } 
+   }
+
+   public function delete_file($id,$comeback_id,$cid=null){
+    $rs = $this->crud->delete_file($id);
+    if($rs){
+        redirect('/person_comeback/files/'.$comeback_id.'/'.$cid, 'refresh');
+    }
+    
    }
 }

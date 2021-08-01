@@ -173,6 +173,7 @@
                     <th>View/Download</th>
                     <th>วันที่ Upload</th>
                     <th>ผู้ Upload</th>
+                    <th>ลบ</th>
                 </thead>
                 <tbody>
                     <?php
@@ -184,7 +185,8 @@
                  style="width:100%;max-width:200px"></a></td>';
                 //echo "<td>".$r->pid_comeback."</td>";
                 echo "<td>".to_thai_date_time($r->created)."</td>";
-                echo "<td>".$r->created_by."</td></tr>";
+                echo "<td>".$r->created_by."</td>";
+                echo "<td><a href=".site_url('person_comeback/delete_file/').$r->id."/".$r->pid_comeback."/".$r->cid."> Delete </a></td></tr>";
                 $no++;
         }
         ?>
