@@ -32,7 +32,7 @@ class Person_comeback_model extends CI_Model
         if (isset($_POST["order"])) {
             $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('date_input', 'DESC');
+            $this->db->order_by('d_update', 'DESC');
         }
     }
 
@@ -114,6 +114,7 @@ class Person_comeback_model extends CI_Model
             ->set("age_y", $data["age_y"])
             ->set("tel", $data["tel"])
             ->set("date_input", date('Y-m-d H:i:s'))
+            ->set("d_update", date('Y-m-d H:i:s'))
             ->set("note", $data["note"])
             ->set("symptom", $data["symptom"])
             ->insert('person_comeback');
@@ -296,6 +297,25 @@ class Person_comeback_model extends CI_Model
             ->join('cfile_type b ','a.doc_type = b.id')
             ->where('pid_comeback', $code)
             ->get("files a ")
+            ->result();
+        return $rs;
+    }
+    public function get_line_token($id){
+
+        $rs = $this->db
+            ->where('id',$id)
+            ->get('line_token')
+            ->row();
+        return $rs?$rs->token:'';
+    }
+
+    public function get_file_by_id($id){
+
+        $rs = $this->db
+        ->select('CONCAT(a.filename,a.filetype) as filename ,b.name as lab_name')
+            ->where('a.pid_comeback',$id)
+            ->join('cfile_type b','b.id = a.doc_type')
+            ->get('files a')
             ->result();
         return $rs;
     }

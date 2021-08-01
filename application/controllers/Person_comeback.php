@@ -45,7 +45,11 @@ class Person_comeback extends CI_Controller
             $sat_confirm_travel='<button class="btn    '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
             $count_file = $this->crud->count_file($row->id);
             $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'/'.$row->cid.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
-            แนบไฟลล์ ['.$count_file.']</a>';
+            ไฟล์['.$count_file.']</a>';
+            $address =($row->address)? $row->address ." อ.".get_ampur_name_ampcode($row->amp):$row->no." ".get_address($row->moo);
+            
+            $sms="แจ้ง SAT กรณีผู้ป่วย ".$lab_type[$row->lab_type-1]['name']." เดินทางโดย ".$travel_type[$row->travel_type-1]['name']." เพื่อเข้าพื้นที่วันที่ ".to_thai_date($row->travel_date)." ".$row->prename.$row->name."  ".$row->lname." โทร ".$row->tel." ที่อยู่ ".$address."";
+            $line_to_sat = "<input type='hidden' value='".$sms."'><button class='btn btn-success' data-btn='btn_line' data-toggle='modal' data-target='#smsModal' data-id='".$row->id."'> Line</button>";
             
             $delete = '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button>';
           
@@ -55,7 +59,7 @@ class Person_comeback extends CI_Controller
            
             $sub_array[] = "บันทึก:".substr(to_thai_date_time($row->date_input),0,10). "<br>ปรับปรุง:".substr(to_thai_date_time($row->d_update),0,10);
             //$sub_array[] = "save:".to_thai_date_time($row->date_input). "<br>update:".to_thai_date_time($row->d_update);
-            $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.'</div></p>';
+            $sub_array[] = '<p class="text-center"><div class="btn-group btn-toggle">'.$sat_confirm_bed.$sat_confirm_travel.$attach_files.$line_to_sat.'</div></p>';
             $sub_array[] = $process_status[$row->process_status-1]["name"];
             $sub_array[] = $row->prename.$row->name."  ".$row->lname;
             $sub_array[] = $row->cid;
@@ -64,7 +68,7 @@ class Person_comeback extends CI_Controller
             $sub_array[] = $row->tel;
             $sub_array[] = $travel_status[$row->travel_status-1]["name"];
             $sub_array[] = to_thai_date($row->travel_date);
-            $sub_array[] = ($row->address)? $row->address ." อ.".get_ampur_name_ampcode($row->amp):$row->no." ".get_address($row->moo);
+            $sub_array[] = $address;
             $sub_array[] = $travel_type[$row->travel_type-1]["name"];  
             $sub_array[] = $row->age_y;
             $sub_array[] = ($row->sex==1 ? 'ชาย':($row->sex==2 ? 'หญิง':''));
@@ -221,5 +225,66 @@ class Person_comeback extends CI_Controller
         redirect('/person_comeback/files/'.$comeback_id.'/'.$cid, 'refresh');
     }
     
+   }
+
+   public function get_line_token($id)
+   {
+    $rs = $this->crud->get_line_token($id);
+       return $rs;
+
+   }
+   public function sendToLine(){
+    $message = $this->input->post('sms');
+    $id = $this->input->post('id');
+    $token = $this->get_line_token(1);
+    $file = $this->crud->get_file_by_id($id);
+    foreach($file as $f){
+        $message .= " ".$f->lab_name." : ".base_url()."uploads/".$f->filename;
+    }
+
+    $rs = $this->notify_message($message, $token);
+            if ($rs) {
+                $json = '{"success": true}';
+            } else {
+                $json = '{"success": false}';
+            }
+            render_json($json);
+   }
+   public function notify_message($message, $token)
+   {
+       
+       $curl = curl_init();
+       curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+       curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+ 
+        
+       curl_setopt_array($curl, array(
+           CURLOPT_URL => "https://notify-api.line.me/api/notify",
+           CURLOPT_RETURNTRANSFER => true,
+           CURLOPT_ENCODING => "",
+           CURLOPT_MAXREDIRS => 10,
+           CURLOPT_TIMEOUT => 30,
+           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+           CURLOPT_CUSTOMREQUEST => "POST",
+           CURLOPT_POSTFIELDS => "message=" . $message,
+           //CURLOPT_POSTFIELDS => "imageFile=" . $imageFile,
+           CURLOPT_HTTPHEADER => array(
+               "Authorization: Bearer " . $token,
+               "Cache-Control: no-cache",
+               "Content-type: application/x-www-form-urlencoded"
+           ),
+       ));
+
+       $response = curl_exec($curl);
+       $err = curl_error($curl);
+       //console_log($err);
+       curl_close($curl);
+       if(!$err){
+           return true;
+       }
+   }
+   public function notify_message2($message, $token)
+   {
+       
    }
 }

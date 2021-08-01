@@ -84,6 +84,17 @@ crud.ajax = {
       err ? cb(err) : cb(null, data);
     });
   },
+  sendToLine: function (sms, id, cb) {
+    var url = "/person_comeback/sendToLine",
+      params = {
+        id: id,
+        sms: sms,
+      };
+
+    app.ajax(url, params, function (err, data) {
+      err ? cb(err) : cb(null, data);
+    });
+  },
 };
 crud.del_data = function (id) {
   crud.ajax.del_data(id, function (err, data) {
@@ -109,6 +120,16 @@ crud.save = function (items, row_id) {
       }
       $("#frmModal").modal("toggle");
       swal("บันทึกข้อมูลเรียบร้อยแล้ว ");
+    }
+  });
+};
+crud.sendToLine = function (sms, id) {
+  crud.ajax.sendToLine(sms, id, function (err, data) {
+    if (err) {
+      //app.alert(err);
+      swal(err);
+    } else {
+      swal("ส่ง Line เรียบร้อยแล้ว");
     }
   });
 };
@@ -257,8 +278,22 @@ $(document).on("click", 'button[data-btn="btn_files"]', function (e) {
   e.preventDefault();
   var id = $(this).data("id");
   var cid = $(this).data("cid");
-  alert(cid);
   window.location = site_url + "/person_comeback/files/" + id + "/" + cid;
+});
+
+$(document).on("click", 'button[data-btn="btn_line"]', function (e) {
+  var id = $(this).data("id");
+  var n = $(this).parent().find("input");
+  var message = n.val();
+  $("#sms").text(message);
+  $("#id_to_line").val(id);
+});
+
+$("#Line").on("click", function (e) {
+  var text = $("#sms").val();
+  var id = $("#id_to_line").val();
+  alert(id);
+  crud.sendToLine(text, id);
 });
 
 $(document).on("click", 'button[data-btn="btn_view"]', function (e) {

@@ -55,4 +55,32 @@
     </div>
 
 
+
+
+    <div class="modal fade" id="smsModal" tabindex="-1" role="dialog" aria-labelledby="smsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smsModalLabel">ส่ง Line แจ้ง SAT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">ข้อความส่ง Line
+                            [สามารถแก้ไขเพิ่มเติมได้ตามเหมาะสม]</label>
+                        <textarea class="form-control" id="sms" rows="3"></textarea>
+                        <input type="hidden" id="id_to_line">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="Line" class="btn btn-primary">Send to Line</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="<?php echo base_url() ?>assets/apps/js/person_comeback.js" charset="utf-8"></script>
