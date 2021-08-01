@@ -236,7 +236,7 @@ class Person_comeback extends CI_Controller
    public function sendtoline(){
     $message = $this->input->post('sms');
     $id = $this->input->post('id');
-    $token = $this->get_line_token(1);
+    $token = $this->get_line_token(2);
     $file = $this->crud->get_file_by_id($id);
     foreach($file as $f){
         $message .= " ".$f->lab_name." : ".base_url()."uploads/".$f->filename;
