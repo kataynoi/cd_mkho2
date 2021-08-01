@@ -85,7 +85,7 @@ crud.ajax = {
     });
   },
   sendToLine: function (sms, id, cb) {
-    var url = "/person_comeback/sendToLine",
+    var url = "/person_comeback/sendtoline",
       params = {
         id: id,
         sms: sms,

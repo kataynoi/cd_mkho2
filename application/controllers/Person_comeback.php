@@ -233,7 +233,7 @@ class Person_comeback extends CI_Controller
        return $rs;
 
    }
-   public function sendToLine(){
+   public function sendtoline(){
     $message = $this->input->post('sms');
     $id = $this->input->post('id');
     $token = $this->get_line_token(1);
