@@ -40,11 +40,13 @@ class Person_comeback extends CI_Controller
 
             if($row->sat_confirm_bed==1){$color_b='btn-success';$fa_b='fa-check';}else{$color_b='btn-danger';$fa_b='fa-times';};
             if($row->sat_confirm_travel==1){$color_t='btn-success';$fa_t='fa-check';}else{$color_t='btn-danger';$fa_t='fa-times';};
+
             $sat_confirm_bed='<button class="btn   '.$color_b.'" alt="แจ้งSATได้เตียง" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
             $sat_confirm_travel='<button class="btn    '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
+            $count_file = $this->crud->count_file($row->id);
             $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'/'.$row->cid.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
-            แนบไฟลล์</a>';
-           
+            แนบไฟลล์ ['.$count_file.']</a>';
+            
             $delete = '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button>';
           
             $sub_array = array();

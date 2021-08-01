@@ -234,6 +234,15 @@ class Person_comeback_model extends CI_Model
             ->count_all_results();
         return $rs;
     }
+
+    public function count_file($id)
+    {
+        $rs = $this->db
+            ->from("files")
+            ->where('pid_comeback', $id)
+            ->count_all_results();
+        return $rs;
+    }
     public function get_person_cid($cid)
     {
         $rs = $this->db
