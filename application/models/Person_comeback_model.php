@@ -289,11 +289,17 @@ class Person_comeback_model extends CI_Model
             ->result();
         return $rs;
     }
-
+    public function update_doctype($id,$doc_type)
+    {       $rs = $this->db
+            ->set('doc_type',$doc_type)
+            ->where('id',$id)
+            ->update("files");
+        return $rs;
+    }
     public function get_doc($code)
     {
         $rs = $this->db
-            ->select('b.name ,a.*')
+            ->select('b.id as doc_type,b.name ,a.*')
             ->join('cfile_type b ','a.doc_type = b.id')
             ->where('pid_comeback', $code)
             ->get("files a ")

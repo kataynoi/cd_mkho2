@@ -179,7 +179,14 @@
                     <?php
         $no=1;
         foreach($doc as $r){
-                echo "<tr><td>".$no."</td><td>".$r->name."</td>";
+        $option='';
+            foreach ($file_type as $f) {  
+                $sl='';
+                if($f->id == $r->doc_type){ $sl = 'selected';}
+                $option .= "<option value=$f->id $sl > $f->name </option>"; 
+            }
+
+                echo "<tr><td>".$no."</td><td><form class='form-inline'><select class='form-control' >".$option."</select><button class='btn btn-success' data-id='".$r->id."' data-btn='btn_save_doctype'>save</button></form></td>";
                 echo '<td><a href="'.base_url('/uploads/'.$r->filename.$r->filetype).'" target="_blank">
                 <img id="myImg" src="'.base_url('/uploads/'.$r->filename.$r->filetype).'" 
                  style="width:100%;max-width:200px"></a></td>';
@@ -223,5 +230,6 @@
     <!-- /.container -->
 </body>
 <div class="modal" id="imgModal"></div>
+<script src="<?php echo base_url() ?>assets/apps/js/files.js" charset="utf-8"></script>
 
 </html>

@@ -127,6 +127,24 @@ class Person_comeback extends CI_Controller
         render_json($json);
     }
 
+    public function  update_doctype()
+    {
+        $id = $this->input->post('id');
+        $doctype = $this->input->post('doctype');
+      
+            $rs = $this->crud->update_doctype($id,$doctype);
+   
+            if ($rs) {
+                $json = '{"success": true}';
+            } else {
+                $json = '{"success": false}';
+            
+        }
+
+        render_json($json);
+    }
+
+
     public function  get_person_comeback($id)
     {
         $rs = $this->crud->get_person_comeback($id);
@@ -283,8 +301,5 @@ class Person_comeback extends CI_Controller
            return true;
        }
    }
-   public function notify_message2($message, $token)
-   {
-       
-   }
+
 }
