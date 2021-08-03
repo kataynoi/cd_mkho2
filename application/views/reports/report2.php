@@ -25,7 +25,7 @@
                             <th>จำนวนทั้งหมด</th>
                             <th>RT_PCR</th>
                             <th>AntigenTest</th>
-                            <th>no_resule</th>
+                            <th>ไม่ทราบ</th>
                         </tr>
                     </thead>
                     <tfoot>
