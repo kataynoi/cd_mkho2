@@ -19,8 +19,8 @@
         </a>
         <ul class="dropdown-menu dropdown-messages">
             <li>
-                <a href="<?php echo site_url('report/person_bypass_last7day')?>">
-                    <div> <i class="fa fa-save fa-fw"></i> xxxxxxxxxxxxxxxxxxx </div>
+                <a href="<?php echo site_url('report2')?>">
+                    <div> <i class="fa fa-save fa-fw"></i> จำนวนผู้ขอเดินทางกลับแยกตามผล Lab</div>
                 </a>
             </li>
             <li>

@@ -219,7 +219,10 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputFile">Image</label>
-                <input type="file" name="userfile">
+                <div class="file-upload-wrapper">
+                    <input type="file" name="file" class="file-upload">
+                </div>
+
             </div>
             <button type="submit" class="btn btn-success">บันทึก</button>
 
