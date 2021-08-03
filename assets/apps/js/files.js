@@ -31,6 +31,6 @@ $(document).on("click", 'button[data-btn="btn_save_doctype"]', function (e) {
   e.preventDefault();
   var id = $(this).data("id");
   var doc_type = $(this).parent().find("select").val();
+  alert(id + doc_type);
   crud.save(id, doc_type);
 });
-$(".file-upload").file_upload();

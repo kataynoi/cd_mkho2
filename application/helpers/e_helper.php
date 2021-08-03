@@ -592,6 +592,19 @@ if(!function_exists('get_hospital_name'))
         return $rs ? $rs->hosname : '-';
     }
 }
+
+if(!function_exists('getComebackName'))
+{
+    function getComebackName($id)
+    {
+        $ci =& get_instance();
+        $rs = $ci->db
+            ->where(array('id' => $id))
+            ->get('person_comeback')
+            ->row();
+        return $rs ? $rs->prename.$rs->name." ".$rs->lname : '-';
+    }
+}
 if(!function_exists('get_group_name'))
 {
     function get_group_name($code)

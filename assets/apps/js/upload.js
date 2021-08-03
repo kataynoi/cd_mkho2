@@ -84,6 +84,7 @@ $("#frm_upload").submit(function (e) {
 
   items.file = $("#file_upload").val();
   items.file_type = $("#file_type").val();
+
   if (validate(items)) {
     if (items.file) {
       $.ajax({

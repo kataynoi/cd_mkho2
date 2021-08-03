@@ -151,17 +151,9 @@
         modal.style.display = "none";
     }
     </script>
-
-
-
-
-
-
-
-
     <div class="panel panel-info ">
         <div class="panel-heading w3-theme">
-            cccc
+            <H4>เอกสารของ <?php echo getComebackName($id);?></H4>
 
         </div>
         <div class="panel-body">
@@ -219,10 +211,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputFile">Image</label>
-                <div class="file-upload-wrapper">
-                    <input type="file" name="file" class="file-upload">
-                </div>
-
+                <input type="file" name="userfile" id='userfile'>
             </div>
             <button type="submit" class="btn btn-success">บันทึก</button>
 

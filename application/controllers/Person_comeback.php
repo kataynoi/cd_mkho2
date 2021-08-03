@@ -217,12 +217,14 @@ class Person_comeback extends CI_Controller
         $config['encrypt_name']  = False; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
         $config['file_name'] = ($cid !='' ? $cid."_".$file_type: $id."_".$file_type);
         
+
         $this->load->library('upload', $config);
         
            //ตรวจสอบว่า การ Upload สำเร็จหรือไม่    
         if ( ! $this->upload->do_upload('userfile')) {
             $data['error'] = array('error' => $this->upload->display_errors());
-            $this->layout->view('person_comeback/files',$data);
+            print_r( $data['error']);
+           // $this->layout->view('person_comeback/files',$data);
         }else { 
             $data = array();
             $data['filename'] = $config['file_name'] ;
