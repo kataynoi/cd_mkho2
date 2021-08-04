@@ -12,7 +12,8 @@
         <div class="panel panel-info ">
             <div class="panel-heading w3-theme">
                 <i class="fa fa-user fa-2x "></i> รายการประชาชนชาวมหาสารคามขอกลับรักษาตัวที่บ้าน
-                <a class="btn btn-success pull-right" href="<?php echo site_url('confirm_case/add_confirm_case');?>"><i
+                <a class="btn btn-success pull-right"
+                    href="<?php echo site_url('person_comeback/add_person_comeback');?>"><i
                         class="fa fa-plus-circle"></i>
                     Add</a>
                 </span>

@@ -110,10 +110,12 @@ crud.save = function (items) {
     if (err) {
       //app.alert(err);
       //swal(err);
-      window.location = site_url + "/person_comeback";
+      //window.location = site_url + "/person_comeback";
+      history.go(-1);
     } else {
       swal("บันทึกข้อมูลเรียบร้อยแล้ว ");
-      window.location = site_url + "/person_comeback";
+      //window.location = site_url + "/person_comeback";
+      history.go(-1);
     }
   });
 };

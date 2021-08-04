@@ -37,7 +37,11 @@
         </ul>
 
     </li>
-
+    <li><a class="" href="<?php echo site_url('person_comeback_g')?>"><i class="fa fa-bus" aria-hidden="true"></i>
+            ผู้เดินทางด้วยจีเสียงเกาะ</a>
+    </li>
+    <li><a class="" id="back"> <i class="fa fa-backward" aria-hidden="true"></i>
+            กลับ</a></li>
     <li class="dropdown pull-right">
 
         <?php
@@ -58,3 +62,9 @@
         ?>
     </li>
 </ul>
+
+<script>
+$("#back").on("click", function() {
+    history.go(-1);
+});
+</script>

@@ -44,7 +44,7 @@ class Person_comeback_g extends CI_Controller
             $sat_confirm_bed='<button class="btn   '.$color_b.'" alt="แจ้งSATได้เตียง" data-row_id1='.$row_id1.' data-btn="btn_confirm_bed" data-id='.$row->id.' data-val="'.$row->sat_confirm_bed.'"><i class="fa '.$fa_b.'" aria-hidden="true"></i></button>';
             $sat_confirm_travel='<button class="btn    '.$color_t.'" alt=" แจ้งSATเดินทาง" data-row_id2='.$row_id2.' data-btn="btn_confirm_travel" data-id='.$row->id.' data-val="'.$row->sat_confirm_travel.'"><i class="fa '.$fa_t.'" aria-hidden="true"></i></button>';
             $count_file = $this->crud->count_file($row->id);
-            $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback_g/files/').$row->id.'/'.$row->cid.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
+            $attach_files='<a class="btn btn-info " href="'.site_url('person_comeback/files/').$row->id.'/'.$row->cid.'"><i class="fa fa-paperclip" aria-hidden="true"></i>
             ไฟล์['.$count_file.']</a>';
             $address =($row->address)? $row->address ." อ.".get_ampur_name_ampcode($row->amp):$row->no." ".get_address($row->moo);
             
@@ -200,7 +200,7 @@ class Person_comeback_g extends CI_Controller
         $data['file_type'] =  $this->crud->get_cfile_type();
         $data['doc'] = $this->crud->get_doc($id);
         //$data['error'] = "";
-        $this->layout->view('person_comeback_g/files',$data);
+        $this->layout->view('person_comeback/files',$data);
     }
 
     public function upload_file(){
@@ -234,7 +234,7 @@ class Person_comeback_g extends CI_Controller
             $data['pid_comeback'] = $id;
             $data['doc_type'] = $file_type;
             $rs = $this->crud->save_file($data);
-            redirect('/person_comeback_g/files/'.$id.'/'.$cid, 'refresh');
+            redirect('/person_comeback/files/'.$id.'/'.$cid, 'refresh');
            
         } 
    }
@@ -242,7 +242,7 @@ class Person_comeback_g extends CI_Controller
    public function delete_file($id,$comeback_id,$cid=null){
     $rs = $this->crud->delete_file($id);
     if($rs){
-        redirect('/person_comeback_g/files/'.$comeback_id.'/'.$cid, 'refresh');
+        redirect('/person_comeback/files/'.$comeback_id.'/'.$cid, 'refresh');
     }
     
    }

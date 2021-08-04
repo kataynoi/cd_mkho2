@@ -272,7 +272,7 @@ $(document).on("click", 'button[data-btn="btn_edit"]', function (e) {
   e.preventDefault();
   var id = $(this).data("id");
   $("#action").val("update");
-  window.location = site_url + "/person_comeback_g/add_person_comeback_g/" + id;
+  window.location = site_url + "/person_comeback/add_person_comeback/" + id;
 });
 
 //btn_save_doctype
@@ -281,7 +281,7 @@ $(document).on("click", 'button[data-btn="btn_save_doctype"]', function (e) {
   var id = $(this).data("id");
   var doc_type = $(this).parent().find("select").val();
   $("#action").val("update");
-  window.location = site_url + "/person_comeback_g/add_person_comeback_g/" + id;
+  window.location = site_url + "/person_comeback/add_person_comeback/" + id;
 });
 
 $(document).on("click", 'button[data-btn="btn_files"]', function (e) {

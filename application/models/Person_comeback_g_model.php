@@ -70,7 +70,7 @@ class Person_comeback_g_model extends CI_Model
     {
         $rs = $this->db
             ->where('id', $id)
-            ->delete('person_comeback_g');
+            ->delete('person_comeback');
         return $rs;
     }
     public function delete_file($id)
@@ -121,7 +121,7 @@ class Person_comeback_g_model extends CI_Model
             ->set("d_update", date('Y-m-d H:i:s'))
             ->set("note", $data["note"])
             ->set("symptom", $data["symptom"])
-            ->insert('person_comeback_g');
+            ->insert('person_comeback');
 
         return $this->db->insert_id();
     }
@@ -159,7 +159,7 @@ class Person_comeback_g_model extends CI_Model
         ->set("symptom", $data["symptom"])
         ->set("d_update", date('Y-m-d H:i:s'))
         ->where("id", $data["id"])
-        ->update('person_comeback_g');
+        ->update('person_comeback');
 
         return $rs;
     }
@@ -183,7 +183,7 @@ class Person_comeback_g_model extends CI_Model
     {
         $rs = $this->db
             ->where('id', $id)
-            ->get("person_comeback_g")
+            ->get("person_comeback")
             ->row();
         return $rs;
     }
@@ -234,7 +234,7 @@ class Person_comeback_g_model extends CI_Model
     public function check_person_cid($cid)
     {
         $rs = $this->db
-            ->from("person_comeback_g")
+            ->from("person_comeback")
             ->where('cid', $cid)
             ->count_all_results();
         return $rs;
