@@ -185,7 +185,6 @@
                              foreach ($clab_type as $r) { 
                                 $sl='';
                                 if($r->id == $person->lab_type){ $sl = 'selected';} 
-                                if(!isset($person->lab_type) && $r->id==4 ){ $sl ='selected';}
                                     echo "<option value=$r->id $sl> $r->name </option>";        
                         } ?>
                         </select>
@@ -221,7 +220,6 @@
                              foreach ($ctravel_type as $r) { 
                                 $sl='';
                                 if($r->id == $person->travel_type){ $sl = 'selected';} 
-                                
                                     echo "<option value=$r->id $sl> $r->name </option>";        
                         } ?>
                         </select>
@@ -273,7 +271,6 @@
                              foreach ($cprocess_status as $r) {  
                                 $sl='';
                                 if($r->id == $person->process_status){ $sl = 'selected';}
-
                                     echo "<option value=$r->id $sl> $r->name </option>";        
                         } ?>
                         </select>
