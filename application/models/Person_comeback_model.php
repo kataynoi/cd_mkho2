@@ -325,4 +325,13 @@ class Person_comeback_model extends CI_Model
             ->result();
         return $rs;
     }
+
+    public function getFileByCid($pid){
+        $rs = $this->db
+            ->select('CONCAT(filename,filetype) as filename')
+            ->where('pid_comeback',$pid)
+            ->get('files')
+            ->result();
+        return $rs;
+    }
 }

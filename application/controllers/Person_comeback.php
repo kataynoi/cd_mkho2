@@ -249,8 +249,8 @@ class Person_comeback extends CI_Controller
             $data['doc_type'] = $file_type;
 
             $rs = $this->crud->save_file($data);
-            $this->resizeImage('uploads/' . $data["filename"] . $data["filetype"]);
-            //redirect('/person_comeback/files/'.$id.'/'.$cid, 'refresh');
+            //$this->resizeImage('uploads/' . $data["filename"] . $data["filetype"]);
+            redirect('/person_comeback/files/'.$id.'/'.$cid, 'refresh');
 
         }
     }
@@ -298,13 +298,14 @@ class Person_comeback extends CI_Controller
     {
         $message = $this->input->post('sms');
         $id = $this->input->post('id');
+        $imageFile = $this->mergeImage($id);
         $token = $this->get_line_token(2);
         $file = $this->crud->get_file_by_id($id);
         foreach ($file as $f) {
             $message .= " " . $f->lab_name . " : " . base_url() . "uploads/" . $f->filename;
         }
-
-        $rs = $this->notify_message2($message, $token);
+        $imageFile = 
+        $rs = $this->notify_message2($message, $token, $imageFile);
         if ($rs) {
             $json = '{"success": true}';
         } else {
@@ -348,7 +349,7 @@ class Person_comeback extends CI_Controller
         }
     }
 
-    public function notify_message2($message, $token)
+    public function notify_message2($message, $token, $imageFile='')
     {
 
         $imageFile = new CURLFILE('cat.jpg'); // Local Image file Path
@@ -377,5 +378,50 @@ class Person_comeback extends CI_Controller
         }
         //Close connection
         curl_close($chOne);
+    }
+
+    public function mergeImage($id='11293')
+    {
+        
+        $newwidth=0;$newheight=0;$size = array();
+        $rs = $this->crud->getFileByCid($id);
+        $i=0;
+        $n = count($rs);
+       
+        switch ($n){
+            case 1 :
+                return $rs[0]->filename;
+                break;
+            case 2 :
+                $filename1= "uploads/".$rs[0]->filename;
+                $filename2= "uploads/".$rs[1]->filename;
+                echo $filename1;
+                echo $filename2;
+                $src = imagecreatefromjpeg($filename1);
+                $size = GetImageSize($filename1);
+           
+                $src2 = imagecreatefromjpeg($filename2);
+                $size2 = GetImageSize($filename2);
+                $newwidth = $size[0]+$size2[0];
+                
+               if($size[1] >= $size2[1]){ 
+                $newheight = $size[1];
+               }else{
+                   $newheight = $size2[1];
+               }
+           
+                $im = ImageCreate($newwidth,$newheight);
+              
+                $bg = ImageColorAllocate($im, 255, 255, 0);
+                $color = ImageColorAllocate($im, 0, 0, 0);
+                ImageCopy($im, $src, 0, 0, 0, 0, $size[0],$size[1]);
+                ImageCopy($im, $src2, $size[0],0, 0, 0, $size2[0],$size2[1]);
+                ImageJpeg($im,"uploads/thumbnail/".$id.".jpg");
+           
+                ImageDestroy($src);
+                ImageDestroy($im);
+                return $id.".jpg";
+                break;
+        } 
     }
 }
