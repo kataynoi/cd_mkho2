@@ -12,7 +12,7 @@ class Person_comeback_g_model extends CI_Model
     var $table = "person_comeback";
     var $order_column = array('id', 'sat_confirm_bed', 'sat_confirm_travel', 'process_status', 'name', 'tel',);
 
-    function make_query()
+    function make_query($travel_date)
     {
         if($this->session->userdata('user_level')==1){
             $id = '<> ""';
@@ -24,7 +24,12 @@ class Person_comeback_g_model extends CI_Model
         ->where('travel_type','5')
         ->where('travel_status <=','3')
         ->where_in('process_status',$process)
+
         ->from($this->table);
+
+        if(isset($travel_date)){
+            $this->db->where('travel_date',$travel_date);
+        }
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
             $this->db->like("cid", $_POST["search"]["value"]);
@@ -40,9 +45,9 @@ class Person_comeback_g_model extends CI_Model
         }
     }
 
-    function make_datatables()
+    function make_datatables($travel_date)
     {
-        $this->make_query();
+        $this->make_query($travel_date);
         if ($_POST["length"] != -1) {
             $this->db->limit($_POST['length'], $_POST['start']);
         }

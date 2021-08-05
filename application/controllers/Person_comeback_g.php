@@ -26,7 +26,8 @@ class Person_comeback_g extends CI_Controller
 
     function fetch_person_comeback_g()
     {
-        $fetch_data = $this->crud->make_datatables();
+        $travel_date = to_mysql_date($this->input->post('travel_date'));
+        $fetch_data = $this->crud->make_datatables($travel_date);
         $data = array();
         //$lab_type = array("Volvo", "BMW", "Toyota");
         $lab_type = get_lab_type();

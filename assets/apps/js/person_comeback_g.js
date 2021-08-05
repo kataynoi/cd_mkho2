@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     pageLength: 10,
     ajax: {
-      url: site_url + "/person_comeback_g/fetch_person_comeback_g",
+      url: site_url + "/person_comeback/fetch_person_comeback",
       data: {
         csrf_token: csrf_token,
       },

@@ -54,9 +54,6 @@
 
     </div>
 
-
-
-
     <div class="modal fade" id="smsModal" tabindex="-1" role="dialog" aria-labelledby="smsModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
