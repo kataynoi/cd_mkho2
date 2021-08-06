@@ -272,12 +272,12 @@ class Person_comeback extends CI_Controller
         $message = $this->input->post('sms');
         $id = $this->input->post('id');
         $imageFile = "uploads/thumbnail/".$this->mergeImage($id);
-        
         $token = $this->get_line_token(2);
-        $file = $this->crud->get_file_by_id($id);
+       /* $file = $this->crud->get_file_by_id($id);
         foreach ($file as $f) {
             $message .= " " . $f->lab_name . " : " . base_url() . "uploads/" . $f->filename;
         }
+    */
        
             $rs = $this->notify_message2($message, $token, $imageFile);
         if ($rs) {
@@ -345,15 +345,12 @@ class Person_comeback extends CI_Controller
         curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($chOne);
         //Check error
-        if (curl_error($chOne)) {
-            echo 'error:' . curl_error($chOne);
-        } else {
-            $result_ = json_decode($result, true);
-            echo "status : " . $result_['status'];
-            echo "message : " . $result_['message'];
-        }
         //Close connection
+        $err = curl_error($chOne);
         curl_close($chOne);
+        if (!$err) {
+            return true;
+        }
     }
 
     public function mergeImage($id)
@@ -402,7 +399,7 @@ class Person_comeback extends CI_Controller
                     $im = imagecreatetruecolor($newwidth, $newheight);
                 } else {
                     $newheight = $size2[1];
-                    $im = imagecreatetruecolor($newheight,$newwidth);
+                    $im = imagecreatetruecolor($newwidth,$newheight);
                 }
 
                 
