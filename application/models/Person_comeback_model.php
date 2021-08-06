@@ -21,7 +21,9 @@ class Person_comeback_model extends CI_Model
         }
         
         $this->db->where('owner',$id)->from($this->table);
+
         if (isset($_POST["search"]["value"])) {
+            
             $this->db->group_start();
             $this->db->like("cid", $_POST["search"]["value"]);
             $this->db->or_like("name", $_POST["search"]["value"]);

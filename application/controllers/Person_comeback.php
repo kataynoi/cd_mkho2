@@ -279,7 +279,7 @@ class Person_comeback extends CI_Controller
         }
     */
        
-            $rs = $this->notify_message2($message, $token, $imageFile);
+            $rs = $this->notify_message($message, $token, $imageFile);
         if ($rs) {
             $json = '{"success": true}';
         } else {
@@ -287,43 +287,7 @@ class Person_comeback extends CI_Controller
         }
         render_json($json);
     }
-    public function notify_message($message, $token)
-    {
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-        //$file_name_with_full_path = '/uploads/3440600055788_1.jpeg';
-
-
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://notify-api.line.me/api/notify",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "message=" . $message,
-            // CURLOPT_POSTFIELDS => "imageFile=" . @$file_name_with_full_path,
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer " . $token,
-                "Cache-Control: no-cache",
-                "Content-type: application/x-www-form-urlencoded"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        ///echo $err;
-        curl_close($curl);
-        if (!$err) {
-            return true;
-        }
-    }
-
-    public function notify_message2($message, $token, $imageFile = '')
+        public function notify_message($message, $token, $imageFile = '')
     {
 
  
@@ -368,6 +332,7 @@ class Person_comeback extends CI_Controller
 
                 $filename1 = "uploads/" . $rs[0]->filename;
                 
+                $this->resizeImage($filename1);
                 $src = imagecreatefromjpeg($filename1);
                 $size = GetImageSize($filename1);
 
@@ -387,6 +352,8 @@ class Person_comeback extends CI_Controller
             case 2:
                 $filename1 = "uploads/" . $rs[0]->filename;
                 $filename2 = "uploads/" . $rs[1]->filename;
+                $this->resizeImage($filename1);
+                $this->resizeImage($filename2);
                 $src = imagecreatefromjpeg($filename1);
                 $size = GetImageSize($filename1);
 
@@ -414,5 +381,21 @@ class Person_comeback extends CI_Controller
                 break;
         }
     }
-   
+   public function resizeImage($filename){
+            //$filename='uploads/test/1.jpg';  
+            $size = GetImageSize($filename);
+            $newwidth=1000*$size[0]/$size[1]; 
+            $newheight=1000;
+
+        list($width, $height) = getimagesize($filename);
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+        $source = imagecreatefromjpeg($filename);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+        ImageJpeg($thumb,$filename);
+        return imagejpeg($thumb);
+    }
+    public function test(){
+        $file="uploads/test/4.jpg";
+        $this->resizeImage($file);
+    }
 }
