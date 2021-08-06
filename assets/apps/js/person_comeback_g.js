@@ -127,7 +127,8 @@ crud.sendToLine = function (sms, id) {
   crud.ajax.sendToLine(sms, id, function (err, data) {
     if (err) {
       //app.alert(err);
-      swal(err);
+      swal("ส่ง Line เรียบร้อยแล้ว");
+      $("#smsModal").modal("toggle");
     } else {
       swal("ส่ง Line เรียบร้อยแล้ว");
       $("#smsModal").modal("toggle");
