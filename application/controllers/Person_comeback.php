@@ -250,37 +250,10 @@ class Person_comeback extends CI_Controller
 
             $rs = $this->crud->save_file($data);
             //$this->resizeImage('uploads/' . $data["filename"] . $data["filetype"]);
-            redirect('/person_comeback/files/'.$id.'/'.$cid, 'refresh');
-
+            redirect('/person_comeback/files/' . $id . '/' . $cid, 'refresh');
         }
     }
 
-    public function resizeImage($filename)
-
-    {
-
-        $source_path = base_url() . '/uploads/' . $filename;
-
-        $target_path = base_url() . '/uploads/thumbnail/';
-
-        $config_manip = array(
-
-            'image_library' => 'gd2',
-            'source_image' => $source_path,
-            'new_image' => $target_path,
-            'maintain_ratio' => TRUE,
-            'create_thumb' => TRUE,
-            'thumb_marker' => '_thumb',
-            'width' => 500,
-            //'height' => 150
-
-        );
-        $this->load->library('image_lib', $config_manip);
-        if (!$this->image_lib->resize()) {
-            echo $this->image_lib->display_errors();
-        }
-        $this->image_lib->clear();
-    }
     public function delete_file($id, $comeback_id, $cid = null)
     {
         $rs = $this->crud->delete_file($id);
@@ -298,14 +271,15 @@ class Person_comeback extends CI_Controller
     {
         $message = $this->input->post('sms');
         $id = $this->input->post('id');
-        $imageFile = $this->mergeImage($id);
+        $imageFile = "uploads/thumbnail/".$this->mergeImage($id);
+        
         $token = $this->get_line_token(2);
         $file = $this->crud->get_file_by_id($id);
         foreach ($file as $f) {
             $message .= " " . $f->lab_name . " : " . base_url() . "uploads/" . $f->filename;
         }
-        $imageFile = 
-        $rs = $this->notify_message2($message, $token, $imageFile);
+       
+            $rs = $this->notify_message2($message, $token, $imageFile);
         if ($rs) {
             $json = '{"success": true}';
         } else {
@@ -319,7 +293,7 @@ class Person_comeback extends CI_Controller
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-       //$file_name_with_full_path = '/uploads/3440600055788_1.jpeg';
+        //$file_name_with_full_path = '/uploads/3440600055788_1.jpeg';
 
 
 
@@ -332,7 +306,7 @@ class Person_comeback extends CI_Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => "message=" . $message,
-           // CURLOPT_POSTFIELDS => "imageFile=" . @$file_name_with_full_path,
+            // CURLOPT_POSTFIELDS => "imageFile=" . @$file_name_with_full_path,
             CURLOPT_HTTPHEADER => array(
                 "Authorization: Bearer " . $token,
                 "Cache-Control: no-cache",
@@ -349,10 +323,12 @@ class Person_comeback extends CI_Controller
         }
     }
 
-    public function notify_message2($message, $token, $imageFile='')
+    public function notify_message2($message, $token, $imageFile = '')
     {
 
-        $imageFile = new CURLFILE('cat.jpg'); // Local Image file Path
+ 
+        $imageFile = new CURLFILE($imageFile); // Local Image file Path
+
         $data = array(
             'message' => $message,
             'imageFile' => $imageFile,
@@ -380,48 +356,66 @@ class Person_comeback extends CI_Controller
         curl_close($chOne);
     }
 
-    public function mergeImage($id='11591')
+    public function mergeImage($id)
     {
-        
-        $newwidth=0;$newheight=0;$size = array();
+
+        $newwidth = 0;
+        $newheight = 0;
+        $size = array();
         $rs = $this->crud->getFileByCid($id);
-        $i=0;
+        $i = 0;
         $n = count($rs);
-       
-        switch ($n){
-            case 1 :
-                return $rs[0]->filename;
-                break;
-            case 2 :
-                $filename1= "uploads/".$rs[0]->filename;
-                $filename2= "uploads/".$rs[1]->filename;
-                echo $filename1;
-                echo $filename2;
+
+        switch ($n) {
+            case 1:
+
+                $filename1 = "uploads/" . $rs[0]->filename;
+                
                 $src = imagecreatefromjpeg($filename1);
                 $size = GetImageSize($filename1);
-           
-                $src2 = imagecreatefromjpeg($filename2);
-                $size2 = GetImageSize($filename2);
-                $newwidth = $size[0]+$size2[0];
-                
-               if($size[1] >= $size2[1]){ 
+
+
+                $newwidth = $size[0];
                 $newheight = $size[1];
-               }else{
-                   $newheight = $size2[1];
-               }
-           
-                $im = ImageCreate($newwidth,$newheight);
-              
-                //$bg = ImageColorAllocate($im, 0, 0, 0);
-                //$color = ImageColorAllocate($im, 0, 0, 0);
-                ImageCopy($im, $src, 0, 0, 0, 0, $size[0],$size[1]);
-                ImageCopy($im, $src2, $size[0],0, 0, 0, $size2[0],$size2[1]);
-                ImageJpeg($im,"uploads/thumbnail/".$id.".jpg");
-           
+                $im = imagecreatetruecolor($newwidth, $newheight);
+                imagesavealpha($im, true);
+
+                imagecopymerge($im, $src, 0, 0, 0, 0, $size[0], $size[1],100);
+                ImageJpeg($im, "uploads/thumbnail/" . $id . ".jpg");
+                //imagepng($im); // แสดงภาพ
                 ImageDestroy($src);
                 ImageDestroy($im);
-                return $id.".jpg";
+                return $id . ".jpg";
                 break;
-        } 
+            case 2:
+                $filename1 = "uploads/" . $rs[0]->filename;
+                $filename2 = "uploads/" . $rs[1]->filename;
+                $src = imagecreatefromjpeg($filename1);
+                $size = GetImageSize($filename1);
+
+                $src2 = imagecreatefromjpeg($filename2);
+                $size2 = GetImageSize($filename2);
+                $newwidth = $size[0] + $size2[0];
+
+                if ($size[1] >= $size2[1]) {
+                    $newheight = $size[1];
+                    $im = imagecreatetruecolor($newwidth, $newheight);
+                } else {
+                    $newheight = $size2[1];
+                    $im = imagecreatetruecolor($newheight,$newwidth);
+                }
+
+                
+                imagesavealpha($im, true);
+                imagecopymerge($im, $src, 0, 0, 0, 0, $size[0], $size[1],100);
+                imagecopymerge($im, $src2, $size[0], 0, 0, 0, $size2[0], $size2[1],100);
+                ImageJpeg($im, "uploads/thumbnail/" . $id . ".jpg");
+                //imagepng($im); // แสดงภาพ
+                ImageDestroy($src);
+                ImageDestroy($im);
+                return $id . ".jpg";
+                break;
+        }
     }
+   
 }
