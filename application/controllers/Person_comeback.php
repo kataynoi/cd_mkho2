@@ -380,7 +380,7 @@ class Person_comeback extends CI_Controller
         curl_close($chOne);
     }
 
-    public function mergeImage($id='11293')
+    public function mergeImage($id='11591')
     {
         
         $newwidth=0;$newheight=0;$size = array();
@@ -412,8 +412,8 @@ class Person_comeback extends CI_Controller
            
                 $im = ImageCreate($newwidth,$newheight);
               
-                $bg = ImageColorAllocate($im, 255, 255, 0);
-                $color = ImageColorAllocate($im, 0, 0, 0);
+                //$bg = ImageColorAllocate($im, 0, 0, 0);
+                //$color = ImageColorAllocate($im, 0, 0, 0);
                 ImageCopy($im, $src, 0, 0, 0, 0, $size[0],$size[1]);
                 ImageCopy($im, $src2, $size[0],0, 0, 0, $size2[0],$size2[1]);
                 ImageJpeg($im,"uploads/thumbnail/".$id.".jpg");
