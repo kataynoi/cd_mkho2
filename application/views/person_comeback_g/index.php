@@ -7,53 +7,82 @@
 
 <body>
     <br>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                aria-selected="false">Contact</a>
+        </li>
+    </ul>
 
-    <div class="row">
-        <div class="panel panel-info ">
-            <div class="panel-heading w3-theme">
-                <i class="fa fa-user fa-2x "></i> รายการประชาชนชาวมหาสารคามขอกลับรักษาตัวที่บ้าน
-                <a class="btn btn-success pull-right"
-                    href="<?php echo site_url('person_comeback/add_person_comeback');?>"><i
-                        class="fa fa-plus-circle"></i>
-                    Add</a>
-                </span>
+    <div class="tab-content" id="myTabContent">
 
-            </div>
-            <div class="panel-body">
+        <!--  start Tab1-->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="panel panel-info ">
+                <div class="panel-heading w3-theme">
+                    <i class="fa fa-user fa-2x "></i> รายการประชาชนชาวมหาสารคามขอกลับรักษาตัวที่บ้าน
+                    <a class="btn btn-success pull-right"
+                        href="<?php echo site_url('person_comeback/add_person_comeback');?>"><i
+                            class="fa fa-plus-circle"></i>
+                        Add</a>
+                    </span>
 
-                <table id="table_data" class="table table-striped" style="width:180%">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>วันที่บันทึก</th>
-                            <th>แจ้งSATได้เตียง | แจ้งSATเดินทาง</th>
-                            <th>สถานะดำเนินการ</th>
-                            <th>ชื่อ-สกุล</th>
-                            <th>เลขบัตรประชาชน</th>
-                            <th>ผล LAB</th>
-                            <th>วันที่ตรวจ Lab</th>
-                            <th>เบอร์โทร</th>
-                            <th>สถานะการเดินทาง</th>
-                            <th>วันที่เดินทางมาถึง</th>
-                            <th>ที่อยู่</th>
-                            <th>ประเภทการเดินทาง</th>
-                            <th>อายุ</th>
-                            <th>เพศ</th>
-                            <th>น้ำหนัก</th>
-                            <th>อาการ</th>
-                            <th>โรคประจำตัว</th>
-                            <th>บันทึกเพิ่มเติม</th>
+                </div>
+                <div class="panel-body">
 
-                        </tr>
-                    </thead>
+                    <table id="table_data" class="table table-striped" style="width:180%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>วันที่บันทึก</th>
+                                <th>แจ้งSATได้เตียง | แจ้งSATเดินทาง</th>
+                                <th>สถานะดำเนินการ</th>
+                                <th>ชื่อ-สกุล</th>
+                                <th>เลขบัตรประชาชน</th>
+                                <th>ผล LAB</th>
+                                <th>วันที่ตรวจ Lab</th>
+                                <th>เบอร์โทร</th>
+                                <th>สถานะการเดินทาง</th>
+                                <th>วันที่เดินทางมาถึง</th>
+                                <th>ที่อยู่</th>
+                                <th>ประเภทการเดินทาง</th>
+                                <th>อายุ</th>
+                                <th>เพศ</th>
+                                <th>น้ำหนัก</th>
+                                <th>อาการ</th>
+                                <th>โรคประจำตัว</th>
+                                <th>บันทึกเพิ่มเติม</th>
 
-                </table>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </div>
+
             </div>
 
         </div>
+        <!--  End Tab1-->
 
+
+        <!--  Start Tab2-->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> Tab 2</div>
+
+        <!--  End Tab2-->
+        <!--  Start Tab3-->
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab 3</div>
+        <!--  End Tab3-->
     </div>
 
+    <!--  Start Modal Line-->
     <div class="modal fade" id="smsModal" tabindex="-1" role="dialog" aria-labelledby="smsModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -79,5 +108,6 @@
             </div>
         </div>
     </div>
+    <!-- End Modal Line -->
 
     <script src="<?php echo base_url() ?>assets/apps/js/person_comeback_g.js" charset="utf-8"></script>
