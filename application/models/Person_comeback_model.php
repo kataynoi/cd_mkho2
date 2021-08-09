@@ -263,6 +263,7 @@ class Person_comeback_model extends CI_Model
     }
     public function get_ctravel_status()
     {       $rs = $this->db
+            ->where('active',1)
             ->get("ctravel_status")
             ->result();
         return $rs;
@@ -275,6 +276,7 @@ class Person_comeback_model extends CI_Model
     }
     public function get_cprocess_status()
     {       $rs = $this->db
+            ->where('active',1)
             ->get("cprocess_status")
             ->result();
         return $rs;
