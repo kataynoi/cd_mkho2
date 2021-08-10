@@ -24,8 +24,8 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('report/person_survey')?>">
-                    <div> <i class="fa fa-save fa-fw"> </i> xxxxxxxxxxxxxxxxxxx</div>
+                <a href="<?php echo site_url('ComebackAllInDay')?>">
+                    <div> <i class="fa fa-save fa-fw"> </i> สรุปรายงานประจำวัน </div>
                 </a>
             </li>
             <li class="divider"></li>

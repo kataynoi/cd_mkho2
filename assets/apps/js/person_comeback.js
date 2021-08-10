@@ -9,6 +9,15 @@ $(document).ready(function () {
     order: [],
 
     pageLength: 10,
+    responsive: true,
+
+    lengthMenu: [
+      [10, 25, 50, -1],
+      [10, 25, 50, "All"],
+    ], // page length options
+
+    dom: "Bfrtip",
+    buttons: ["copy", "csv", "excel", "pdf", "print"],
     ajax: {
       url: site_url + "/person_comeback/fetch_person_comeback",
       data: {

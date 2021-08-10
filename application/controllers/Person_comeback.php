@@ -223,7 +223,7 @@ class Person_comeback extends CI_Controller
         $cid = $this->input->post('cid');
         $file_type = $this->input->post('file_type');
         $config['upload_path']   = './uploads/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
-        $config['allowed_types'] = 'gif|jpg|png|jpeg'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+        $config['allowed_types'] = 'pdf/gif|jpg|png|jpeg'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
         $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
         $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
         $config['max_height']    = 0;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)

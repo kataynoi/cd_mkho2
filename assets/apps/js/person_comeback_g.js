@@ -4,6 +4,7 @@ $(document).ready(function () {
       $(row).attr("name", "row" + dataIndex);
     },
     scrollX: true,
+    buttons: ["copy", "csv", "excel", "pdf", "print"],
     processing: true,
     serverSide: true,
     order: [],

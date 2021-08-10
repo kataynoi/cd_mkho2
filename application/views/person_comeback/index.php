@@ -1,8 +1,6 @@
 ﻿<script src="<?php echo base_url() ?>assets/vendor/js/jquery.dataTables.min.js" charset="utf-8"></script>
 <script src="<?php echo base_url() ?>assets/vendor/js/dataTables.bootstrap4.min.js" charset="utf-8"></script>
 <link href="<?php echo base_url() ?>assets/vendor/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-
 <html>
 
 <body>
@@ -17,7 +15,6 @@
                         class="fa fa-plus-circle"></i>
                     Add</a>
                 </span>
-
             </div>
             <div class="panel-body">
 
@@ -43,15 +40,11 @@
                             <th>อาการ</th>
                             <th>โรคประจำตัว</th>
                             <th>บันทึกเพิ่มเติม</th>
-
                         </tr>
                     </thead>
-
                 </table>
             </div>
-
         </div>
-
     </div>
 
 
