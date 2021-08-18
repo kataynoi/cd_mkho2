@@ -135,7 +135,13 @@ crud.save = function (items, row_id) {
   crud.ajax.save(items, function (err, data) {
     if (err) {
       //app.alert(err);
-      swal(err);
+      $("#register").hide();
+      //var q = data.id;
+      var hospname = $("#hospcode").find(":selected").html();
+      //console.log("Queue:" + q);
+      $("#hos_regis").html(hospname);
+      //$("#q").html(q);
+      $("#alert").show();
     } else {
       $("#register").hide();
       var q = data.id;
@@ -306,6 +312,7 @@ $("#btn_save").on("click", function (e) {
   items.name = $("#name").val();
   items.lname = $("#lname").val();
   items.sex = $("#sex").val();
+  items.nation = $("#nation").val();
   items.birth = $("#birth").val();
   items.tel = $("#tel").val();
   items.hsub = $("#hsub").val();
@@ -378,8 +385,8 @@ $(document).on("click", 'button[data-btn="btn_view"]', function (e) {
 });
 
 function validate(items) {
-  if (!items.cid || items.cid.length != 13) {
-    swal("กรุณาระบุเลขบัตรประชาชนให้ถูกต้อง");
+  if (!items.cid) {
+    swal("กรุณาระบุเลขบัตรประชาชนหรือ Passport");
     $("#cid").focus();
   } else if (!items.prename) {
     swal("กรุณาระบุคำนำหน้า");
