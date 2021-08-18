@@ -377,3 +377,12 @@ $(".btn-toggle").click(function () {
 
   $(this).find(".btn").toggleClass("btn-default");
 });
+function checkProcessStatus() {
+  let cid = $("#cid").val();
+  let tel = $("#tel").val();
+  let amp = $("#ampur").val();
+  let lab = $("#lab").val();
+  let travel_status = 0;
+
+  return travel_status;
+}
