@@ -33,8 +33,7 @@
                 <div class="panel-body">
                     <div class="form-group col-md-3">
                         <label for="cid">เลขบัตรประชาชน/Passport</label>
-                        <input type="text" class="form-control" id="cid" placeholder="เลขบัตรประชาชน" value="" min="13"
-                            max="13" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        <input type="text" class="form-control" id="cid" placeholder="เลขบัตรประชาชน" value="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="prename">คำนำหน้า:prename</label>
