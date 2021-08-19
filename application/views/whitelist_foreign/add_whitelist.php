@@ -15,13 +15,13 @@
 
         <div class="panel panel-info ">
             <div class="panel-heading w3-theme">
-                <i class="fa fa-user fa-2x "></i> ชาวมหาสารคาม ร่วมใจลงทะเบียนฉีดวัคซีนสู้ภัยโควิด-19
+                <i class="fa fa-user fa-2x "></i> Registration for foreigners in Mahasarakham Province
             </div>
             <div class="alert alert-primary" role="alert">
-                <ul style="list-style-type: none">
+                <!-- <ul style="list-style-type: none">
                     <li>1. ระบบนี้ลงทะเบียนสำหรับต่างชาติ </li>
 
-                </ul>
+                </ul> -->
             </div>
             <form>
                 <input type="hidden" id="action" value="insert">
@@ -69,15 +69,12 @@
 
                     <div class="form-group col-md-3">
                         <label for="from_province">สัญชาติ:nation</label>
-                        <select class="form-control" id="ืnation" placeholder="จังหวัด" value="" style="width:100%">
-                            <option></option>
+                        <select class="form-control" id="nation" placeholder="จังหวัด" value="" style="width:100%">
                             <?php
                                         foreach ($cnation as $r) {
                                             
-                                           // if($r->id !='056' || $r->id !='266' || $r->id !='150' || $r->id !='090' || $r->id !='048'  || $r->id !='048' || $r->id !='057'){
-                                              
-                                        if(strstr($r->name,'ลาว')== false || strstr($r->name,'พม่า')== false  || strstr($r->name,'กัมพูชา')== false || strstr($r->name,'เวียดนาม')== false ){
-                                      
+                                        if($r->id !='056' || $r->id !='266' || $r->id !='150' || $r->id !='090' || $r->id !='048'  || $r->id !='048' || $r->id !='057'){   
+                                        //if(strstr($r->name,'ลาว')== false || strstr($r->name,'พม่า')== false  || strstr($r->name,'กัมพูชา')== false || strstr($r->name,'เวียดนาม')== false ){
                                                 echo "<option value=$r->id > $r->name </option>";
                                             }
                                             

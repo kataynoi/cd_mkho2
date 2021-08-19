@@ -33,6 +33,7 @@ $(document).ready(function () {
     })
     .datepicker("setDate", "0");
   $("#date_in").datepicker();
+  $("#nation").select2();
 });
 
 var crud = {};

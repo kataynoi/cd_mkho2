@@ -10,10 +10,7 @@
 <html>
 
 <body>
-
-
     <br>
-
     <div class="panel panel-info ">
         <div class="panel-heading w3-theme">
             <i class="fa fa-user fa-2x "></i> ชาวมหาสารคาม ร่วมใจลงทะเบียนสู้ภัยโควิด-19
@@ -70,11 +67,8 @@
                     <select class="form-control" id="prov" placeholder="จังหวัด" value="" style="width:100%">
                         <option></option>
                         <?php
-                                        foreach ($cchangwat as $r) {
-                                            
-                                                echo "<option value=$r->changwatcode > $r->changwatname </option>";
-                                
-                                            
+                                foreach ($cchangwat as $r) {
+                                echo "<option value=$r->changwatcode > $r->changwatname </option>";           
                         } ?>
                     </select>
                 </div>
@@ -108,7 +102,6 @@
             </div>
         </form>
     </div>
-
     <div class="panel panel-success">
         <div class="panel-heading">
             ความต้องการรับบริการฉีดวัคซีน
@@ -121,13 +114,10 @@
                         ต้องการรับวัคซีน
                     </label>
                 </div>
-
             </div>
-
             <div class="form-group ">
                 <input type="hidden" class="form-control" id="province" placeholder="จังหวัด" value="44">
             </div>
-
         </div>
     </div>
     <div class="form-row">
