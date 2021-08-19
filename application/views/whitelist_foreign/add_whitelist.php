@@ -70,6 +70,7 @@
                     <div class="form-group col-md-3">
                         <label for="from_province">สัญชาติ:nation</label>
                         <select class="form-control" id="nation" placeholder="จังหวัด" value="" style="width:100%">
+                            <option></option>
                             <?php
                                         foreach ($cnation as $r) {
                                             
