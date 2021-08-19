@@ -108,7 +108,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="tambon">ตำบล</label>
+                        <label for="tambon">ตำบล:Subdistrict</label>
                         <select class="form-control" id="tambon" placeholder="ตำบล" value="">
                             <option></option>
                         </select>
@@ -121,7 +121,7 @@
                         <input type="hidden" id="villagecode">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="no">บ้านเลขที่</label>
+                        <label for="no">บ้านเลขที่:HomeNumber</label>
                         <input type="text" class="form-control" id="no" placeholder="บ้านเลขที่" value="">
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                         <option></option>
                         <?php
                              foreach ($chospmain as $r) {  
-                                 if($r->hoscode =='10707' || $r->hoscode =='11055' || $r->hoscode =='11058' ){
+                                 if($r->hoscode =='10707' || $r->hoscode =='11055' || $r->hoscode =='11058' || $r->hoscode =='22953'){
                                     echo "<option value=$r->hoscode > $r->hosname </option>";     
                                  }             
                         } ?>
