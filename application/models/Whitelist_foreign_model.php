@@ -79,10 +79,10 @@ class Whitelist_foreign_model extends CI_Model
     {
         if(!isset($data["vaccine"])){$data["vaccine"]=0;}
         $birth= to_mysql_date($data["birth"]);
-        $sql = "insert into whitelist_foreign( target_type, prov, amp, tambon, moo, hospname, hospcode, cid, prename, name, lname, sex, birth, tel, vaccine, hsub, date_input, q, nation) 
+        $sql = "insert into whitelist_foreign( person_type, prov, amp, tambon, moo, hospname, hospcode, cid, prename, name, lname, sex, birth, tel, vaccine, date_input, q, nation, file1, file2, file3) 
 
             select 
-            '5'
+            '".$data["person_type"]."'
             ,'".$data["prov"]."'
             ,'".$data["ampur"]."'
             ,'".$data["tambon"]."'
@@ -97,10 +97,12 @@ class Whitelist_foreign_model extends CI_Model
             ,'".$birth."'
             ,'".str_replace("-","",$data["tel"])."'
             ,'".$data["vaccine"]."'
-            ,'".$data["hsub"]."'
             ,'".date('Y-m-d H:i:s')."'
             ,(coalesce(max(q), -1) + 1)
             ,'".$data["nation"]."'
+            ,'".$data["file1"]."'
+            ,'".$data["file2"]."'
+            ,'".$data["file3"]."'
             from whitelist_foreign  where hospcode=".$data["hospcode"]."
             on duplicate key update
             q  = values(q);";

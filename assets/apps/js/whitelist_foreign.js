@@ -303,7 +303,8 @@ $("#btn_save").on("click", function (e) {
   items.action = $("#action").val();
   // items.brand_name = $("#brand option:selected").text();
   items.id = $("#id").val();
-  items.organization = $("#organization").val();
+  items.person_type = $("#person_type").val();
+  items.file1 = $("#file1").val();
   items.prov = $("#prov").val();
   items.ampur = $("#ampur").val();
   items.tambon = $("#tambon").val();
@@ -316,13 +317,12 @@ $("#btn_save").on("click", function (e) {
   items.nation = $("#nation").val();
   items.birth = $("#birth").val();
   items.tel = $("#tel").val();
-  items.hsub = $("#hsub").val();
   items.hospcode = $("#hospcode").val();
   items.hospname = $("#hospcode").find(":selected").html();
   items.vaccine = $("input[name='vaccine']:checked").val();
 
   if (validate(items)) {
-    crud.save(items, row_id);
+    $("#frm_register").submit();
   }
 });
 
@@ -386,7 +386,10 @@ $(document).on("click", 'button[data-btn="btn_view"]', function (e) {
 });
 
 function validate(items) {
-  if (!items.cid) {
+  if (!items.person_type) {
+    swal("กรุณาเลือกประเภทการลงทะเบียน");
+    $("#cid").focus();
+  } else if (!items.cid) {
     swal("กรุณาระบุเลขบัตรประชาชนหรือ Passport");
     $("#cid").focus();
   } else if (!items.prename) {
@@ -419,6 +422,9 @@ function validate(items) {
   } else if (!items.moo) {
     swal("กรุณาระบุหมู่ที่");
     $("#moo").focus();
+  } else if (!items.file1) {
+    swal("กรุณาแนบ ไฟลล์ Passport");
+    $("#file1").focus();
   } else if (!items.hospcode) {
     swal("กรุณาระบุหน่วยบริการที่ต้องการฉีดวัคซีน");
     $("#้hospcode").focus();

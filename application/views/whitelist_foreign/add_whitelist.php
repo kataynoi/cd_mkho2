@@ -23,7 +23,8 @@
 
                 </ul> -->
             </div>
-            <form>
+            <form action="<?php echo site_url('whitelist_foreign/save_foreign')?>" enctype="multipart/form-data"
+                method="post" accept-charset="utf-8" id="frm_register">
                 <input type="hidden" id="action" value="insert">
                 <input type="hidden" class="form-control" id="row_id" placeholder="ROWID" value="">
                 <input type="hidden" class="form-control" id="id" placeholder="ID" value="">
@@ -32,43 +33,55 @@
                     value="<?php echo $this->session->userdata('id')?>">
                 <div class="panel-body">
                     <div class="form-group col-md-3">
+                        <label for="cid"> กลุ่มเป้าหมาย</label>
+                        <select class="form-control" id="person_type" name="person_type">
+                            <option></option>
+                            <option value="1">ชาวต่างชาติที่พำนักถาวรในจังหวัดมหาสารคาม</option>
+                            <option value="2">ชาวไทย/นักเรียนไทย ที่ต้องเดินทางไปต่างประเทศ ในปี 2564
+                                และประเทศปลายทางระบุว่าต้องได้รับ Pfizer</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="cid">เลขบัตรประชาชน/Passport</label>
-                        <input type="text" class="form-control" id="cid" placeholder="เลขบัตรประชาชน" value="">
+                        <input type="text" class="form-control" id="cid" name="cid" placeholder="เลขบัตรประชาชน"
+                            value="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="prename">คำนำหน้า:prename</label>
-                        <input type="text" class="form-control" id="prename" placeholder="คำนำหน้า" value="">
+                        <input type="text" class="form-control" id="prename" name="prename" placeholder="คำนำหน้า"
+                            value="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="name">ชื่อ:name</label>
-                        <input type="text" class="form-control" id="name" placeholder="ชื่อ" value="">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อ" value="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="lname">สกุล:lastname</label>
-                        <input type="text" class="form-control" id="lname" placeholder="สกุล" value="">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="สกุล" value="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sex">เพศ:sex</label>
-                        <select id="sex" class="form-control">
+                        <select id="sex" name="sex" class="form-control">
                             <option value="1">ชาย:male</option>
                             <option value="2">หญิง:female</option>
                         </select>
                     </div>
                     <div class="form_group col-md-3">
                         <label for="birth">วันเกิด:birth</label>
-                        <input type="text" id="birth" data-type="date" class="form-control datepicker"
+                        <input type="text" id="birth" name="birth" data-type="date" class="form-control datepicker"
                             data-date-language="th" placeholder="01/04/2563" title="ระบุวันที่" data-rel="tooltip">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="tel">โทร:telephone number</label>
-                        <input type="text" class="form-control" id="tel" placeholder="โทร" value=""
+                        <input type="text" class="form-control" id="tel" name="tel" placeholder="โทร" value=""
                             onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                     </div>
 
 
                     <div class="form-group col-md-3">
                         <label for="from_province">สัญชาติ:nation</label>
-                        <select class="form-control" id="nation" placeholder="จังหวัด" value="" style="width:100%">
+                        <select class="form-control" id="nation" name="nation" placeholder="จังหวัด" value=""
+                            style="width:100%">
                             <option></option>
                             <?php
                                         foreach ($cnation as $r) {
@@ -83,20 +96,19 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="from_province">ที่อยู่จังหวัด:province</label>
-                        <select class="form-control" id="prov" placeholder="จังหวัด" value="" style="width:100%">
+                        <select class="form-control" id="prov" name="prov" placeholder="จังหวัด" value=""
+                            style="width:100%">
                             <option></option>
                             <?php
                                         foreach ($cchangwat as $r) {
                                             
-                                                echo "<option value=$r->changwatcode > $r->changwatname </option>";
-                                
-                                            
+                                                echo "<option value=$r->changwatcode > $r->changwatname </option>";   
                         } ?>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="ampur">อำเภอ:district</label>
-                        <select class="form-control" id="ampur" placeholder="อำเภอ" value="">
+                        <select class="form-control" id="ampur" name="ampur" placeholder="อำเภอ" value="">
                             <option></option>
                             <?php
                             foreach ($campur as $r) {
@@ -106,23 +118,46 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="tambon">ตำบล:Subdistrict</label>
-                        <select class="form-control" id="tambon" placeholder="ตำบล" value="">
+                        <select class="form-control" id="tambon" name="tambon" placeholder="ตำบล" value="">
                             <option></option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="moo">หมูที่->หมู่บ้าน:village</label>
-                        <select class="form-control" id="moo" placeholder="หมู่บ้าน" value="">
+                        <select class="form-control" id="moo" name="moo" placeholder="หมู่บ้าน" value="">
                             <option></option>
                         </select>
                         <input type="hidden" id="villagecode">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="no">บ้านเลขที่:HomeNumber</label>
-                        <input type="text" class="form-control" id="no" placeholder="บ้านเลขที่" value="">
+                        <input type="text" class="form-control" id="no" name="no" placeholder="บ้านเลขที่" value="">
                     </div>
                 </div>
-            </form>
+
+
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                เอกสารประกอบการเดินทาง
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="file1">หนังสือเดินทาง : passport [ภาพถ่าย]*</label>
+                    <input type="file" name="file1" id='file1'>
+                </div>
+                <div class="form-group">
+                    <label for="file2">visa</label>
+                    <input type="file" name="file2" id='file2'>
+                </div>
+                <div class="form-group">
+                    <label for="file3">เอกสารยืนยันการเดินทางในปี 2564 *</label>
+                    <input type="file" name="file3" id='file3'>
+                </div>
+            </div>
+
+
         </div>
 
         <div class="panel panel-success">
@@ -141,7 +176,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="from_province">หน่วยบริการวัคซีน:Hospital</label>
-                    <select class="form-control" id="hospcode" placeholder="หน่วยบริการวัคซีน" value=""
+                    <select class="form-control" id="hospcode" name="hospcode" placeholder="หน่วยบริการวัคซีน" value=""
                         style="width:100%">
                         <option></option>
                         <?php
@@ -151,19 +186,21 @@
                                  }             
                         } ?>
                     </select>
-                    <input type="hidden" class="form-control" id="hsub" placeholder="โทร" value="">
+                    <input type="hidden" class="form-control" id="hospname" name="hospname" placeholder="โทร" value="">
                 </div>
 
             </div>
         </div>
         <div class="form-row">
             <div class="form-group text-center">
-                <button type="button" class="btn btn-success" id="btn_save">Save:บันทึกข้อมูล</button>
+                <button type="submit" class="btn btn-success" id="btn_save">Save:บันทึกข้อมูล</button>
 
                 </button>
             </div>
         </div>
     </div>
+    </form>
+
     <div class="container" id='alert' hidden>
         <div class=" col colalert alert-success justify-content-lg-center" role="alert">
             <h1 class="text-center">ลงทะเบียนสำเร็จ</h1>
@@ -177,7 +214,6 @@
             <p>
         </div>
     </div>
-
 </body>
 
 </html>

@@ -34,9 +34,8 @@ class Whitelist_foreign extends CI_Controller
         $data["cchangwat"] = $this->crud->get_cchangwat();
         $data["cnation"] = $this->crud->get_cnation();
         $data["chospmain"] = $this->crud->get_hospmain();
-        $this->layout->view('whitelist_foreign/add_whitelist2',$data);
+        $this->layout->view('whitelist_foreign/add_whitelist',$data);
     }
-
     function fetch_whitelist_foreign()
     {
         $fetch_data = $this->crud->make_datatables();
@@ -150,5 +149,104 @@ class Whitelist_foreign extends CI_Controller
         }
 
         render_json($json);
+    }
+
+    public function save_foreign (){
+        $data = array();
+        $data['person_type'] = $this->input->post('person_type');
+        $data['prov'] = $this->input->post('prov');
+        $data['ampur'] = $this->input->post('ampur');
+        $data['tambon'] = $this->input->post('tambon');
+        $data['moo'] = $this->input->post('moo');
+        $data['cid'] = $this->input->post('cid');
+        $data['prename'] = $this->input->post('prename');
+        $data['name'] = $this->input->post('name');
+        $data['lname'] = $this->input->post('lname');
+        $data['sex'] = $this->input->post('sex');
+        $data['nation'] = $this->input->post('nation');
+        $data['birth'] = $this->input->post('birth');
+        $data['tel'] = $this->input->post('tel');
+        $data['hospcode'] = $this->input->post('hospcode');
+        $data['hospname'] = $this->input->post('hospname');
+        $data['vaccine'] = $this->input->post('vaccine');
+        $data['file1'] = $this->input->post('file1');
+        $data['file2'] = $this->input->post('file2');
+        $data['file3'] = $this->input->post('file3');
+        //$rs=$this->crud->save_whitelist_foreign($data);
+        //print_r($data);
+        $config['upload_path']   = './uploads/foreign'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+        $config['allowed_types'] = 'pdf|gif|jpg|png|jpeg'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+        $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['max_height']    = 0;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['overwrite'] = false;
+        $config['encrypt_name']  = False; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
+        
+            //$config['file_name'] = "1_".$data['cid']."_".$data['tel'];
+            $this->load->library('upload', $config);
+
+            $this->upload->do_upload('file1');
+            $data_file1 = array('upload_data' => $this->upload->data());
+            $data['file1'] = $data_file1['upload_data']['file_name'];
+
+            if($this->upload->do_upload('file2')){
+                //$config['file_name'] = "2_".$data['cid']."_".$data['tel'];
+                $data_file2 = array('upload_data' => $this->upload->data());
+                $data['file2'] = $data_file2['upload_data']['file_name'];
+            }
+            
+            if($this->upload->do_upload('file3')){
+                
+                //$config['file_name'] = "3_".$data['cid']."_".$data['tel'];
+                $data_file3 = array('upload_data' => $this->upload->data());
+                $data['file3'] = $data_file3['upload_data']['file_name'];
+            }
+       
+            
+
+            $rs=$this->crud->save_whitelist_foreign($data);
+            
+            $data['hospname'] = "xxxxx";
+            $this->layout->view('whitelist_foreign/upload_success',$data);
+            
+    }
+    
+        
+        public function upload_file($id,$file,$file_type)
+    {
+
+       // $id = $this->input->post('id');
+        //$cid = $this->input->post('cid');
+        //$file_type = $this->input->post('file_type');
+        $config['upload_path']   = './uploads/foreign'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+        $config['allowed_types'] = 'pdf|gif|jpg|png|jpeg'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+        $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['max_height']    = 0;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+        $config['overwrite'] = TRUE;
+        $config['encrypt_name']  = False; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
+        $config['file_name'] = ( $id . "_" . $file_type);
+
+
+        $this->load->library('upload', $config);
+
+        //ตรวจสอบว่า การ Upload สำเร็จหรือไม่    
+        if (!$this->upload->do_upload('file1')) {
+            $data['error'] = array('error' => $this->upload->display_errors());
+            print_r($data['error']);
+            // $this->layout->view('person_comeback/files',$data);
+        } else {
+            $data = array();
+            $data['filename'] = $config['file_name'];
+            $data['filetype'] = $this->upload->data('file_ext');
+            $data['file_size'] = $this->upload->data('file_size');
+            //$data['cid'] = $cid;
+            $data['pid_comeback'] = $id;
+            //$data['doc_type'] = $file_type;
+
+            $rs = $this->crud->save_file($data);
+            //$this->resizeImage('uploads/' . $data["filename"] . $data["filetype"]);
+            //redirect('/person_comeback/files/' . $id . '/' . $cid, 'refresh');
+        }
     }
 }
