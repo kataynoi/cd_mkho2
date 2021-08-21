@@ -21,6 +21,7 @@
                 <img src="<?php echo base_url().'/assets/img/1.jpg';?>" height="200">
                 <img src="<?php echo base_url().'/assets/img/3.jpg';?>" height="200">
             </div>
+            <h3>กรุณาลงทะเบียน 1 คน ด้วย 1 เบอร์โทร</h3>
             <form action="<?php echo site_url('whitelist_foreign/save_foreign')?>" enctype="multipart/form-data"
                 method="post" accept-charset="utf-8" id="frm_register">
                 <input type="hidden" id="action" value="insert">
