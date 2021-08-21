@@ -18,10 +18,8 @@
                 <i class="fa fa-user fa-2x "></i> Registration for foreigners in Mahasarakham Province
             </div>
             <div class="alert alert-primary" role="alert">
-                <!-- <ul style="list-style-type: none">
-                    <li>1. ระบบนี้ลงทะเบียนสำหรับต่างชาติ </li>
-
-                </ul> -->
+                <img src="<?php echo base_url().'/assets/img/1.jpg';?>" height="200">
+                <img src="<?php echo base_url().'/assets/img/3.jpg';?>" height="200">
             </div>
             <form action="<?php echo site_url('whitelist_foreign/save_foreign')?>" enctype="multipart/form-data"
                 method="post" accept-charset="utf-8" id="frm_register">
