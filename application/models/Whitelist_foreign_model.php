@@ -103,13 +103,11 @@ class Whitelist_foreign_model extends CI_Model
             ,'".$data["file1"]."'
             ,'".$data["file2"]."'
             ,'".$data["file3"]."'
-            from whitelist_foreign  where hospcode=".$data["hospcode"]."
-            on duplicate key update
-            q  = values(q);";
+            from whitelist_foreign  where hospcode=".$data["hospcode"].";";
             $query = $this->db->query($sql);
-            $last_id = $this->db->insert_id();
-            $q = $this->db->query("SELECT q FROM whitelist_foreign where id = '".$last_id."'")->row();
-            return $q->q;
+            
+            return $query;
+           
     }
     
     public function update_whitelist_foreign($data)

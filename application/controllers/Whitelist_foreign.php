@@ -205,9 +205,13 @@ class Whitelist_foreign extends CI_Controller
             
 
             $rs=$this->crud->save_whitelist_foreign($data);
+            if($rs){
+                $this->layout->view('whitelist_foreign/upload_success');
+            }else{
+                $this->layout->view('whitelist_foreign/upload_un_success');
+            }
             
-            $data['hospname'] = "xxxxx";
-            $this->layout->view('whitelist_foreign/upload_success',$data);
+            
             
     }
     
@@ -245,6 +249,7 @@ class Whitelist_foreign extends CI_Controller
             //$data['doc_type'] = $file_type;
 
             $rs = $this->crud->save_file($data);
+
             //$this->resizeImage('uploads/' . $data["filename"] . $data["filetype"]);
             //redirect('/person_comeback/files/' . $id . '/' . $cid, 'refresh');
         }

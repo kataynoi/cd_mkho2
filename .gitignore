@@ -21,6 +21,7 @@ assets/images/banner/*
 assets/images/users/*
 assets/images/
 /uploads
+index.php
 
 /crud
 /report
