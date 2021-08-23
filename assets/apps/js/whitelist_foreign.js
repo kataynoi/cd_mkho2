@@ -33,7 +33,7 @@ $(document).ready(function () {
     })
     .datepicker("setDate", "0");
   $("#date_in").datepicker();
-  $("#nation").select2();
+  // $("#nation").select2();
 });
 
 var crud = {};
@@ -113,6 +113,19 @@ crud.ajax = {
     var url = "/basic/get_moo_list",
       params = {
         code: code,
+      };
+
+    app.ajax(url, params, function (err, data) {
+      err ? cb(err) : cb(null, data);
+    });
+  },
+  confirm_vaccine: function (id, val, cb) {
+    var url = "/basic/toggle_data",
+      params = {
+        id: id,
+        val: val,
+        table: "whitelist_foreign",
+        filed: "confirm_vaccine",
       };
 
     app.ajax(url, params, function (err, data) {
@@ -469,6 +482,18 @@ $("#cid").on("keyup", function () {
 });
 
 */
+
+crud.confirm_vaccine = function (id, val) {
+  crud.ajax.confirm_vaccine(id, val, function (err, data) {
+    if (err) {
+      $r = false;
+    } else {
+      $r = true;
+    }
+    //alert($r);
+  });
+  return true;
+};
 crud.get_foreign_by_cid = function (cid) {
   crud.ajax.get_foreign_by_cid(cid, function (err, data) {
     $("#provchange").val("0");
@@ -595,4 +620,32 @@ $("#new_regis").on("click", function () {
   $("#register").show();
   $("#hos_regis").html("");
   $("#q").html("");
+});
+
+$(document).on("click", 'button[data-btn="btn_con_vac"]', function (e) {
+  e.preventDefault();
+  var id = $(this).data("id");
+  var val = $(this).data("val");
+  var n = $(this);
+  swal({
+    title: "คำเตือน?",
+    text: "คุณต้องการแก้ไขสถานะรับวัคซีน ",
+    icon: "warning",
+    buttons: ["cancel !", "Yes !"],
+    dangerMode: true,
+  }).then(function (isConfirm) {
+    if (isConfirm) {
+      if (crud.confirm_vaccine(id, val)) {
+        if (val == "0") {
+          n.removeClass("btn-danger").addClass("btn-success");
+          n.find("i").removeClass("fa-times").addClass("fa-check");
+          n.data("val", 1);
+        } else {
+          n.removeClass("btn-success").addClass("btn-danger");
+          n.find("i").removeClass("fa-check").addClass("fa-times");
+          n.data("val", 0);
+        }
+      }
+    }
+  });
 });

@@ -42,10 +42,10 @@ class Whitelist_foreign extends CI_Controller
         $data = array();
         foreach ($fetch_data as $row) {
             $vaccine="";
-            if($row->vaccine==1){
-                $vaccine="<span><i class='fa fa-check-circle' style='color:green;'></i><span>";
+            if($row->confirm_vaccine==1){
+                $vaccine="<button class='btn btn-success' data-btn='btn_con_vac' data-id='".$row->id."' data-val='1'><i class='fa fa-check'></i></button>";
             }else{
-                $vaccine="<span><i class='fa fa-times-circle' style='color:red;'></i><span>";
+                $vaccine="<button class='btn btn-danger' data-btn='btn_con_vac' data-id='".$row->id."' data-val='0'><i class='fa fa-times' ></i></button>";
             }
             $sub_array = array();
                 $sub_array[] =$vaccine;
