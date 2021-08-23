@@ -47,8 +47,23 @@ class Whitelist_foreign extends CI_Controller
             }else{
                 $vaccine="<button class='btn btn-danger' data-btn='btn_con_vac' data-id='".$row->id."' data-val='0'><i class='fa fa-times' ></i></button>";
             }
+            $sl0='';$sl1='';$sl2='';
+            if($row->confirm_vaccine==1){
+                $sl1='selected';
+            }else if($row->confirm_vaccine==2){
+                $sl2='selected';
+            }else{
+                $sl0='selected';
+            }
+
+            $test ='<div><select data-id="'.$row->id.'" class="" data-name="confirm_vaccine">
+            <option value="1" '.$sl1.'>รับวัคซีน</option>
+            <option value="2" '.$sl2.'>รอตรวจสอบ</option>
+            <option value="0" '.$sl0.'>ไม่ผ่านการพิจารณา </option>
+            </select></div>';
             $sub_array = array();
-                $sub_array[] =$vaccine;
+                $sub_array[] =$test;
+                $sub_array[] = $row->confirm_vaccine;
                 $sub_array[] = $row->hospcode;
                 $sub_array[] = substr($row->cid,0,10)."xxx";
                 $sub_array[] = $row->prename;
@@ -65,6 +80,7 @@ class Whitelist_foreign extends CI_Controller
                
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
                 <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
+                
                 $data[] = $sub_array;
         }
         $output = array(

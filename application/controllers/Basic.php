@@ -175,6 +175,20 @@ public function check_person_off_id(){
        }
         render_json($json);
     }
+    
+    public function set_data(){
+        $id = $this->input->post('id');
+        $val = $this->input->post('val');
+        $table = $this->input->post('table');
+        $filed= $this->input->post('filed');
+        $rs=$this->basic->set_data($id, $val, $table, $filed);
+       if($rs){
+           $json = '{"success": true}';
+       }else{
+           $json = '{"success": false}';
+       }
+        render_json($json);
+    }
 }
 /* End of file basic.php */
 /* Location: ./application/controlers/basic.php */

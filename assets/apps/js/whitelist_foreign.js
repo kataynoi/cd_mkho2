@@ -2,6 +2,13 @@ $(document).ready(function () {
   var dataTable = $("#table_data").DataTable({
     createdRow: function (row, data, dataIndex) {
       $(row).attr("name", "row" + dataIndex);
+      if (data[1] == 1) {
+        $(row).addClass("green");
+      } else if (data[1] == 2) {
+        $(row).addClass("orange");
+      } else {
+        //$(row).addClass("orange");
+      }
     },
     processing: true,
     serverSide: true,
@@ -17,8 +24,12 @@ $(document).ready(function () {
     },
     columnDefs: [
       {
-        targets: [1, 2],
+        targets: [0, 1, 2, 3, 6, 7, 8, 9, 10],
         orderable: false,
+      },
+      {
+        targets: [1],
+        visible: false,
       },
     ],
   });
@@ -120,7 +131,7 @@ crud.ajax = {
     });
   },
   confirm_vaccine: function (id, val, cb) {
-    var url = "/basic/toggle_data",
+    var url = "/basic/set_data",
       params = {
         id: id,
         val: val,
@@ -644,6 +655,40 @@ $(document).on("click", 'button[data-btn="btn_con_vac"]', function (e) {
           n.removeClass("btn-success").addClass("btn-danger");
           n.find("i").removeClass("fa-check").addClass("fa-times");
           n.data("val", 0);
+        }
+      }
+    }
+  });
+});
+
+$(document).on("change", 'select[data-name="confirm_vaccine"]', function (e) {
+  e.preventDefault();
+  var id = $(this).data("id");
+  var val = $(this).val();
+  var tr = $(this).parent().parent().parent();
+  var text = "";
+  if (val == 0) {
+    text = "ไม่ผ่านการพิจารณา";
+  } else if (val == 1) {
+    text = "รับวัคซีน";
+  } else if (val == 2) {
+    text = "รอตรวจสอบ";
+  }
+  swal({
+    title: "คำเตือน?",
+    text: "คุณต้องการแก้ไขสถานะเป็น " + text,
+    icon: "warning",
+    buttons: ["cancel !", "Yes !"],
+    dangerMode: true,
+  }).then(function (isConfirm) {
+    if (isConfirm) {
+      if (crud.confirm_vaccine(id, val)) {
+        if (val == 0) {
+          tr.removeClass("green").removeClass("orange");
+        } else if (val == 1) {
+          tr.removeClass("orange").addClass("green");
+        } else if (val == 2) {
+          tr.removeClass("green").addClass("orange");
         }
       }
     }

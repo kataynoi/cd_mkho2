@@ -182,5 +182,13 @@ class Basic_model extends CI_Model
             ->update($table);
         return $rs;
     }
+    public function set_data($id, $val, $table, $filed)
+    {
+        $rs = $this->db
+            ->set($filed,$val)
+            ->where('id', $id)
+            ->update($table);
+        return $rs;
+    }
 
 }

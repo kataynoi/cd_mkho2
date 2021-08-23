@@ -1,7 +1,19 @@
 ﻿<script src="<?php echo base_url() ?>assets/vendor/js/jquery.dataTables.min.js" charset="utf-8"></script>
 <script src="<?php echo base_url() ?>assets/vendor/js/dataTables.bootstrap4.min.js" charset="utf-8"></script>
 <link href="<?php echo base_url() ?>assets/vendor/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<style>
+tr.red {
+    background-color: #e57373;
+}
 
+tr.orange {
+    background-color: #ffb74d;
+}
+
+tr.green {
+    background-color: #aed581;
+}
+</style>
 <html>
 
 <body>
@@ -40,7 +52,8 @@
                 <table id="table_data" class="table table-responsive">
                     <thead>
                         <tr>
-                            <th>รับวัคซีน</th>
+                            <th>สถานะ</th>
+                            <th>confirm_vaccine</th>
                             <th>หน่วยงาน</th>
                             <th>เลขบัตรประชาชน</th>
                             <th>คำนำหน้า</th>
