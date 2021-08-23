@@ -32,7 +32,7 @@ header("Cache-Control: private",false);
                 <thead>
                     <tr>
                         <th>วันเวลาที่ลงทะเบียน</th>
-                        <th>คิวในระบ</th>
+                        <th>สถานะ</th>
                         <th>กลุ่มเป้าหมาย</th>
                         <th>ประเภทกลุ่มเป้าหมาย</th>
                         <th>จังหวัด</th>
@@ -55,9 +55,16 @@ header("Cache-Control: private",false);
                 <tbody>
                     <?php
             foreach ($whitelist_person as $r) {
+                if($r->confirm_vaccine==0){
+                    $text = "ไม่ผ่านการพิจารณา";
+                }else if($r->confirm_vaccine==1){
+                    $text = "รับวัคซีน";
+                }else if($r->confirm_vaccine==2){
+                    $text = "รอตรวจสอบ";
+                }
                 echo "<tr>";
                 echo "<td>".$r->date_input."</td>";
-                echo "<td>".$r->q."</td>";
+                echo "<td>".$text."</td>";
                 echo "<td>".$r->target_type."</td>";
                 echo "<td>".$r->sub_target_type."</td>";
                 echo "<td>".$r->prov."</td>";

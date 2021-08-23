@@ -94,5 +94,49 @@ class Excel_export_model extends CI_Model
         return $rs;
     }
 
+    function fetch_whitelist_foreign($id,$level)
+    {
+
+        switch ($level) {
+            case 1:
+                $level_text = "";
+              break;
+            case 2:
+                $level_text = "WHERE hospcode ='".$id."'";
+              break;
+            case 3:
+                $level_text = "WHERE hsub ='".$id."'";
+              break;
+          } 
+        $sql = "SELECT 
+        date_input
+        ,a.confirm_vaccine
+        ,'5-กลุ่มต่างชาติและผู้เดินทางไปต่างประเทศ' as target_type
+        ,'501-อายุ 18 ปีขึ้นไป' as sub_target_type
+        ,CONCAT(a.prov,'-',b.changwatname) as prov
+        ,CONCAT(RIGHT(a.amp,2),'-',c.ampurname) as amp
+        ,CONCAT(RIGHT(a.tambon,2),'-',d.tambonname) as tambon
+        ,RIGHT(a.moo,2) as moo
+        ,NULL as hospname
+        ,NULL as hospcode
+        ,a.prename
+        ,a.name
+        ,a.lname
+        ,IF(a.sex=1,'ชาย',IF(a.sex=2,'หญิง','')) sex
+        ,CONCAT( DATE_FORMAT(  a.birth , '%d' ),'/',DATE_FORMAT(  a.birth, '%m' ) , '/',DATE_FORMAT( a.birth , '%Y' ) +543  ) AS birth
+        ,a.cid
+        ,CONCAT(LEFT(a.tel,3),'-',RIGHT(a.tel,7)) as tel
+        ,IF(a.vaccine=1,'1-รับ','0-ไม่รับ') as vaccine
+         FROM whitelist_foreign a
+        LEFT JOIN cchangwat b ON a.prov = b.changwatcode
+        LEFT JOIN campur c ON a.amp = c.ampurcodefull
+        LEFT JOIN ctambon d ON a.tambon = d.tamboncodefull
+        ".$level_text." ORDER BY q; ";
+               
+        $rs = $this->db->query($sql)->result();
+        echo $this->db->last_query();
+        return $rs;
+    }
+
 
 }
