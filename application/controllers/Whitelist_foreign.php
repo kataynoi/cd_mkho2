@@ -56,6 +56,12 @@ class Whitelist_foreign extends CI_Controller
                 $sub_array[] = $row->lname;
                 $sub_array[] = $row->sex;
                 $sub_array[] = $row->tel;
+                $sub_array[] = $row->file1 !="" ? "<a href='".base_url('uploads/foreign/').$row->file1."' target='_blank'> <i class='fa fa-folder-open-o' aria-hidden='true' style='color:green'></i>
+                </a>":"";
+                $sub_array[] = $row->file2 !="" ? "<a href='".base_url('uploads/foreign/').$row->file2."' target='_blank'> <i class='fa fa-folder-open-o' aria-hidden='true' style='color:orange'></i>
+                </a>":"";
+                $sub_array[] = $row->file3 !="" ? "<a href='".base_url('uploads/foreign/').$row->file3."' target='_blank'> <i class='fa fa-folder-open-o' aria-hidden='true' style='color:blue'></i>
+                </a>":"";
                
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
                 <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';

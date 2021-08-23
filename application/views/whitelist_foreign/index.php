@@ -48,6 +48,9 @@
                             <th>นามสกุล</th>
                             <th>เพศ</th>
                             <th>เบอร์โทร</th>
+                            <th>Passport</th>
+                            <th>visa</th>
+                            <th>เอกสารประกอบการเดินทาง</th>
                             <th>#</th>
                         </tr>
                     </thead>

@@ -23,6 +23,9 @@
 
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">
                     <a class="btn btn-success" type="button" target="_blank"
+                        href="<?php echo site_url('whitelist_foreign');?>"><i class="fa fa-file"></i>
+                        รายชื่อชาวต่างชาติที่ลงทะเบียน</a>
+                    <a class="btn btn-success" type="button" target="_blank"
                         href="<?php echo site_url('person_vaccine');?>"><i class="fa fa-file"></i> Report</a>
                     <a class="btn btn-success" type="button"
                         href="<?php echo site_url('whitelist_person/add_whitelist')?>" id=""><i
