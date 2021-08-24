@@ -15,8 +15,8 @@ class Whitelist_foreign extends CI_Controller
 
     public function index()
     {
-        //if(!$this->session->userdata("hospital_login"))
-        //redirect(site_url("user/login_hospital"));
+        if(!$this->session->userdata("hospital_login"))
+        redirect(site_url("user/login_hospital"));
         $data[] = '';
        
         $this->layout->view('whitelist_foreign/index', $data);
@@ -31,6 +31,30 @@ class Whitelist_foreign extends CI_Controller
     public function add_whitelist()
     {
         //$data["campur"] = $this->crud->get_campur();
+        $data["cchangwat"] = $this->crud->get_cchangwat();
+        $data["cnation"] = $this->crud->get_cnation();
+        $data["chospmain"] = $this->crud->get_hospmain();
+        $this->layout->view('whitelist_foreign/add_whitelist2',$data);
+    }
+
+    public function  get_whitelist_foreign($id)
+    {
+        $rs = $this->crud->get_whitelist_foreign($id);
+        return $rs;
+    }
+    public function add_whitelist2($id=null)
+    {
+        $data['person'] = '';
+        $data['action'] = 'insert';
+
+
+        if ($id != null) {
+            $data['person'] = $this->get_whitelist_foreign($id);
+            $data['action'] = 'update';
+            $data["campur"] = $this->crud->get_campur($data['person']->prov);
+            $data["ctambon"] = $this->crud->get_ctambon($data['person']->amp);
+            $data["cvillage"] = $this->crud->get_cvillage($data['person']->tambon);
+        }
         $data["cchangwat"] = $this->crud->get_cchangwat();
         $data["cnation"] = $this->crud->get_cnation();
         $data["chospmain"] = $this->crud->get_hospmain();
@@ -79,6 +103,7 @@ class Whitelist_foreign extends CI_Controller
                 </a>":"";
                
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
+                <a href="'.site_url('whitelist_foreign/add_whitelist2/').$row->id .'" class="btn btn-outline btn-warning disabled" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></a>
                 <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
                 
                 $data[] = $sub_array;
@@ -141,14 +166,6 @@ class Whitelist_foreign extends CI_Controller
     
                 render_json($json);
             }
-    public function  get_whitelist_foreign()
-    {
-                $id = $this->input->post('id');
-                $rs = $this->crud->get_whitelist_foreign($id);
-                $rows = json_encode($rs);
-                $json = '{"success": true, "rows": ' . $rows . '}';
-                render_json($json);
-    }
     public function get_foreign_by_cid()
     {
         $cid = $this->input->post('cid');

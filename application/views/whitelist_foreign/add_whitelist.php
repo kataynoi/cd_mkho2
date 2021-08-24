@@ -43,36 +43,45 @@
                     <div class="form-group col-md-3">
                         <label for="cid">เลขบัตรประชาชน/Passport</label>
                         <input type="text" class="form-control" id="cid" name="cid" placeholder="เลขบัตรประชาชน"
-                            value="">
+                            value="<?php echo isset($person->cid) ? $person->cid :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="prename">คำนำหน้า:prename</label>
                         <input type="text" class="form-control" id="prename" name="prename" placeholder="คำนำหน้า"
-                            value="">
+                            value="<?php echo isset($person->prename) ? $person->prename :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="name">ชื่อ:name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อ" value="">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อ"
+                            value="<?php echo isset($person->name) ? $person->name :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="lname">สกุล:lastname</label>
-                        <input type="text" class="form-control" id="lname" name="lname" placeholder="สกุล" value="">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="สกุล"
+                            value="<?php echo isset($person->lname) ? $person->lname :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sex">เพศ:sex</label>
+                        <?php
+                        $male='';$female='';
+                        if(isset($person->sex)){
+                            if($person->sex==1){ $male='selected';}elseif($person->sex==2){$female='selected';}
+                        } ?>
                         <select id="sex" name="sex" class="form-control">
-                            <option value="1">ชาย:male</option>
-                            <option value="2">หญิง:female</option>
+                            <option value="1" <?php echo $male?>>ชาย:male</option>
+                            <option value="2" <?php echo $female?>>หญิง:female</option>
                         </select>
                     </div>
                     <div class="form_group col-md-3">
                         <label for="birth">วันเกิด:birth</label>
                         <input type="text" id="birth" name="birth" data-type="date" class="form-control datepicker"
-                            data-date-language="th" placeholder="01/04/2563" title="ระบุวันที่" data-rel="tooltip">
+                            data-date-language="th" placeholder="01/04/2563" title="ระบุวันที่" data-rel="tooltip"
+                            value="<?php echo isset($person->birth) ? to_thai_date($person->birth) :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="tel">โทร:telephone number</label>
-                        <input type="text" class="form-control" id="tel" name="tel" placeholder="โทร" value=""
+                        <input type="text" class="form-control" id="tel" name="tel" placeholder="โทร"
+                            value="<?php echo isset($person->tel) ? $person->tel :""; ?>"
                             onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                     </div>
 
@@ -84,10 +93,11 @@
                             <option></option>
                             <?php
                                         foreach ($cnation as $r) {
-                                            
+                                            $sl='';
+                                            if($r->id==$person->nation){ $sl = 'selected';}
                                         if($r->id !='056' || $r->id !='266' || $r->id !='150' || $r->id !='090' || $r->id !='048'  || $r->id !='048' || $r->id !='057'){   
                                         //if(strstr($r->name,'ลาว')== false || strstr($r->name,'พม่า')== false  || strstr($r->name,'กัมพูชา')== false || strstr($r->name,'เวียดนาม')== false ){
-                                                echo "<option value=$r->id > $r->name </option>";
+                                                echo "<option value=$r->id $sl> $r->name </option>";
                                             }
                                             
                         } ?>
@@ -100,8 +110,9 @@
                             <option></option>
                             <?php
                                         foreach ($cchangwat as $r) {
-                                            
-                                                echo "<option value=$r->changwatcode > $r->changwatname </option>";   
+                                            $sl='';
+                                            if($r->changwatcode==$person->prov){ $sl = 'selected';}
+                                                echo "<option value=$r->changwatcode $sl> $r->changwatname </option>";   
                         } ?>
                         </select>
                     </div>
@@ -111,7 +122,9 @@
                             <option></option>
                             <?php
                             foreach ($campur as $r) {
-                            echo "<option value=$r->ampurcodefull > $r->ampurname </option>";
+                                $sl='';
+                                if($r->ampurcodefull==$person->amp){ $sl = 'selected';}
+                            echo "<option value=$r->ampurcodefull $sl > $r->ampurname </option>";
                             } ?>
                         </select>
                     </div>

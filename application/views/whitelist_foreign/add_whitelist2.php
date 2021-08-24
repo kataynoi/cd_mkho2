@@ -11,9 +11,9 @@
 <title>มหาสารคาม พร้อม!!</title>
 
 <body>
-    <p>
+    <p class="text-center">
     <div class="text-center btn btn-info">
-        <h1>เปิดให้ลงทะเบียน วันที่ 20 สิงหาคม 2564 18.00 น.</h1>
+        <h1>ปิดให้ลงทะเบียน</h1>
     </div>
     </p>
 

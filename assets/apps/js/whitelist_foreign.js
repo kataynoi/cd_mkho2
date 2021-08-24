@@ -34,16 +34,15 @@ $(document).ready(function () {
     ],
   });
   //$("#prov").select2();
-  $(".datepicker")
-    .datepicker({
-      format: "dd/mm/yyyy",
-      todayBtn: false,
-      language: "th", //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-      thaiyear: true, //Set เป็นปี พ.ศ.
-      autoclose: true,
-    })
-    .datepicker("setDate", "0");
-  $("#date_in").datepicker();
+  $(".datepicker").datepicker({
+    format: "dd/mm/yyyy",
+    todayBtn: false,
+    language: "th", //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+    thaiyear: true, //Set เป็นปี พ.ศ.
+    autoclose: true,
+  });
+  //.datepicker("setDate", "0");
+  //$("#birth").datepicker();
   // $("#nation").select2();
 });
 
@@ -377,21 +376,6 @@ $(document).on("click", 'button[data-btn="btn_del"]', function (e) {
       td.hide();
     }
   });
-});
-
-$(document).on("click", 'button[data-btn="btn_edit"]', function (e) {
-  e.preventDefault();
-  var id = $(this).data("id");
-  $("#action").val("update");
-  $("#id").val(id);
-  var row_id = $(this).parent().parent().parent().attr("name");
-  $("#frmModal input").prop("disabled", false);
-  $("#frmModal select").prop("disabled", false);
-  $("#frmModal textarea").prop("disabled", false);
-  $("#frmModal .btn").prop("disabled", false);
-
-  crud.get_update(id, row_id);
-  $("#frmModal").modal("show");
 });
 
 $(document).on("click", 'button[data-btn="btn_view"]', function (e) {

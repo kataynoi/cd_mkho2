@@ -137,6 +137,22 @@ class Whitelist_foreign_model extends CI_Model
             ->row();
         return $rs;
     }
+    public function get_cvillage($code)
+    {
+        $rs = $this->db
+            ->where('tamboncode', $code)
+            ->get("cvillage")
+            ->result();
+        return $rs;
+    }
+    public function get_ctambon($code)
+    {
+        $rs = $this->db
+            ->where('ampurcode', $code)
+            ->get("ctambon")
+            ->result();
+        return $rs;
+    }
     public function get_campur()
     {
         $rs = $this->db
@@ -218,4 +234,5 @@ class Whitelist_foreign_model extends CI_Model
             ->row();
         return $rs->numrows;
     }
+
 }
