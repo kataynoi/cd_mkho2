@@ -75,7 +75,7 @@ class Whitelist_foreign_model extends CI_Model
 
 
 
-    public function save_whitelist_foreign($data)
+    public function save_whitelist_foreignx($data)
     {
         if(!isset($data["vaccine"])){$data["vaccine"]=0;}
         $birth= to_mysql_date($data["birth"]);
@@ -109,12 +109,66 @@ class Whitelist_foreign_model extends CI_Model
             return $query;
            
     }
-    
+    public function save_whitelist_foreign($data)
+    {
+            $rs = $this->db
+            
+            ->set("nation", $data["nation"])
+            ->set("person_type", $data["person_type"])
+            ->set("prov", $data["prov"])
+            ->set("amp", $data["ampur"])
+            ->set("tambon", $data["tambon"])
+            ->set("moo", $data["moo"])
+            ->set("hospname", $data["hospname"])
+            ->set("hospcode", $data["hospcode"])
+            ->set("cid", $data["cid"])
+            ->set("prename", $data["prename"])
+            ->set("name", $data["name"])
+            ->set("lname", $data["lname"])
+            ->set("sex", $data["sex"])
+            ->set("birth", $data["birth"])
+            ->set("tel", $data["tel"])
+            ->set("vaccine", $data["vaccine"])
+            ->set('file1', $data["file1"])
+            ->set('file2', $data["file2"])
+            ->set('file3', $data["file3"])
+            ->set('date_input',date('Y-m-d H:i:s'))
+            ->insert('whitelist_foreign');
+            
+
+        return $rs;
+    }
     public function update_whitelist_foreign($data)
     {
-        $rs = $this->db
-            ->set("id", $data["id"])->set("organization", $data["organization"])->set("target_type", $data["target_type"])->set("prov", $data["prov"])->set("amp", $data["amp"])->set("tambon", $data["tambon"])->set("moo", $data["moo"])->set("hospname", $data["hospname"])->set("hospcode", $data["hospcode"])->set("cid", $data["cid"])->set("prename", $data["prename"])->set("name", $data["name"])->set("lname", $data["lname"])->set("sex", $data["sex"])->set("birth", $data["birth"])->set("tel", $data["tel"])->set("vaccine", $data["vaccine"])->where("id", $data["id"])
-            ->update('whitelist_foreign');
+            $this->db
+            
+            ->set("nation", $data["nation"])
+            ->set("person_type", $data["person_type"])
+            ->set("prov", $data["prov"])
+            ->set("amp", $data["ampur"])
+            ->set("tambon", $data["tambon"])
+            ->set("moo", $data["moo"])
+            ->set("hospname", $data["hospname"])
+            ->set("hospcode", $data["hospcode"])
+            ->set("cid", $data["cid"])
+            ->set("prename", $data["prename"])
+            ->set("name", $data["name"])
+            ->set("lname", $data["lname"])
+            ->set("sex", $data["sex"])
+            ->set("birth", $data["birth"])
+            ->set("tel", $data["tel"])
+            ->set("vaccine", $data["vaccine"]);
+            if($data["file1"] !=""){
+                    $this->db->set('file1', $data["file1"]);
+                    }
+            if($data["file2"] !=""){
+                $this->db->set('file2', $data["file2"]);
+                    }
+            if($data["file3"] !=""){
+            $this->db->set('file3', $data["file3"]);
+                }
+
+           $rs= $this->db->where("id", $data["id"])->update('whitelist_foreign');
 
         return $rs;
     }

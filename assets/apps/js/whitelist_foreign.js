@@ -430,7 +430,7 @@ function validate(items) {
   } else if (!items.moo) {
     swal("กรุณาระบุหมู่ที่");
     $("#moo").focus();
-  } else if (!items.file1) {
+  } else if (!items.file1 && items.action == "insert") {
     swal("กรุณาแนบ ไฟลล์ Passport");
     $("#file1").focus();
   } else if (!items.hospcode) {
@@ -456,27 +456,6 @@ $("#btn_save_org").on("click", function (e) {
     crud.save_org(items);
   }
 });
-function validate_org(items) {
-  if (!items.org_name) {
-    swal("กรุณาระบุหน่วยงาน");
-  } else if (!items.ampur) {
-    swal("กรุณาระบุอำเภอ");
-  } else {
-    return true;
-  }
-}
-/*
-$("#cid").on("keyup", function () {
-  var cid = $("#cid").val();
-  if (cid.length == 13) {
-    // alert(cid);
-    crud.get_foreign_by_cid(cid);
-  }
-
-  //
-});
-
-*/
 
 crud.confirm_vaccine = function (id, val) {
   crud.ajax.confirm_vaccine(id, val, function (err, data) {

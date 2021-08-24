@@ -103,7 +103,7 @@ class Whitelist_foreign extends CI_Controller
                 </a>":"";
                
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
-                <a href="'.site_url('whitelist_foreign/add_whitelist2/').$row->id .'" class="btn btn-outline btn-warning disabled" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></a>
+                <a href="'.site_url('whitelist_foreign/add_whitelist2/').$row->id .'" class="btn btn-outline btn-warning " data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></a>
                 <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';
                 
                 $data[] = $sub_array;
@@ -191,8 +191,11 @@ class Whitelist_foreign extends CI_Controller
     }
 
     public function save_foreign (){
+
         $data = array();
         $data['person_type'] = $this->input->post('person_type');
+        $data['action'] = $this->input->post('action');
+        $data['id'] = $this->input->post('id');
         $data['prov'] = $this->input->post('prov');
         $data['ampur'] = $this->input->post('ampur');
         $data['tambon'] = $this->input->post('tambon');
@@ -241,10 +244,14 @@ class Whitelist_foreign extends CI_Controller
                 $data['file3'] = $data_file3['upload_data']['file_name'];
             }
        
-            
+            if($data['action']=='insert'){
+                $rs=$this->crud->save_whitelist_foreign($data);
+            }else if($data['action']=='update'){
+                $rs=$this->crud->update_whitelist_foreign($data);
+            }
 
-            $rs=$this->crud->save_whitelist_foreign($data);
-            if($rs){
+           
+            if($rs ){
                 $this->layout->view('whitelist_foreign/upload_success');
             }else{
                 $this->layout->view('whitelist_foreign/upload_un_success');

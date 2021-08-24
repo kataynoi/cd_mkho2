@@ -24,9 +24,11 @@
             <h3>กรุณาลงทะเบียน 1 คน ด้วย 1 เบอร์โทร</h3>
             <form action="<?php echo site_url('whitelist_foreign/save_foreign')?>" enctype="multipart/form-data"
                 method="post" accept-charset="utf-8" id="frm_register">
-                <input type="hidden" id="action" value="insert">
+                <input type="hidden" id="action" name="action" value="<?php if(isset($person->id)){ echo "update";}else{echo "insert"
+                    ;};?>">
                 <input type="hidden" class="form-control" id="row_id" placeholder="ROWID" value="">
-                <input type="hidden" class="form-control" id="id" placeholder="ID" value="">
+                <input type="hidden" class="form-control" id="id" name="id" placeholder="ID"
+                    value="<?php if(isset($person->id)){ echo $person->id;}?>">
                 <input type="hidden" class="form-control" id="provchange" placeholder="ID" value="0">
                 <input type="hidden" class="form-control" id="organization" placeholder="ID"
                     value="<?php echo $this->session->userdata('id')?>">
@@ -35,8 +37,14 @@
                         <label for="cid"> กลุ่มเป้าหมาย</label>
                         <select class="form-control" id="person_type" name="person_type">
                             <option></option>
-                            <option value="1">ชาวต่างชาติที่พำนักถาวรในจังหวัดมหาสารคาม</option>
-                            <option value="2">ชาวไทย/นักเรียนไทย ที่ต้องเดินทางไปต่างประเทศ ในปี 2564
+                            <?php
+                            $type1='';$type2='';
+                        if(isset($person->person_type)){
+                            if($person->person_type==1){ $type1='selected';}elseif($person->person_type==2){$type2='selected';}
+                        } ?>
+                            <option value="1" <?php echo $type1;?>>ชาวต่างชาติที่พำนักถาวรในจังหวัดมหาสารคาม</option>
+                            <option value="2" <?php echo $type2;?>>ชาวไทย/นักเรียนไทย ที่ต้องเดินทางไปต่างประเทศ ในปี
+                                2564
                                 และประเทศปลายทางระบุว่าต้องได้รับ Pfizer</option>
                         </select>
                     </div>
@@ -74,7 +82,7 @@
                     </div>
                     <div class="form_group col-md-3">
                         <label for="birth">วันเกิด:birth</label>
-                        <input type="text" id="birth" name="birth" data-type="date" class="form-control datepicker"
+                        <input type="text" id="birth" name="birth" data-type="date" class="form-control datepicker "
                             data-date-language="th" placeholder="01/04/2563" title="ระบุวันที่" data-rel="tooltip"
                             value="<?php echo isset($person->birth) ? to_thai_date($person->birth) :""; ?>">
                     </div>
@@ -132,18 +140,39 @@
                         <label for="tambon">ตำบล:Subdistrict</label>
                         <select class="form-control" id="tambon" name="tambon" placeholder="ตำบล" value="">
                             <option></option>
+                            <?php
+                            if(isset($person->tambon)){
+
+                                foreach ($ctambon as $r) {
+                                    $sl='';
+                                    if($r->tamboncodefull==$person->tambon){ $sl = 'selected';}
+                                echo "<option value=$r->tamboncodefull $sl > $r->tambonname </option>";
+                                } 
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="moo">หมูที่->หมู่บ้าน:village</label>
                         <select class="form-control" id="moo" name="moo" placeholder="หมู่บ้าน" value="">
                             <option></option>
+                            <?php
+                            if(isset($person->moo)){
+
+                                foreach ($cvillage as $r) {
+                                    $sl='';
+                                    if($r->villagecodefull==$person->moo){ $sl = 'selected';}
+                                echo "<option value=$r->villagecodefull $sl > $r->villagename </option>";
+                                } 
+                            }
+                            ?>
                         </select>
                         <input type="hidden" id="villagecode">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="no">บ้านเลขที่:HomeNumber</label>
-                        <input type="text" class="form-control" id="no" name="no" placeholder="บ้านเลขที่" value="">
+                        <input type="text" class="form-control" id="no" name="no" placeholder="บ้านเลขที่"
+                            value="<?php echo isset($person->no) ? to_thai_date($person->no) :""; ?>">
                     </div>
                 </div>
 
@@ -158,14 +187,29 @@
                 <div class="form-group">
                     <label for="file1">หนังสือเดินทาง : passport [ภาพถ่าย]*</label>
                     <input type="file" name="file1" id='file1'>
+                    <?php 
+                    if(isset($person->file1)){
+                        echo '<a href="'.base_url('uploads/foreign/').$person->file1.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
+                    }
+                    ?>
                 </div>
                 <div class="form-group">
                     <label for="file2">visa</label>
                     <input type="file" name="file2" id='file2'>
+                    <?php 
+                    if(isset($person->file2)){
+                        echo '<a href="'.base_url('uploads/foreign/').$person->file2.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
+                    }
+                    ?>
                 </div>
                 <div class="form-group">
                     <label for="file3">เอกสารยืนยันการเดินทางในปี 2564 *</label>
                     <input type="file" name="file3" id='file3'>
+                    <?php 
+                    if(isset($person->file3)){
+                        echo '<a href="'.base_url('uploads/foreign/').$person->file3.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -193,8 +237,10 @@
                         <option></option>
                         <?php
                              foreach ($chospmain as $r) {  
+                                $sl='';
+                                if($r->hoscode==$person->hospcode){ $sl = 'selected';}
                                  if($r->hoscode =='10707' || $r->hoscode =='11055' || $r->hoscode =='11058' || $r->hoscode =='22953'){
-                                    echo "<option value=$r->hoscode > $r->hosname </option>";     
+                                    echo "<option value=$r->hoscode $sl> $r->hosname </option>";     
                                  }             
                         } ?>
                     </select>
