@@ -102,7 +102,8 @@ class Whitelist_foreign extends CI_Controller
                 </a>":"";
                 $sub_array[] = $row->file3 !="" ? "<a href='".base_url('uploads/foreign/').$row->file3."' target='_blank'> <i class='fa fa-folder-open-o' aria-hidden='true' style='color:blue'></i>
                 </a>":"";
-               
+                $sub_array[] = $row->file4 !="" ? "<a href='".base_url('uploads/foreign/').$row->file4."' target='_blank'> <i class='fa fa-folder-open-o' aria-hidden='true' style='color:blue'></i>
+                </a>":"";
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
                 <a href="'.site_url('whitelist_foreign/add_whitelist2/').$row->id .'" class="btn btn-outline btn-warning " data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></a>
                 <button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' . $row->id . '"><i class="fa fa-trash"></i></button></div>';

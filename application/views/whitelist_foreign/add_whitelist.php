@@ -253,7 +253,7 @@
                     <input type="file" name="file4" id='file4'>
                     <?php 
                     if(isset($person->file4)){
-                        echo '<a href="'.base_url('uploads/foreign/').$person->file3.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
+                        echo '<a href="'.base_url('uploads/foreign/').$person->file4.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
                     }
                     ?>
                 </div>
