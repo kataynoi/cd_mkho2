@@ -34,7 +34,8 @@ class Whitelist_foreign extends CI_Controller
         $data["cchangwat"] = $this->crud->get_cchangwat();
         $data["cnation"] = $this->crud->get_cnation();
         $data["chospmain"] = $this->crud->get_hospmain();
-        $this->layout->view('whitelist_foreign/add_whitelist2',$data);
+        $data["crisk_vaccine"] = $this->crud->get_crisk_vaccine();
+        $this->layout->view('whitelist_foreign/add_whitelist',$data);
     }
 
     public function  get_whitelist_foreign($id)
@@ -169,9 +170,7 @@ class Whitelist_foreign extends CI_Controller
     public function get_foreign_by_cid()
     {
         $cid = $this->input->post('cid');
-        if ($this->crud->check_vaccine($cid) >= 1) {
-            $json = '{"success": true,"check_vaccine":true}';
-        } else if ($this->crud->check_foreign_cid($cid) >= 1) {
+        if ($this->crud->check_foreign_cid($cid) >= 1) {
             $json = '{"success": true, "check":true}';
         } else {
             $rs = $this->crud->get_foreign_cid($cid);
@@ -194,6 +193,10 @@ class Whitelist_foreign extends CI_Controller
 
         $data = array();
         $data['person_type'] = $this->input->post('person_type');
+        $data['destination'] = $this->input->post('destination');
+        $data['risk_vaccine'] = $this->input->post('risk_vaccine');
+        $data['weight'] = $this->input->post('weight');
+        $data['height'] = $this->input->post('height');
         $data['action'] = $this->input->post('action');
         $data['id'] = $this->input->post('id');
         $data['prov'] = $this->input->post('prov');

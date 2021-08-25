@@ -24,7 +24,7 @@ class Whitelist_foreign_model extends CI_Model
                 $this->db->where('hsub',$this->session->userdata('id'));
               break;
           } 
-        $this->db->from($this->table);
+        $this->db->where('status',1)->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
             $this->db->like("cid", $_POST["search"]["value"]);
@@ -68,8 +68,9 @@ class Whitelist_foreign_model extends CI_Model
     public function del_whitelist_foreign($id)
     {
         $rs = $this->db
+            ->set('status','0')
             ->where('id', $id)
-            ->delete('whitelist_foreign');
+            ->update('whitelist_foreign');
         return $rs;
     }
 
@@ -115,6 +116,10 @@ class Whitelist_foreign_model extends CI_Model
             
             ->set("nation", $data["nation"])
             ->set("person_type", $data["person_type"])
+            ->set("destination", $data["destination"])
+            ->set("risk_vaccine", $data["risk_vaccine"])
+            ->set("weight", $data["weight"])
+            ->set("height", $data["height"])
             ->set("prov", $data["prov"])
             ->set("amp", $data["ampur"])
             ->set("tambon", $data["tambon"])
@@ -144,6 +149,10 @@ class Whitelist_foreign_model extends CI_Model
             
             ->set("nation", $data["nation"])
             ->set("person_type", $data["person_type"])
+            ->set("destination", $data["destination"])
+            ->set("risk_vaccine", $data["risk_vaccine"])
+            ->set("weight", $data["weight"])
+            ->set("height", $data["height"])
             ->set("prov", $data["prov"])
             ->set("amp", $data["ampur"])
             ->set("tambon", $data["tambon"])
@@ -243,6 +252,15 @@ class Whitelist_foreign_model extends CI_Model
             ->result();
         return $rs;
     }
+    public function get_crisk_vaccine()
+    {
+        
+        $rs = $this->db
+            ->get("crisk_vaccine")
+            ->result();
+        return $rs;
+    }
+    
     public function check_foreign_cid($cid)
     {
         $rs = $this->db
@@ -254,7 +272,7 @@ class Whitelist_foreign_model extends CI_Model
     public function check_foreign_age($cid)
     {
         $rs = $this->db
-            ->from("t_foreign_cid")
+            ->from("t_person_cid")
             ->where('cid', $cid)
             ->where('age_y <','18',false)
             ->where('age_y >','60',false)
@@ -266,7 +284,7 @@ class Whitelist_foreign_model extends CI_Model
         $rs = $this->db
             ->where('cid', $cid)
             ->limit(1)
-            ->get("t_foreign_cid")
+            ->get("t_person_cid")
             ->row();
         return $rs;
     }

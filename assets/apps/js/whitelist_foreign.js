@@ -43,7 +43,22 @@ $(document).ready(function () {
   });
   //.datepicker("setDate", "0");
   //$("#birth").datepicker();
-  // $("#nation").select2();
+  $("#nation").select2();
+  $("#destination").select2();
+  var action = $("#action").val();
+  var person_type = $("#person_type").val();
+  if (action == "insert") {
+    $("#div_destination").hide();
+    $("#div_risk_vaccine").hide();
+  } else {
+    if (action == "update" && [person_type] == 1) {
+      $("#div_destination").hide();
+      $("#div_risk_vaccine").show();
+    } else if (action == "update" && [person_type] == 2) {
+      $("#div_destination").show();
+      $("#div_risk_vaccine").hide();
+    }
+  }
 });
 
 var crud = {};
@@ -338,6 +353,8 @@ $("#btn_save").on("click", function (e) {
   items.lname = $("#lname").val();
   items.sex = $("#sex").val();
   items.nation = $("#nation").val();
+  items.risk_vaccine = $("#risk_vaccine").val();
+  items.destination = $("#destination").val();
   items.birth = $("#birth").val();
   items.tel = $("#tel").val();
   items.hospcode = $("#hospcode").val();
@@ -396,6 +413,12 @@ $(document).on("click", 'button[data-btn="btn_view"]', function (e) {
 function validate(items) {
   if (!items.person_type) {
     swal("กรุณาเลือกประเภทการลงทะเบียน");
+    $("#cid").focus();
+  } else if (items.person_type == 2 && !items.destination) {
+    swal("กรุณาระบุประเทศปลายทาง");
+    $("#cid").focus();
+  } else if (items.person_type == 1 && !items.risk_vaccine) {
+    swal("กรุณาระบุกลุ่มโรค");
     $("#cid").focus();
   } else if (!items.cid) {
     swal("กรุณาระบุเลขบัตรประชาชนหรือ Passport");
@@ -657,3 +680,66 @@ $(document).on("change", 'select[data-name="confirm_vaccine"]', function (e) {
     }
   });
 });
+
+$("#person_type").on("change", function (e) {
+  var val = $(this).val();
+  //alert(val);
+  if (val == 1) {
+    $("#div_destination").hide();
+    $("#div_risk_vaccine").show();
+  } else if (val == 2) {
+    $("#div_destination").show();
+    $("#div_risk_vaccine").hide();
+  }
+});
+
+$("#cid").on("keyup", function () {
+  var cid = $("#cid").val();
+  var person_type = $("#person_type").val();
+  if (cid.length == 13 && person_type == 2) {
+    // alert(cid);
+    crud.get_person_by_cid(cid);
+  }
+});
+
+crud.get_person_by_cid = function (cid) {
+  crud.ajax.get_foreign_by_cid(cid, function (err, data) {
+    $("#provchange").val("0");
+    if (!err) {
+      if (data.check) {
+        swal("บุคคลนี้บันทึกข้อมูลในระบบแล้ว");
+        app.clear_form();
+        return;
+      } else if (data.rows) {
+        $("#cid").val(data.rows["CID"]);
+        $("#prename").val(data.rows["PRENAME"]);
+        $("#name").val(data.rows["NAME"]);
+        $("#lname").val(data.rows["LNAME"]);
+        $("#birth").val(data.rows["BIRTH"]);
+        $("#sex").val(data.rows["SEX"]);
+        $("#no").val(data.rows["addr"]);
+        $("#hospcode").val(data.rows["HOSPMAIN"]);
+        $("#hsub").val(data.rows["HOSPCODE"]);
+        //$("#age").val(data.rows["age_y"]);
+        $provcode = data.rows["vhid"].substring(0, 2);
+        $amp = data.rows["vhid"].substring(0, 4);
+        $tambon = data.rows["vhid"].substring(0, 6);
+        $moo = data.rows["vhid"];
+        crud.get_ampur_list($provcode);
+        crud.get_tambon_list($amp);
+        crud.get_moo_list($tambon);
+        $(document).ajaxStop(function () {
+          $check_provchange = $("#provchange").val();
+          if ($check_provchange == 0) {
+            $("#prov").val($provcode);
+            $("#ampur").val($amp);
+            $("#tambon").val($tambon);
+            $("#moo").val($moo);
+          }
+        });
+      } else {
+        $("#name").focus();
+      }
+    }
+  });
+};

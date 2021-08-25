@@ -48,6 +48,33 @@
                                 และประเทศปลายทางระบุว่าต้องได้รับ Pfizer</option>
                         </select>
                     </div>
+                    <div class="form-group col-md-3" id='div_risk_vaccine'>
+                        <label for="cid"> 8 กลุ่มเป้าหมาย </label>
+                        <select class="form-control" id="risk_vaccine" name="risk_vaccine" placeholder="จังหวัด"
+                            value="" style="width:100%">
+                            <option></option>
+                            <?php
+                                        foreach ($crisk_vaccine as $r) {
+                                            $sl='';
+                                            if($r->id==$person->risk_vaccine){ $sl = 'selected';}
+                                                echo "<option value=$r->id $sl> $r->name </option>";
+                                            
+                        } ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3" id='div_destination'>
+                        <label for="from_province">ประเทศที่ต้องเดินทางไป:Destination</label>
+                        <select class="form-control" id="destination" name="destination" value="" style="width:100%">
+                            <option></option>
+                            <?php
+                                        foreach ($cnation as $r) {
+                                            $sl='';
+                                            if($r->id==$person->destination){ $sl = 'selected';}
+                                                echo "<option value=$r->id $sl> $r->name </option>";              
+                        } ?>
+                        </select>
+                    </div>
                     <div class="form-group col-md-3">
                         <label for="cid">เลขบัตรประชาชน/Passport</label>
                         <input type="text" class="form-control" id="cid" name="cid" placeholder="เลขบัตรประชาชน"
@@ -173,6 +200,16 @@
                         <label for="no">บ้านเลขที่:HomeNumber</label>
                         <input type="text" class="form-control" id="no" name="no" placeholder="บ้านเลขที่"
                             value="<?php echo isset($person->no) ? to_thai_date($person->no) :""; ?>">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="no">น้ำหนัก:Weight</label>
+                        <input type="text" class="form-control" id="weight" name="weight" placeholder=""
+                            value="<?php echo isset($person->weight) ? $person->weight :""; ?>">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="no">ส่วนสูง:height</label>
+                        <input type="text" class="form-control" id="height" name="height" placeholder=""
+                            value="<?php echo isset($person->height) ? $person->height :""; ?>">
                     </div>
                 </div>
 
