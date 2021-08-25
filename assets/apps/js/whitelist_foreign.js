@@ -456,8 +456,11 @@ function validate(items) {
   } else if (!items.file1 && items.action == "insert") {
     swal("กรุณาแนบ ไฟลล์ Passport");
     $("#file1").focus();
+  } else if (!items.file4 && items.person_type == 1) {
+    swal("กรุณาแนบ ไฟลล์ เอกสารระบุการป่วยหรือตั้งครรภ์");
+    $("#file1").focus();
   } else if (!items.hospcode) {
-    swal("กรุณาระบุหน่วยบริการที่ต้องการฉีดวัคซีน");
+    swal("กรุณาระบุหน่วยบริการที่ต้องการฉีดวัคซีน: select hospital");
     $("#้hospcode").focus();
   } else {
     return true;

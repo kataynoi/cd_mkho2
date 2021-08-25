@@ -203,6 +203,7 @@ class Whitelist_foreign extends CI_Controller
         $data['ampur'] = $this->input->post('ampur');
         $data['tambon'] = $this->input->post('tambon');
         $data['moo'] = $this->input->post('moo');
+        $data['no'] = $this->input->post('no');
         $data['cid'] = $this->input->post('cid');
         $data['prename'] = $this->input->post('prename');
         $data['name'] = $this->input->post('name');
@@ -217,6 +218,7 @@ class Whitelist_foreign extends CI_Controller
         $data['file1'] = $this->input->post('file1');
         $data['file2'] = $this->input->post('file2');
         $data['file3'] = $this->input->post('file3');
+        $data['file4'] = $this->input->post('file4');
         //$rs=$this->crud->save_whitelist_foreign($data);
         //print_r($data);
         $config['upload_path']   = './uploads/foreign'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
@@ -245,6 +247,12 @@ class Whitelist_foreign extends CI_Controller
                 //$config['file_name'] = "3_".$data['cid']."_".$data['tel'];
                 $data_file3 = array('upload_data' => $this->upload->data());
                 $data['file3'] = $data_file3['upload_data']['file_name'];
+            }
+            if($this->upload->do_upload('file4')){
+                
+                //$config['file_name'] = "3_".$data['cid']."_".$data['tel'];
+                $data_file4 = array('upload_data' => $this->upload->data());
+                $data['file4'] = $data_file4['upload_data']['file_name'];
             }
        
             if($data['action']=='insert'){

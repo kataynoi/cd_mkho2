@@ -37,7 +37,7 @@ tr.green {
                     <a class="btn btn-success" type="button" target="_blank"
                         href="<?php echo site_url('foreign_vaccine');?>"><i class="fa fa-file"></i> Report</a>
                     <a class="btn btn-success" type="button"
-                        href="<?php echo site_url('whitelist_foreign/add_whitelist2')?>" target="_blank" id=""><i
+                        href="<?php echo site_url('whitelist_foreign/add_whitelist')?>" target="_blank" id=""><i
                             class="fa fa-plus-circle"></i> ลงทะเบียนฉีดวัคซีน</a>
                     <a href="<?php echo site_url('excel_export/whitelist_foreign/'); ?>" class="btn  btn-success"
                         type="button">
@@ -64,6 +64,7 @@ tr.green {
                             <th>Passport</th>
                             <th>visa</th>
                             <th>เอกสารประกอบการเดินทาง</th>
+                            <th>ใบรับรองแพทย์</th>
                             <th>#</th>
                         </tr>
                     </thead>

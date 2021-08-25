@@ -202,12 +202,12 @@
                             value="<?php echo isset($person->no) ? to_thai_date($person->no) :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="no">น้ำหนัก:Weight</label>
+                        <label for="no">น้ำหนัก(กก.):Weight(kg)</label>
                         <input type="text" class="form-control" id="weight" name="weight" placeholder=""
                             value="<?php echo isset($person->weight) ? $person->weight :""; ?>">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="no">ส่วนสูง:height</label>
+                        <label for="no">ส่วนสูง(ซม.):height(cm)</label>
                         <input type="text" class="form-control" id="height" name="height" placeholder=""
                             value="<?php echo isset($person->height) ? $person->height :""; ?>">
                     </div>
@@ -231,7 +231,7 @@
                     ?>
                 </div>
                 <div class="form-group">
-                    <label for="file2">visa</label>
+                    <label for="file2">visa (ถ้าประเทศปลายทางต้องใช้ Visa)</label>
                     <input type="file" name="file2" id='file2'>
                     <?php 
                     if(isset($person->file2)){
@@ -240,10 +240,19 @@
                     ?>
                 </div>
                 <div class="form-group">
-                    <label for="file3">เอกสารยืนยันการเดินทางในปี 2564 *</label>
+                    <label for="file3">เอกสารยืนยันการเดินทางในปี 2564 </label>
                     <input type="file" name="file3" id='file3'>
                     <?php 
                     if(isset($person->file3)){
+                        echo '<a href="'.base_url('uploads/foreign/').$person->file3.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
+                    }
+                    ?>
+                </div>
+                <div class="form-group">
+                    <label for="file4">เอกสารกรณีเป็นชาวตา่งชาติท่ป่วยด้วย 7 กลุ่มโรคและหญิงตั้งครรภ์</label>
+                    <input type="file" name="file4" id='file4'>
+                    <?php 
+                    if(isset($person->file4)){
                         echo '<a href="'.base_url('uploads/foreign/').$person->file3.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
                     }
                     ?>

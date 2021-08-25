@@ -120,10 +120,12 @@ class Whitelist_foreign_model extends CI_Model
             ->set("risk_vaccine", $data["risk_vaccine"])
             ->set("weight", $data["weight"])
             ->set("height", $data["height"])
+            ->set("bmi", $data["weight"]/$data["height"]/$data["height"]*10000)
             ->set("prov", $data["prov"])
             ->set("amp", $data["ampur"])
             ->set("tambon", $data["tambon"])
             ->set("moo", $data["moo"])
+            ->set("no", $data["no"])
             ->set("hospname", $data["hospname"])
             ->set("hospcode", $data["hospcode"])
             ->set("cid", $data["cid"])
@@ -137,6 +139,7 @@ class Whitelist_foreign_model extends CI_Model
             ->set('file1', $data["file1"])
             ->set('file2', $data["file2"])
             ->set('file3', $data["file3"])
+            ->set('file4', $data["file4"])
             ->set('date_input',date('Y-m-d H:i:s'))
             ->insert('whitelist_foreign');
             
@@ -153,10 +156,12 @@ class Whitelist_foreign_model extends CI_Model
             ->set("risk_vaccine", $data["risk_vaccine"])
             ->set("weight", $data["weight"])
             ->set("height", $data["height"])
+            ->set("bmi", $data["weight"]/$data["height"]/$data["height"]*10000)
             ->set("prov", $data["prov"])
             ->set("amp", $data["ampur"])
             ->set("tambon", $data["tambon"])
             ->set("moo", $data["moo"])
+            ->set("no", $data["no"])
             ->set("hospname", $data["hospname"])
             ->set("hospcode", $data["hospcode"])
             ->set("cid", $data["cid"])
@@ -171,10 +176,13 @@ class Whitelist_foreign_model extends CI_Model
                     $this->db->set('file1', $data["file1"]);
                     }
             if($data["file2"] !=""){
-                $this->db->set('file2', $data["file2"]);
+                    $this->db->set('file2', $data["file2"]);
                     }
             if($data["file3"] !=""){
-            $this->db->set('file3', $data["file3"]);
+                    $this->db->set('file3', $data["file3"]);
+                }
+            if($data["file4"] !=""){
+                    $this->db->set('file4', $data["file4"]);
                 }
 
            $rs= $this->db->where("id", $data["id"])->update('whitelist_foreign');
