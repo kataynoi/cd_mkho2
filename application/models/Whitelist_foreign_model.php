@@ -112,8 +112,8 @@ class Whitelist_foreign_model extends CI_Model
     }
     public function save_whitelist_foreign($data)
     {
+            $birth= to_mysql_date($data["birth"]);
             $rs = $this->db
-            
             ->set("nation", $data["nation"])
             ->set("person_type", $data["person_type"])
             ->set("destination", $data["destination"])
@@ -133,7 +133,7 @@ class Whitelist_foreign_model extends CI_Model
             ->set("name", $data["name"])
             ->set("lname", $data["lname"])
             ->set("sex", $data["sex"])
-            ->set("birth", $data["birth"])
+            ->set("birth", $birth)
             ->set("tel", $data["tel"])
             ->set("vaccine", $data["vaccine"])
             ->set('file1', $data["file1"])
@@ -148,8 +148,8 @@ class Whitelist_foreign_model extends CI_Model
     }
     public function update_whitelist_foreign($data)
     {
+            $birth= to_mysql_date($data["birth"]);
             $this->db
-            
             ->set("nation", $data["nation"])
             ->set("person_type", $data["person_type"])
             ->set("destination", $data["destination"])
@@ -169,7 +169,7 @@ class Whitelist_foreign_model extends CI_Model
             ->set("name", $data["name"])
             ->set("lname", $data["lname"])
             ->set("sex", $data["sex"])
-            ->set("birth", $data["birth"])
+            ->set("birth", $birth)
             ->set("tel", $data["tel"])
             ->set("vaccine", $data["vaccine"]);
             if($data["file1"] !=""){
