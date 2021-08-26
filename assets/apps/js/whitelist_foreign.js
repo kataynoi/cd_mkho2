@@ -239,78 +239,6 @@ crud.set_after_update = function (items, row_id) {
   row_id.find("td:eq(15)").html(items.tel);
   row_id.find("td:eq(16)").html(items.vaccine);
 };
-crud.set_after_insert = function (items, id) {
-  $(
-    '<tr name="row' +
-      (id + 1) +
-      '"><td>' +
-      id +
-      "</td>" +
-      "<td>" +
-      items.id +
-      "</td>" +
-      "<td>" +
-      items.organization +
-      "</td>" +
-      "<td>" +
-      items.target_type +
-      "</td>" +
-      "<td>" +
-      items.prov +
-      "</td>" +
-      "<td>" +
-      items.amp +
-      "</td>" +
-      "<td>" +
-      items.tambon +
-      "</td>" +
-      "<td>" +
-      items.moo +
-      "</td>" +
-      "<td>" +
-      items.hospname +
-      "</td>" +
-      "<td>" +
-      items.hospcode +
-      "</td>" +
-      "<td>" +
-      items.cid +
-      "</td>" +
-      "<td>" +
-      items.prename +
-      "</td>" +
-      "<td>" +
-      items.name +
-      "</td>" +
-      "<td>" +
-      items.lname +
-      "</td>" +
-      "<td>" +
-      items.sex +
-      "</td>" +
-      "<td>" +
-      items.birth +
-      "</td>" +
-      "<td>" +
-      items.tel +
-      "</td>" +
-      "<td>" +
-      items.vaccine +
-      "</td>" +
-      '<td><div class="btn-group pull-right" role="group">' +
-      '<button class="btn btn-outline btn-success" data-btn="btn_view" data-id="' +
-      id +
-      '"><i class="fa fa-eye"></i></button>' +
-      '<button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' +
-      id +
-      '"><i class="fa fa-edit"></i></button>' +
-      '<button class="btn btn-outline btn-danger" data-btn="btn_del" data-id="' +
-      id +
-      '"><i class="fa fa-trash"></i></button>' +
-      "</td></div>" +
-      "</tr>"
-  ).insertBefore("table > tbody > tr:first");
-};
 
 crud.set_update = function (data, row_id) {
   $("#row_id").val(row_id);
@@ -343,6 +271,11 @@ $("#btn_save").on("click", function (e) {
   items.id = $("#id").val();
   items.person_type = $("#person_type").val();
   items.file1 = $("#file1").val();
+  items.file2 = $("#file2").val();
+  items.file3 = $("#file3").val();
+  items.file4 = $("#file4").val();
+  items.weight = $("#weight").val();
+  items.height = $("#height").val();
   items.prov = $("#prov").val();
   items.ampur = $("#ampur").val();
   items.tambon = $("#tambon").val();
@@ -453,12 +386,33 @@ function validate(items) {
   } else if (!items.moo) {
     swal("กรุณาระบุหมู่ที่");
     $("#moo").focus();
+  } else if (
+    items.person_type == 1 &&
+    items.action == "insert" &&
+    !items.weight &&
+    !items.height
+  ) {
+    swal(" weight height field is required");
+    $("#weight").focus();
   } else if (!items.file1 && items.action == "insert") {
     swal("กรุณาแนบ ไฟลล์ Passport");
     $("#file1").focus();
-  } else if (!items.file4 && items.person_type == 1) {
+  } else if (
+    !items.file3 &&
+    items.person_type == 2 &&
+    items.action == "insert"
+  ) {
+    swal(
+      "กรุณาแนบ ไฟลล์ เอกสารการเดินทางไปต่างประเทศเช่น เอกสารจากมหาวิทยาลัยหรือตั๋วเครื่องบิน"
+    );
+    $("#file3").focus();
+  } else if (
+    !items.file4 &&
+    items.person_type == 1 &&
+    items.action == "insert"
+  ) {
     swal("กรุณาแนบ ไฟลล์ เอกสารระบุการป่วยหรือตั้งครรภ์");
-    $("#file1").focus();
+    $("#file4").focus();
   } else if (!items.hospcode) {
     swal("กรุณาระบุหน่วยบริการที่ต้องการฉีดวัคซีน: select hospital");
     $("#้hospcode").focus();
