@@ -34,7 +34,7 @@
                     value="<?php echo $this->session->userdata('id')?>">
                 <div class="panel-body">
                     <div class="form-group col-md-3">
-                        <label for="cid"> กลุ่มเป้าหมาย</label>
+                        <label for="cid"> กลุ่มเป้าหมาย: Target groups</label>
                         <select class="form-control" id="person_type" name="person_type">
                             <option></option>
                             <?php
@@ -42,14 +42,15 @@
                         if(isset($person->person_type)){
                             if($person->person_type==1){ $type1='selected';}elseif($person->person_type==2){$type2='selected';}
                         } ?>
-                            <option value="1" <?php echo $type1;?>>ชาวต่างชาติที่พำนักถาวรในจังหวัดมหาสารคาม</option>
+                            <option value="1" <?php echo $type1;?>>ชาวต่างชาติที่พำนักถาวรในจังหวัดมหาสารคาม :foreigners
+                                in Mahasarakham Province</option>
                             <option value="2" <?php echo $type2;?>>ชาวไทย/นักเรียนไทย ที่ต้องเดินทางไปต่างประเทศ ในปี
                                 2564
-                                และประเทศปลายทางระบุว่าต้องได้รับ Pfizer</option>
+                                และประเทศปลายทางระบุว่าต้องได้รับ Pfizer : Thai citizens</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3" id='div_risk_vaccine'>
-                        <label for="cid"> 8 กลุ่มเป้าหมาย </label>
+                        <label for="cid"> 8 กลุ่มเป้าหมาย : 7 chronic diseases or pregnancy</label>
                         <select class="form-control" id="risk_vaccine" name="risk_vaccine" placeholder="จังหวัด"
                             value="" style="width:100%">
                             <option></option>
@@ -57,7 +58,7 @@
                                         foreach ($crisk_vaccine as $r) {
                                             $sl='';
                                             if($r->id==$person->risk_vaccine){ $sl = 'selected';}
-                                                echo "<option value=$r->id $sl> $r->name </option>";
+                                                echo "<option value=$r->id $sl> $r->name :$r->name_eng  </option>";
                                             
                         } ?>
                         </select>
@@ -218,7 +219,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                เอกสารประกอบการเดินทาง
+                เอกสารประกอบการเดินทาง : Travel documents
             </div>
             <div class="panel-body">
                 <div class="form-group">
@@ -240,7 +241,8 @@
                     ?>
                 </div>
                 <div class="form-group">
-                    <label for="file3">เอกสารยืนยันการเดินทางในปี 2564 </label>
+                    <label for="file3">เอกสารยืนยันการเดินทางในปี 2564 : Other documents such as work permit, etc.
+                    </label>
                     <input type="file" name="file3" id='file3'>
                     <?php 
                     if(isset($person->file3)){
@@ -249,7 +251,8 @@
                     ?>
                 </div>
                 <div class="form-group">
-                    <label for="file4">เอกสารกรณีเป็นชาวตา่งชาติท่ป่วยด้วย 7 กลุ่มโรคและหญิงตั้งครรภ์</label>
+                    <label for="file4">เอกสารกรณีเป็นชาวตา่งชาติท่ป่วยด้วย 7 กลุ่มโรคและหญิงตั้งครรภ์ : Documents showed
+                        of the 7 underlying medical conditions or pregnancy(at least 12 weeks)</label>
                     <input type="file" name="file4" id='file4'>
                     <?php 
                     if(isset($person->file4)){
@@ -264,7 +267,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                ความต้องการรับบริการฉีดวัคซีน
+                ความต้องการรับบริการฉีดวัคซีน:Accept the vaccine
             </div>
             <div class="panel-body">
                 <div class="form-group ">
