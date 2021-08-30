@@ -212,6 +212,7 @@
                         <input type="text" class="form-control" id="height" name="height" placeholder=""
                             value="<?php echo isset($person->height) ? $person->height :""; ?>">
                     </div>
+                    <?php echo isset($person->bmi) ? " BMI :".number_format($person->bmi,2) :""; ?>
                 </div>
 
 
