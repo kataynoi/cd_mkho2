@@ -33,7 +33,7 @@ class Whitelist_student extends CI_Controller
         //$data["campur"] = $this->crud->get_campur();
         $data["cchangwat"] = $this->crud->get_cchangwat();
         $data["chospmain"] = $this->crud->get_hospmain();
-        $this->layout->view('whitelist_student/add_whitelist2',$data);
+        $this->layout->view('whitelist_student/add_whitelist',$data);
     }
 
     function fetch_whitelist_student()
