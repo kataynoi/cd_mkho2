@@ -35,7 +35,7 @@ class Whitelist_foreign extends CI_Controller
         $data["cnation"] = $this->crud->get_cnation();
         $data["chospmain"] = $this->crud->get_hospmain();
         $data["crisk_vaccine"] = $this->crud->get_crisk_vaccine();
-        $this->layout->view('whitelist_foreign/add_whitelist2',$data);
+        $this->layout->view('whitelist_foreign/add_whitelist',$data);
     }
 
     public function  get_whitelist_foreign($id)
