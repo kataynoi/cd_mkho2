@@ -19,7 +19,6 @@
             </div>
             <div class="alert alert-primary" role="alert">
                 <img src="<?php echo base_url().'/assets/img/1.jpg';?>" height="200">
-                <img src="<?php echo base_url().'/assets/img/3.jpg';?>" height="200">
             </div>
             <h3>กรุณาลงทะเบียน 1 คน ด้วย 1 เบอร์โทร</h3>
             <form action="<?php echo site_url('whitelist_foreign/save_foreign')?>" enctype="multipart/form-data"
@@ -49,21 +48,6 @@
                                 และประเทศปลายทางระบุว่าต้องได้รับ Pfizer : Thai citizens</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-3" id='div_risk_vaccine'>
-                        <label for="cid"> 8 กลุ่มเป้าหมาย : 7 chronic diseases or pregnancy</label>
-                        <select class="form-control" id="risk_vaccine" name="risk_vaccine" placeholder="จังหวัด"
-                            value="" style="width:100%">
-                            <option></option>
-                            <?php
-                                        foreach ($crisk_vaccine as $r) {
-                                            $sl='';
-                                            if($r->id==$person->risk_vaccine){ $sl = 'selected';}
-                                                echo "<option value=$r->id $sl> $r->name :$r->name_eng  </option>";
-                                            
-                        } ?>
-                        </select>
-                    </div>
-
                     <div class="form-group col-md-3" id='div_destination'>
                         <label for="from_province">ประเทศที่ต้องเดินทางไป:Destination</label>
                         <select class="form-control" id="destination" name="destination" value="" style="width:100%">
@@ -248,16 +232,6 @@
                     <?php 
                     if(isset($person->file3)){
                         echo '<a href="'.base_url('uploads/foreign/').$person->file3.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
-                    }
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="file4">เอกสารกรณีเป็นชาวตา่งชาติท่ป่วยด้วย 7 กลุ่มโรคและหญิงตั้งครรภ์ : Documents showed
-                        of the 7 underlying medical conditions or pregnancy(at least 12 weeks)</label>
-                    <input type="file" name="file4" id='file4'>
-                    <?php 
-                    if(isset($person->file4)){
-                        echo '<a href="'.base_url('uploads/foreign/').$person->file4.'" target="_blank" class="btn btn-sm btn-success" href="">ดูเอกสาร</a>';
                     }
                     ?>
                 </div>

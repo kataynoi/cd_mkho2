@@ -350,9 +350,6 @@ function validate(items) {
   } else if (items.person_type == 2 && !items.destination) {
     swal("กรุณาระบุประเทศปลายทาง");
     $("#cid").focus();
-  } else if (items.person_type == 1 && !items.risk_vaccine) {
-    swal("กรุณาระบุกลุ่มโรค");
-    $("#cid").focus();
   } else if (!items.cid) {
     swal("กรุณาระบุเลขบัตรประชาชนหรือ Passport");
     $("#cid").focus();
@@ -406,13 +403,6 @@ function validate(items) {
       "กรุณาแนบ ไฟลล์ เอกสารการเดินทางไปต่างประเทศเช่น เอกสารจากมหาวิทยาลัยหรือตั๋วเครื่องบิน"
     );
     $("#file3").focus();
-  } else if (
-    !items.file4 &&
-    items.person_type == 1 &&
-    items.action == "insert"
-  ) {
-    swal("กรุณาแนบ ไฟลล์ เอกสารระบุการป่วยหรือตั้งครรภ์");
-    $("#file4").focus();
   } else if (!items.hospcode) {
     swal("กรุณาระบุหน่วยบริการที่ต้องการฉีดวัคซีน: select hospital");
     $("#้hospcode").focus();
