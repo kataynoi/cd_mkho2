@@ -8,6 +8,7 @@ class Excel_export extends CI_Controller
     {
         $this->load->model("excel_export_model");
         $data["employee_data"] = $this->excel_export_model->fetch_data();
+        
         $this->load->view("excel_export_view", $data);
     }
 
@@ -45,6 +46,16 @@ class Excel_export extends CI_Controller
         $data['whitelist_person'] = $this->excel_export_model->fetch_whitelist_foreign($id,$level);
         $this->load->view("whitelist_foreign/excel_export_view", $data);
     }
+    function vaccine_amp($ampcode=13)
+    {
+        $id= $this->session->userdata('id');
+        $ampcode= 13;
+        $level= $this->session->userdata('user_level');
+        $this->load->model("excel_export_model");
+        $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_amp($ampcode);
+        $this->load->view("vaccine/excel_export_view", $data);
+    }
+
 
 
     function action()
