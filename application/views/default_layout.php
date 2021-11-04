@@ -99,8 +99,9 @@ var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
         <!-- Navigation -->
         <nav class="navbar w3-theme" role="" style="margin-bottom: 0;">
             <div>
-
+                <?php echo $header_for_layout?>
             </div>
+            <!-- /.navbar-static-side -->
             <!-- /.navbar-static-side -->
             <div id="left_menu" style="padding-left: 2%;border: 0px;">
                 <?php echo $left_for_layout?>

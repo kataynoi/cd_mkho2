@@ -27,6 +27,58 @@
                     <div> <i class="fa fa-save fa-fw"> </i>บันทึกข้อมูลประชาชนที่เดินทางกลับภูมิลำเนา</div>
                 </a>
             </li>
+            <li class="divider"></li>
+            <li><?php 
+                $amp = $this->session->userdata('ampurcode');
+                $txt="";
+                switch ($amp) {
+                    case '01':
+                        $txt='D1B1B7';
+                        break;
+                    case '02':
+                        $txt='70CA6C';
+                        break;
+                    case '03':
+                        $txt='AAE4AD';
+                        break;
+                    case '04':
+                        $txt='CC65DF';
+                         break;
+                    case '05':
+                        $txt='F9000D';
+                         break;
+                    case '06':
+                        $txt='11223B';
+                        break;
+                    case '07':
+                        $txt='3788A0';
+                        break;
+                    case '08':
+                        $txt='BF5130';
+                        break;
+                    case '09':
+                        $txt='21C1D7';
+                        break;
+                    case '10':
+                        $txt='1465A2';
+                        break;
+                    case '11':
+                        $txt='29847D';
+                        break;
+                    case '12':
+                        $txt='2494ED';
+                        break;
+                    case '13':
+                        $txt='2494AF';
+                        break;
+       
+                  } 
+                ?>
+                <a href=<?php echo base_url().'/assets/downloads/pop_vaccine/'.strtolower($txt)."_pop_vaccine_".$amp.".csv"; ?>
+                    target="_blank">
+                    <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine</div>
+                </a>
+            </li>
         </ul>
 
     </li>
