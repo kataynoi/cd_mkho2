@@ -5,6 +5,8 @@ header("Content-Disposition: attachment; filename=".$this->session->userdata('id
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Cache-Control: private",false);
+
+
 ?>
 
 <body>

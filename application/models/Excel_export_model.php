@@ -141,7 +141,7 @@ class Excel_export_model extends CI_Model
     function fetch_vaccine_amp($amp)
     {
       $vaccine = $this->load->database('vaccine', TRUE);
-        $table='pop_vaccine_01';
+        $table='pop_vaccine_'.$amp;
         $rs = $vaccine
         ->get($table)
         ->result();
