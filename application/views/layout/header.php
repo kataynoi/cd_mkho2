@@ -28,7 +28,36 @@
                 </a>
             </li>
             <li class="divider"></li>
-            <li><?php 
+
+        </ul>
+
+    </li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-save fa-fw"></i> รายงาน <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+            <li>
+                <a href="<?php echo site_url('report/person_bypass_last7day')?>">
+                    <div> <i class="fa fa-save fa-fw"></i> จำนวนผู้ผ่านด่านตรวจ </div>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('report/person_survey')?>">
+                    <div> <i class="fa fa-save fa-fw"> </i> จำนวนประชาชนเดินทางกลับภูมิลำเนา จ.มหาสารคาม</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="<?php echo site_url('report/summary_checkpoint')?>">
+                    <div> <i class="fa fa-save fa-fw"> </i> สรุปจำนวนประชาชนผ่านด่าน รายวัน</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <?php 
+            if($this->session->userdata('user_type')=='2'){
+            echo "<li>";
                 $amp = $this->session->userdata('ampurcode');
                 $txt="";
                 switch ($amp) {
@@ -74,43 +103,26 @@
        
                   } 
                 ?>
-                <a href=<?php echo base_url().'/assets/downloads/pop_vaccine/'.strtolower($txt)."_pop_vaccine_".$amp.".csv"; ?>
-                    target="_blank">
-                    <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine</div>
-                </a>
-            </li>
-        </ul>
-
+            <a href=<?php echo base_url().'/assets/downloads/pop_vaccine/'.strtolower($txt)."_pop_vaccine_".$amp.".csv"; ?>
+                target="_blank">
+                <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine รายอำเภอ</div>
+            </a>
     </li>
-
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-save fa-fw"></i> รายงาน <i class="fa fa-caret-down"></i>
+    <?php }
+    ?>
+    <li>
+        <a href=<?php echo site_url('excel_export/vaccine_hosp') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine หน่วยบริการ</div>
         </a>
-        <ul class="dropdown-menu dropdown-messages">
-            <li>
-                <a href="<?php echo site_url('report/person_bypass_last7day')?>">
-                    <div> <i class="fa fa-save fa-fw"></i> จำนวนผู้ผ่านด่านตรวจ </div>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo site_url('report/person_survey')?>">
-                    <div> <i class="fa fa-save fa-fw"> </i> จำนวนประชาชนเดินทางกลับภูมิลำเนา จ.มหาสารคาม</div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="<?php echo site_url('report/summary_checkpoint')?>">
-                    <div> <i class="fa fa-save fa-fw"> </i> สรุปจำนวนประชาชนผ่านด่าน รายวัน</div>
-                </a>
-            </li>
-        </ul>
-
     </li>
 
-    <li class="dropdown">
+</ul>
 
-        <?php
+</li>
+
+<li class="dropdown">
+
+    <?php
         if ($this->session->userdata('login')==1) {
             echo "
 <a class='dropdown-toggle' data-toggle='dropdown'' href='#'>
@@ -127,7 +139,7 @@
         }
         ?>
 
-        <!-- /.dropdown-user -->
-    </li>
-    <!-- /.dropdown -->
+    <!-- /.dropdown-user -->
+</li>
+<!-- /.dropdown -->
 </ul>

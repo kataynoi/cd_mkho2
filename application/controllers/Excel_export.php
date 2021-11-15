@@ -52,6 +52,13 @@ class Excel_export extends CI_Controller
         $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_amp($ampcode);
         $this->load->view("vaccine/excel_export_view", $data);
     }
+    function vaccine_hosp()
+    {
+        $hospcode= $this->session->userdata('hospcode');
+        $this->load->model("excel_export_model");
+        $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp($hospcode);
+        $this->load->view("vaccine/excel_export_view", $data);
+    }
 
 
 

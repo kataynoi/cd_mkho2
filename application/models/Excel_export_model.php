@@ -148,5 +148,17 @@ class Excel_export_model extends CI_Model
         return $rs;
     }
 
+    function fetch_vaccine_hosp($hospcode)
+    {
+        $vaccine = $this->load->database('vaccine', TRUE);
+        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,IF(a.province_vaccine IS NOT NULL,'Y','') as vaccine,a.vaccine_date,a.vaccine_type,a.hospital_code_vaccine,hospital_name_vaccine 
+        FROM t_person_cid_hash a
+        LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
+        WHERE b.hoscode='".$hospcode."' AND a.TYPEAREA in(1,2,3) AND a.DISCHARGE='9' AND TYPEAREA in(1,2,3)
+        ORDER BY a.HOSPCODE,a.vhid;";
+        $rs = $vaccine->query($sql)->result();
+        return $rs;
+    }
+
 
 }

@@ -162,6 +162,7 @@ class User extends CI_Controller
             $rs['user_type'] = $rs['user_type'];
             $rs['ampurcode'] = $rs['ampurcode'];
             $rs['checkpoint'] = $rs['checkpoint'];
+            $rs['hospcode'] = substr($username,8,5);
             $this->session->set_userdata($rs);
             $json = '{"success": true, "msg":"" }';
         } else {
