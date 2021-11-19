@@ -14,7 +14,7 @@ $(document).ready(function () {
     $.ajax({
       method: "GET",
       url: "https://cvp1.moph.go.th/token",
-      dataType: "text",
+      dataType: "json",
       data: {
         Action: "get_moph_access_token",
         user: username,
@@ -37,16 +37,16 @@ $(document).ready(function () {
     var cid = $("#cid").val();
     $.ajax({
       method: "GET",
-      url: "https://cvp1.moph.go.th/api/ImmunizationHistory",
+      url: "https://cloud4.hosxp.net/api/moph/ImmunizationHistory",
       dataType: "json",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token_moph_ic"),
+        "Access-Control-Allow-Origin": "*",
       },
       data: {
         cid: cid,
       },
       success: function (data) {
-        $("#token").val(data);
         console.log(data);
       },
       error: function (status) {
