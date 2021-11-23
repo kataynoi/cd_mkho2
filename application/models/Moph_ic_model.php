@@ -21,10 +21,11 @@ class Moph_ic_model extends CI_Model
         $rs = $vaccine
         ->select('cid')
         ->where('vaccine_status','2')
+        //->where('vaccine_plan1_date IS NULL','',false)
         ->where('age_y >=','12', false)
         ->where_in('TYPEAREA',['1','2','3'])
         //->where('hospcode',$hospcode)
-        ->limit(30)
+        ->limit(10)
         ->get('t_person_cid_hash')
         ->result();
         return $rs;

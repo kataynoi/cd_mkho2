@@ -13,13 +13,16 @@ class Moph_ic extends CI_Controller
     public function index()
     {
       $url1=$_SERVER['REQUEST_URI'];
-      header("Refresh: 10; URL=$url1");
+      header("Refresh: 2; URL=$url1");
       $data[]="";
       $hospcode = "04912";
       $cid=$this->moph_ic->getCidByHospcode($hospcode);
+      $n=0;
       foreach($cid as $c){
         $this->call_visit_immun($c->cid);
+      $n++;
       }
+      $data['n']=$n;
         $this->layout->view('moph_ic/index',$data);
         
     }
@@ -101,7 +104,8 @@ class Moph_ic extends CI_Controller
         
         public  function get_token_from_api() {
 
-          $url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=plan01&password_hash=C293AE0C801AD90A52A09B847733D8A0DDCCBEF4BFCBCC386A177EBD906819F2&hospital_code=00031";
+         // $url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=plan01&password_hash=C293AE0C801AD90A52A09B847733D8A0DDCCBEF4BFCBCC386A177EBD906819F2&hospital_code=00031";
+          $url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=u11056&password_hash=523D70B072507FA47B71B15A5CEE83A9186ACDA5358D6190BDF936F6FFEDD043&hospital_code=11056";
           $ch =  curl_init($url);
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
           curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
