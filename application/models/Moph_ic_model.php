@@ -13,7 +13,11 @@ class Moph_ic_model extends CI_Model
     function insert_visit_immun($data)
     {
         //$vaccine = $this->load->database('vaccine', TRUE);
-        $rs =  $this->db->insert('visit_immunization_outprovince', $data);
+        //$rs =  $this->db->insert('visit_immunization_outprovince', $data);
+
+        $insert_query = $this->db->insert_string('visit_immunization_outprovince', $data);
+        $insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO',$insert_query);
+        $rs = $this->db->query($insert_query);
         return $rs;
     }
     function getCidByHospcode($hospcode){

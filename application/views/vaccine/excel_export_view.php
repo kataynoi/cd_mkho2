@@ -43,11 +43,20 @@ header("Cache-Control: private",false);
                         <th>รหัสที่อยู่</th>
                         <th>บ้านเลขที่</th>
                         <th>TypeArea</th>
-                        <th>รับวัคซีน(เข็ม1)</th>
-                        <th>วันที่รับวัคซีน</th>
-                        <th>ชนิดวัคซีน</th>
-                        <th>หน่วยที่ให้บริการ</th>
-                        <th>ชื่อหน่วย</th>
+                        <th>สถานะการรับวัคซีน</th>
+                        <th>วันที่รับวัคซีนเข็ม1</th>
+                        <th>สถานที่รับวัคซีนเข็ม1</th>
+                        <th>ชนิดวัคซีนเข็ม1</th>
+                        <th>วันที่รับวัคซีนเข็ม2</th>
+                        <th>สถานที่รับวัคซีนเข็ม2</th>
+                        <th>ชนิดวัคซีนเข็ม2</th>
+                        <th>วันที่รับวัคซีนเข็ม3</th>
+                        <th>สถานที่รับวัคซีนเข็ม3</th>
+                        <th>ชนิดวัคซีนเข็ม3</th>
+                        <th>วันที่รับวัคซีนเข็ม4</th>
+                        <th>สถานที่รับวัคซีนเข็ม4</th>
+                        <th>ชนิดวัคซีนเข็ม4</th>
+
 
                     </tr>
                 </thead>
@@ -66,10 +75,18 @@ header("Cache-Control: private",false);
                 echo "<td>".$r->addr."</td>";
                 echo "<td>".$r->TYPEAREA."</td>";
                 echo "<td>".$r->vaccine."</td>";
-                echo "<td>".$r->vaccine_date."</td>";
-                echo "<td>".$r->vaccine_type."</td>";
-                echo "<td>".$r->hospital_code_vaccine."</td>";
-                echo "<td>".$r->hospital_name_vaccine."</td>";
+                echo "<td>".$r->vaccine_plan1_date."</td>";
+                echo "<td>".$r->vaccine_hosp1."</td>";
+                echo "<td>".$r->vaccine_name1 ."</td>";
+                echo "<td>".$r->vaccine_plan2_date."</td>";
+                echo "<td>".$r->vaccine_hosp2."</td>";
+                echo "<td>".$r->vaccine_name2 ."</td>";
+                echo "<td>".$r->vaccine_plan3_date."</td>";
+                echo "<td>".$r->vaccine_hosp3."</td>";
+                echo "<td>".$r->vaccine_name3 ."</td>";
+                echo "<td>".$r->vaccine_plan4_date."</td>";
+                echo "<td>".$r->vaccine_hosp4."</td>";
+                echo "<td>".$r->vaccine_name4 ."</td>";
                 echo "</tr>";
 
             }

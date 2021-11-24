@@ -151,7 +151,10 @@ class Excel_export_model extends CI_Model
     function fetch_vaccine_hosp($hospcode)
     {
         $vaccine = $this->load->database('vaccine', TRUE);
-        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,IF(a.province_vaccine IS NOT NULL,'Y','') as vaccine,a.vaccine_date,a.vaccine_type,a.hospital_code_vaccine,hospital_name_vaccine 
+        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,IF(vaccine_hosp1 IS NOT NULL,'Y','') as vaccine,vaccine_plan1_date ,vaccine_hosp1,vaccine_name1 
+        ,vaccine_plan2_date ,vaccine_hosp2,vaccine_name2 
+        ,vaccine_plan3_date ,vaccine_hosp3,vaccine_name3 
+        ,vaccine_plan4_date ,vaccine_hosp4,vaccine_name4  
         FROM t_person_cid_hash a
         LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
         WHERE b.hoscode='".$hospcode."' AND a.TYPEAREA in(1,2,3) AND a.DISCHARGE='9' AND TYPEAREA in(1,2,3)
