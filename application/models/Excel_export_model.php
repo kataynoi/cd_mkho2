@@ -150,6 +150,8 @@ class Excel_export_model extends CI_Model
 
     function fetch_vaccine_hosp($hospcode)
     {
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->session->userdata('id'), 'Download เป้าหมายวัคซีน hosp');
         $vaccine = $this->load->database('vaccine', TRUE);
         $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,IF(vaccine_hosp1 IS NOT NULL,'Y','') as vaccine,vaccine_plan1_date ,vaccine_hosp1,vaccine_name1 
         ,vaccine_plan2_date ,vaccine_hosp2,vaccine_name2 
