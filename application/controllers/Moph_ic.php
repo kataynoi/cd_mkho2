@@ -27,7 +27,7 @@ class Moph_ic extends CI_Controller
         
     }
     function call_visit_immun($cid){
-      usleep(15000);
+      usleep(5000);
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
       //echo "Resule->".$history->result;
@@ -94,7 +94,7 @@ class Moph_ic extends CI_Controller
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json',$authorization));
         $result = curl_exec($ch);
-        //print_r($result);
+        console_log($result);
         $err = curl_error($ch);
       
         return json_decode($result);
