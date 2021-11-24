@@ -13,7 +13,7 @@ class Moph_ic_model extends CI_Model
     function insert_visit_immun($data)
     {
         //$vaccine = $this->load->database('vaccine', TRUE);
-        $rs =  $this->db->insert_batch('visit_immunization_outprovince', $data);
+        $rs =  $this->db->insert('visit_immunization_outprovince', $data);
         return $rs;
     }
     function getCidByHospcode($hospcode){
@@ -25,7 +25,7 @@ class Moph_ic_model extends CI_Model
         ->where('age_y >=','12', false)
         ->where_in('TYPEAREA',['1','2','3'])
         //->where('hospcode',$hospcode)
-        ->limit(5)
+        ->limit(10)
         ->get('t_person_cid_hash')
         ->result();
         return $rs;

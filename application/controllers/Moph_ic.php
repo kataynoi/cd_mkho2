@@ -27,7 +27,7 @@ class Moph_ic extends CI_Controller
         
     }
     function call_visit_immun($cid){
-      usleep(5000);
+      usleep(15000);
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
       //echo "Resule->".$history->result;
@@ -37,38 +37,38 @@ class Moph_ic extends CI_Controller
         $data = array();
         foreach($history->result->patient->visit as $r){
          
-          $data[$i]['visit_guid']= $r->visit_guid;
-          $data[$i]['visit_immunization_ref_code']= $r->visit_ref_code;
-          $data[$i]['hospital_code']= $r->hospital_code;
-          $data[$i]['cid']= $history->result->patient->cid;
-          $data[$i]['immunization_date']= substr($r->visit_immunization[0]->immunization_datetime,0,10); //date
-          $data[$i]['immunization_datetime']= substr($r->visit_immunization[0]->immunization_datetime,0,10)." ".substr($r->visit_immunization[0]->immunization_datetime,11,8); //datatime
-          $data[$i]['vaccine_plan_no']= $r->visit_immunization[0]->vaccine_plan_no; 
-          $data[$i]['vaccine_code']= $r->visit_immunization[0]->vaccine_code; 
-          $data[$i]['lot_number']= $r->visit_immunization[0]->lot_number; 
-          $data[$i]['expiration_date']= $r->visit_immunization[0]->vaccine_expiration_date; 
+          $data['visit_guid']= $r->visit_guid;
+          $data['visit_immunization_ref_code']= $r->visit_ref_code;
+          $data['hospital_code']= $r->hospital_code;
+          $data['cid']= $history->result->patient->cid;
+          $data['immunization_date']= substr($r->visit_immunization[0]->immunization_datetime,0,10); //date
+          $data['immunization_datetime']= substr($r->visit_immunization[0]->immunization_datetime,0,10)." ".substr($r->visit_immunization[0]->immunization_datetime,11,8); //datatime
+          $data['vaccine_plan_no']= $r->visit_immunization[0]->vaccine_plan_no; 
+          $data['vaccine_code']= $r->visit_immunization[0]->vaccine_code; 
+          $data['lot_number']= $r->visit_immunization[0]->lot_number; 
+          $data['expiration_date']= $r->visit_immunization[0]->vaccine_expiration_date; 
       
-          $data[$i]['vaccine_serial_no']= $r->visit_immunization[0]->vaccine_serial_no; 
-          $data[$i]['vaccine_ref_name']= $r->visit_immunization[0]->vaccine_ref_name; 
-          $data[$i]['vaccine_manufacturer_id']= "";
-          $data[$i]['person_type_id']= "";
-          $data[$i]['person_risk_type_id']= "";
-          $data[$i]['hospital_tmbpart']= "";
-          $data[$i]['hospital_amppart']= "";
-          $data[$i]['hospital_chwpart']= "";
-          $data[$i]['aefi_list_text']= "";
-          $data[$i]['ref_hn']= "";
-          $data[$i]['ref_patient_name']= $history->result->patient->first_name." ".$history->result->patient->last_name; 
-          $data[$i]['ref_birth_date']= $history->result->patient->birth_date; 
-          $data[$i]['practitioner_name']= $r->visit_immunization[0]->practitioner_name; 
-          $data[$i]['practitioner_role']= $r->visit_immunization[0]->practitioner_role; 
+          $data['vaccine_serial_no']= $r->visit_immunization[0]->vaccine_serial_no; 
+          $data['vaccine_ref_name']= $r->visit_immunization[0]->vaccine_ref_name; 
+          $data['vaccine_manufacturer_id']= "";
+          $data['person_type_id']= "";
+          $data['person_risk_type_id']= "";
+          $data['hospital_tmbpart']= "";
+          $data['hospital_amppart']= "";
+          $data['hospital_chwpart']= "";
+          $data['aefi_list_text']= "";
+          $data['ref_hn']= "";
+          $data['ref_patient_name']= $history->result->patient->first_name." ".$history->result->patient->last_name; 
+          $data['ref_birth_date']= $history->result->patient->birth_date; 
+          $data['practitioner_name']= $r->visit_immunization[0]->practitioner_name; 
+          $data['practitioner_role']= $r->visit_immunization[0]->practitioner_role; 
           $i++;
-          //$all_data[] = $data;
+          $rs = $this->moph_ic->insert_visit_immun($data);
+          if($rs){
+            $rs = $this->moph_ic->set_vaccine($cid,'1');
+          }
         }
-        $rs = $this->moph_ic->insert_visit_immun($data);
-        if($rs){
-          $rs = $this->moph_ic->set_vaccine($cid,'1');
-        }
+  
         
       }else{
         $rs = $this->moph_ic->set_vaccine($cid,'7');
@@ -94,7 +94,7 @@ class Moph_ic extends CI_Controller
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json',$authorization));
         $result = curl_exec($ch);
-        console_log($result);
+        //print_r($result);
         $err = curl_error($ch);
       
         return json_decode($result);
