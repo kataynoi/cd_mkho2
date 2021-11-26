@@ -8,8 +8,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
  */
 class Moph_ic_model extends CI_Model
+
 {
-   
+
     function insert_visit_immun($data)
     {
         //$vaccine = $this->load->database('vaccine', TRUE);
@@ -20,7 +21,7 @@ class Moph_ic_model extends CI_Model
         $rs = $this->db->query($insert_query);
         return $rs;
     }
-    function getCidByHospcode($hospcode){
+    function getCidByHospcode(){
         $vaccine = $this->load->database('vaccine', TRUE);
         $rs = $vaccine
         ->select('cid')

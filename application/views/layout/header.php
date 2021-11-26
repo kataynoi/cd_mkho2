@@ -28,6 +28,11 @@
                 </a>
             </li>
             <li class="divider"></li>
+            <li>
+                <a href="<?php echo site_url('person_vaccine'); ?>">
+                    <div> <i class="fa fa-save fa-fw"> </i>บันทึกข้อมูลสำรวจวัคซีน</div>
+                </a>
+            </li>
 
         </ul>
 

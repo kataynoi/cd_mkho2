@@ -56,6 +56,7 @@ header("Cache-Control: private",false);
                         <th>วันที่รับวัคซีนเข็ม4</th>
                         <th>สถานที่รับวัคซีนเข็ม4</th>
                         <th>ชนิดวัคซีนเข็ม4</th>
+                        <th>จังหวัดที่รับวัคซีน</th>
 
 
                     </tr>
@@ -74,7 +75,7 @@ header("Cache-Control: private",false);
                 echo "<td>".$r->vhid."</td>";
                 echo "<td>".$r->addr."</td>";
                 echo "<td>".$r->TYPEAREA."</td>";
-                echo "<td>".$r->vaccine."</td>";
+                echo "<td>".$r->vaccine_status."</td>";
                 echo "<td>".$r->vaccine_plan1_date."</td>";
                 echo "<td>".$r->vaccine_hosp1."</td>";
                 echo "<td>".$r->vaccine_name1 ."</td>";
@@ -87,9 +88,11 @@ header("Cache-Control: private",false);
                 echo "<td>".$r->vaccine_plan4_date."</td>";
                 echo "<td>".$r->vaccine_hosp4."</td>";
                 echo "<td>".$r->vaccine_name4 ."</td>";
+                echo "<td>".$r->vaccine_provname ."</td>";
                 echo "</tr>";
 
             }
+
             ?>
                 </tbody>
             </table>

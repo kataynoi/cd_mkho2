@@ -15,8 +15,7 @@ class Moph_ic extends CI_Controller
       $url1=$_SERVER['REQUEST_URI'];
       header("Refresh: 2; URL=$url1");
       $data[]="";
-      $hospcode = "04912";
-      $cid=$this->moph_ic->getCidByHospcode($hospcode);
+      $cid=$this->moph_ic->getCidByHospcode();
       $n=0;
       foreach($cid as $c){
         $this->call_visit_immun($c->cid);
