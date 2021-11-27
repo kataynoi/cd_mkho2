@@ -22,8 +22,8 @@ class Moph_ic_model extends CI_Model
         return $rs;
     }
     function getCidByHospcode(){
-        $vaccine = $this->load->database('vaccine', TRUE);
-        $rs = $vaccine
+        //$vaccine = $this->load->database('vaccine', TRUE);
+        $rs = $this->db
         ->select('cid')
         ->where('vaccine_status','2')
         //->where('vaccine_plan1_date IS NULL','',false)
@@ -38,8 +38,8 @@ class Moph_ic_model extends CI_Model
 }
 
 function set_vaccine($cid,$status){
-    $vaccine = $this->load->database('vaccine', TRUE);
-    $rs = $vaccine
+    //$vaccine = $this->load->database('vaccine', TRUE);
+    $rs = $this->db
     ->set('vaccine_status',$status)
     ->where('cid',$cid)
     //->limit(10)

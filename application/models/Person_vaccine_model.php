@@ -115,7 +115,7 @@ class Person_vaccine_model extends CI_Model
                         ->row();
                     return $rs;
                 }
-                public function set_vaccine_status($cid,$val)
+    public function set_vaccine_status($cid,$val)
             {
                 $rs = $this->db
                 ->set('vaccine_status_survey',$val)

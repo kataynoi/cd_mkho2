@@ -31,7 +31,7 @@ class Person_vaccine extends CI_Controller
             $option ="";
             foreach($cvaccine_status as $r){
                 $selected='';
-                if($r['id']==$row->vaccine_status){
+                if($r['id']==$row->vaccine_status_survey){
                     $selected='selected';
                 }
                     $option .="<option value='".$r['id']."' ".$selected.">".$r['name']."</option>";
@@ -56,7 +56,7 @@ class Person_vaccine extends CI_Controller
                 $sub_array[] = to_thai_date($row->vaccine_plan2_date);
                 $sub_array[] = $row->vaccine_hosp2;
                 $sub_array[] = $row->vaccine_name2;
-                $sub_array[] = $cvaccine_status[$row->vaccine_status_survey - 1]["name"];
+                //$sub_array[] = $cvaccine_status[$row->vaccine_status_survey - 1]["name"];
                 $sub_array[] = $row->vaccine_provname;
                 
                 $data[] = $sub_array;
