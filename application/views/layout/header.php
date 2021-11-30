@@ -108,7 +108,7 @@
        
                   } 
                 ?>
-            <a href=<?php echo base_url().'/assets/downloads/pop_vaccine/'.strtolower($txt)."_pop_vaccine_".$amp.".csv"; ?>
+            <a href=<?php echo base_url().'/assets/downloads/pop_vaccine/'.$txt."_pop_vaccine_".$amp.".csv"; ?>
                 target="_blank">
                 <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine รายอำเภอ</div>
             </a>
