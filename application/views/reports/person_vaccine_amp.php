@@ -15,15 +15,32 @@ $('#btn-28').on('click', function() {
 </style>
 <div class="panel panel-info">
     <div class="panel-heading">
-        จำนวนประชาชนที่เดินทางกลับภูมิลำเนา ของจังหวัดมหาสารคาม
+        กลุ่มเป้าหมายฉีดวัคซีนป้องกัน COVID-19 ของจังหวัดมหาสารคาม
     </div>
     <div class="panel-body">
 
-        <span class="pull-right">
-            <a href="<?php echo site_url('excel_export/person_survey_excel/'); ?>" class="btn btn-outline btn-success">
-                ส่งออกรายชื่อ Excel (เฉพาะอำเภอของท่าน) </a>
+        <div class="navbar navbar-default">
+            <form action="<?php echo site_url('report/person_vaccine_amp')?>" class="navbar-form" method="post">
+                <label class="control-label"> อำเภอ </label>
+                <select id="sl_ampur" name="ampurcode" style="width: 200px;" class="form-control">
+                    <option value=""> อำเภอทั้งหมด </option>
+                    <?php
+                        foreach($amp as $v){
+                            echo '<option value='.$v->ampurcodefull.'>'.$v->ampurname.'</option>';
+                        }
+                        ?>
+                </select>
+                <label class="control-label"> ตำบล </label>
+                <select id="sl_tambon" name="tamboncode" style="width: 200px;" class="form-control">
 
-        </span>
+                </select>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary" id="btn_audit1" data-name='btn_show'>
+                        <i class="glyphicon glyphicon-search"></i> แสดง
+                    </button>
+                </div>
+            </form>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -105,3 +122,5 @@ $('#btn-28').on('click', function() {
 
     </div>
 </div>
+
+<script src="<?php echo base_url()?>assets/apps/js/basic.js" charset="utf-8"></script>

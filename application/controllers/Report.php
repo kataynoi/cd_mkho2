@@ -10,7 +10,7 @@ class Report extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        $this->load->model('Basic_model', 'basic');
         $this->load->model('Reports_model', 'crud');
         $this->id = $this->session->userdata('id');
     }
@@ -55,9 +55,13 @@ class Report extends CI_Controller
     }
     public function  person_vaccine_amp()
     {
+        $ampur=$this->input->post('ampurcode');
+        $tambon=$this->input->post('tamboncode');
+        echo "tambon".$tambon;
+        $data['amp']=$this->basic->get_ampur_list('44');
         $this->load->model('log_model');
         $this->log_model->save_log_view($this->id, 'รายงาน กลุ่มเป้าหมายวัคซีน');
-        $data['report'] = $this->crud->person_vaccine_amp();
+        $data['report'] = $this->crud->person_vaccine_amp($ampur,$tambon);
         $this->layout->view('reports/person_vaccine_amp', $data);
     }
 

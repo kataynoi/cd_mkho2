@@ -98,13 +98,21 @@ class Reports_model extends CI_Model
     }
 
 
-    public function person_vaccine_amp($ampur='',$tambon='',$village='')
+    public function person_vaccine_amp($ampur='',$tambon='')
     {
 
         if($ampur==''){
             $where = " ";
             $group=" left(a.vhid,4)";
             $select="c.ampurname as name";
+        }else if($ampur!=''){
+            $where = "AND left(a.vhid,4)= '".$ampur."' ";
+            $group=" left(a.vhid,6)";
+            $select="d.tambonname as name";
+        }else if($ampur!='' && $tambon!=''){
+            $where = "AND left(a.vhid,6)= '".$tambon."' ";
+            $group=" left(a.vhid,8)";
+            $select="b.villagename as name";
         }
         
         $sql = "select ".$select.", count(*) as person
@@ -120,10 +128,12 @@ class Reports_model extends CI_Model
         , SUM(IF( vaccine_status_survey='9' ,1,0 )) as out_target
         from t_person_cid_hash a
         LEFT JOIN (SELECT  * FROM cvillage WHERE changwatcode='44') b ON a.vhid= b.villagecodefull
-        LEFT JOIN (SELECT * FROM campur WHERE changwatcode='44 ') c ON b.ampurcode = c.ampurcodefull
+        LEFT JOIN (SELECT * FROM campur WHERE changwatcode='44') c ON b.ampurcode = c.ampurcodefull
+        LEFT JOIN (SELECT * FROM ctambon WHERE changwatcode='44') d ON left(a.vhid,6) = d.tamboncodefull
         
         where a.DISCHARGE=9 AND TYPEAREA in(1,2,3) AND a.NATION='099'  AND LEFT(a.vhid,2)='44'".$where."
         GROUP BY ".$group;
+        //echo $sql;
         $rs = $this->db->query($sql)->result();
         //echo $this->db->last_query();
 
