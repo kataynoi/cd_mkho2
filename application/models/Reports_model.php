@@ -105,14 +105,14 @@ class Reports_model extends CI_Model
             $where = " ";
             $group=" left(a.vhid,4)";
             $select="c.ampurname as name";
-        }else if($ampur!=''){
+        }else if($ampur!='' && $tambon=='' ){
             $where = "AND left(a.vhid,4)= '".$ampur."' ";
             $group=" left(a.vhid,6)";
             $select="d.tambonname as name";
         }else if($ampur!='' && $tambon!=''){
             $where = "AND left(a.vhid,6)= '".$tambon."' ";
             $group=" left(a.vhid,8)";
-            $select="b.villagename as name";
+            $select="CONCAT(b.villagename,'[',b.villagecode,']') as name";
         }
         
         $sql = "select ".$select.", count(*) as person

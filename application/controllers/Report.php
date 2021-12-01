@@ -57,7 +57,7 @@ class Report extends CI_Controller
     {
         $ampur=$this->input->post('ampurcode');
         $tambon=$this->input->post('tamboncode');
-        echo "tambon".$tambon;
+       // echo "tambon".$tambon;
         $data['amp']=$this->basic->get_ampur_list('44');
         $this->load->model('log_model');
         $this->log_model->save_log_view($this->id, 'รายงาน กลุ่มเป้าหมายวัคซีน');
