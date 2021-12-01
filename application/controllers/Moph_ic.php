@@ -12,6 +12,10 @@ class Moph_ic extends CI_Controller
 
     public function index()
     {
+      if(!$this->session->userdata('callApiAll')){
+        $this->session->set_userdata('callApiAll','0');
+      }
+      $callAll = $this->session->userdata('callApiAll');
       $url1=$_SERVER['REQUEST_URI'];
       header("Refresh: 2; URL=$url1");
       $data[]="";
@@ -19,13 +23,22 @@ class Moph_ic extends CI_Controller
       $n=0;
       foreach($cid as $c){
         $this->call_visit_immun($c->cid);
+        $callAll++;
       $n++;
       }
+      $this->session->set_userdata('callApiAll',$callAll);
       $data['n']=$n;
+      $data['callAll']= $this->session->userdata('callApiAll');
+      $data['callSuccess'] = $this->session->userdata('callSuccess');
         $this->layout->view('moph_ic/index',$data);
         
     }
     function call_visit_immun($cid){
+
+      if(!$this->session->userdata('callSuccess')){
+        $this->session->set_userdata('callApiAll','0');
+      }
+      $callSuccess = $this->session->userdata('callSuccess');
       usleep(15000);
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
@@ -34,6 +47,8 @@ class Moph_ic extends CI_Controller
       if( isset($history->result->patient->visit) ){
         $i=0;
         $data = array();
+          $callSuccess++;
+          $this->session->set_userdata('callSuccess',$callSuccess);
         foreach($history->result->patient->visit as $r){
          
           $data['visit_guid']= $r->visit_guid;
@@ -65,6 +80,8 @@ class Moph_ic extends CI_Controller
           $rs = $this->moph_ic->insert_visit_immun($data);
           if($rs){
             $rs = $this->moph_ic->set_vaccine($cid,'1');
+            
+
           }
         }
   
