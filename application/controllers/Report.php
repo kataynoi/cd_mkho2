@@ -53,6 +53,12 @@ class Report extends CI_Controller
         $data['car'] = $this->crud->car_inday($ampcode, $date_now);
         $this->layout->view('reports/summary_checkpoint', $data);
     }
-
+    public function  person_vaccine_amp()
+    {
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->id, 'รายงาน กลุ่มเป้าหมายวัคซีน');
+        $data['report'] = $this->crud->person_vaccine_amp();
+        $this->layout->view('reports/person_vaccine_amp', $data);
+    }
 
 }

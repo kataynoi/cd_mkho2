@@ -97,18 +97,39 @@ class Reports_model extends CI_Model
 
     }
 
-    public function get_median_month($year, $code506, $m)
+
+    public function person_vaccine_amp($ampur='',$tambon='',$village='')
     {
-        $m = "m" . (int)$m;
-        $rs = $this->db
-            ->select($m)
-            ->where('year', $year)
-            ->where('code506', $code506)
-            ->where('hospcode', '00031')
-            ->get('median_month')
-            ->row();
-        return count($rs) > 0 ? $rs->$m : 0;
+
+        if($ampur==''){
+            $where = " ";
+            $group=" left(a.vhid,4)";
+            $select="c.ampurname as name";
+        }
+        
+        $sql = "select ".$select.", count(*) as person
+        , SUM(IF(a.vaccine_hosp1 IS NOT NULL,1,0)) as person_plan1
+        , SUM(IF(a.vaccine_provcode='44',1,0)) as person_plan1_mk
+        , SUM(IF(a.vaccine_provcode!='44' AND vaccine_provcode IS NOT NULL ,1,0 )) as person_plan1_notmk
+        , SUM(IF( vaccine_status_survey='2' ,1,0 )) as wait
+        , SUM(IF( vaccine_status_survey='3' ,1,0 )) as reject
+        , SUM(IF( vaccine_status_survey='4' ,1,0 )) as out_province
+        , SUM(IF( vaccine_status_survey='5' ,1,0 )) as out_country
+        , SUM(IF( vaccine_status_survey='6' ,1,0 )) as death
+        , SUM(IF( vaccine_status_survey='8' ,1,0 )) as need_vaccine
+        , SUM(IF( vaccine_status_survey='9' ,1,0 )) as out_target
+        from t_person_cid_hash a
+        LEFT JOIN (SELECT  * FROM cvillage WHERE changwatcode='44') b ON a.vhid= b.villagecodefull
+        LEFT JOIN (SELECT * FROM campur WHERE changwatcode='44 ') c ON b.ampurcode = c.ampurcodefull
+        
+        where a.DISCHARGE=9 AND TYPEAREA in(1,2,3) AND a.NATION='099'  AND LEFT(a.vhid,2)='44'".$where."
+        GROUP BY ".$group;
+        $rs = $this->db->query($sql)->result();
+        //echo $this->db->last_query();
+
+        return $rs;
     }
+
 }
 /* End of file basic_model.php */
 /* Location: ./application/models/basic_model.php */

@@ -120,6 +120,12 @@
             <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine หน่วยบริการ</div>
         </a>
     </li>
+    <li class="divider"></li>
+    <li>
+        <a href=<?php echo site_url('report/person_vaccine_amp') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>รายงานจำนวนกลุ่มเป้าหมายรายหมู่บ้าน</div>
+        </a>
+    </li>
 
 </ul>
 
