@@ -43,7 +43,7 @@ class Moph_ic extends CI_Controller
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
       //echo "Resule->".$history->result;
-      //print_r($history);
+      print_r($history);
       if( isset($history->result->patient->visit) ){
         $i=0;
         $data = array();
@@ -80,8 +80,6 @@ class Moph_ic extends CI_Controller
           $rs = $this->moph_ic->insert_visit_immun($data);
           if($rs){
             $rs = $this->moph_ic->set_vaccine($cid,'1');
-            
-
           }
         }
   

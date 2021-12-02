@@ -18,8 +18,6 @@ $(document).ready(function () {
     },
     columnDefs: [
       {
-        defaultContent: "-",
-        targets: "_all",
         targets: [0, 5],
         orderable: true,
       },
