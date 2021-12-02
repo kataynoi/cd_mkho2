@@ -43,6 +43,7 @@ class Moph_ic extends CI_Controller
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
       //echo "Resule->".$history->result;
+      print($cid);
       print_r($history)."<br>";
       if( isset($history->result->patient->visit) ){
         $i=0;
