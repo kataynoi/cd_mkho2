@@ -39,7 +39,7 @@ class Moph_ic extends CI_Controller
         $this->session->set_userdata('callApiAll','0');
       }
       $callSuccess = $this->session->userdata('callSuccess');
-      usleep(15000);
+      usleep(55000);
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
       //echo "Resule->".$history->result;
