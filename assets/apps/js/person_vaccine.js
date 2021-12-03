@@ -760,7 +760,7 @@ crud.set_vaccine_status = function (cid, val) {
   });
   return true;
 };
-$(document).on("change", "select", function (e) {
+$(document).on("change", "select[data-btn='sl_vaccine_status']", function (e) {
   var cid = $(this).data("cid");
   var val = $(this).val();
   swal({
