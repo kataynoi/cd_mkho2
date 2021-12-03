@@ -45,7 +45,9 @@ class Moph_ic extends CI_Controller
       //echo "Resule->".$history->result;
       print($cid);
       print_r($history)."<br>";
-      if( isset($history->result->patient->visit) ){
+      if($history->MessageCode ==200){
+
+        if( isset($history->result->patient->visit) ){
         $i=0;
         $data = array();
           $callSuccess++;
@@ -88,17 +90,16 @@ class Moph_ic extends CI_Controller
       }else{
         $rs = $this->moph_ic->set_vaccine($cid,'7');
       }
-      
+    }else{
+      $token_key = $this->get_token_from_api();
+      $this->session->set_userdata('token_moph_ic',$token_key);
+    }
+
     }
     function get_data_from_api($cid) {
 
-        // Run the function that will make a POST request and return the token
+        // Run the function that will make a POST request and return the token 
         $token = $this->session->userdata('token_moph_ic');
-        if(empty($token)){
-          $token_key = $this->get_token_from_api();
-          $this->session->set_userdata('token_moph_ic',$token_key);
-          $token = $this->session->userdata('token_moph_ic');
-        } 
         $url = "https://cvp1.moph.go.th/api/ImmunizationHistory?cid=".$cid;
         $authorization = "Authorization: Bearer ".$token;
         $ch =  curl_init($url);

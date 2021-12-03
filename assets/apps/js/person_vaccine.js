@@ -18,7 +18,7 @@ $(document).ready(function () {
     },
     columnDefs: [
       {
-        targets: [0, 5],
+        targets: [8, 10],
         orderable: true,
       },
     ],
