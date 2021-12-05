@@ -30,6 +30,7 @@ class Moph_ic_model extends CI_Model
         ->where('age_y >=','12', false)
         ->where_in('TYPEAREA',['1','2','3'])
         //->where('hospcode',$hospcode)
+        ->order_by('rand()')
         ->limit(10)
         ->get('t_person_cid_hash')
         ->result();
