@@ -126,6 +126,11 @@
             <div> <i class="fa fa-save fa-fw"> </i>รายงานจำนวนกลุ่มเป้าหมายรายหมู่บ้าน</div>
         </a>
     </li>
+    <li>
+        <a href=<?php echo site_url('report/person_vaccine_hosp') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>รายงานจำนวนกลุ่มเป้าหมายราย รพ.สต.</div>
+        </a>
+    </li>
 
 </ul>
 

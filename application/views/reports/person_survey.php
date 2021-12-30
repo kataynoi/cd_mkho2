@@ -30,9 +30,9 @@ $('#btn-28').on('click', function() {
                     <th>#</th>
                     <th>อำเภอ</th>
                     <th class='text-center'>
-                        <?php echo '01 เม.ย. 2564 - ' . to_thai_date_short(date('Y-m-d')); ?></th>
+                        <?php echo '30 ธันวาคม. 2564 - ' . to_thai_date_short(date('Y-m-d')); ?></th>
                     <th class='text-center' data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                        ผู้เดินทางจาก 8 จังหวัด(พื้นที่เสี่ยงสูง,พื้นที่เสี่ยง)
+                        ผู้เดินทางจาก 8 จังหวัด
                     </th>
                 </tr>
             </thead>
