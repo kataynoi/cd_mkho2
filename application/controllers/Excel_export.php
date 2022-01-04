@@ -60,6 +60,13 @@ class Excel_export extends CI_Controller
         $this->load->view("vaccine/excel_export_view", $data);
     }
 
+    function death_hosp()
+    {
+        $hospcode= $this->session->userdata('hospcode');
+        $this->load->model("excel_export_model");
+        $data['death_hosp'] = $this->excel_export_model->fetch_death_hosp($hospcode);
+        $this->load->view("death/excel_export_view", $data);
+    }
 
 
     function action()

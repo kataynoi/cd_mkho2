@@ -167,6 +167,22 @@ class Excel_export_model extends CI_Model
         return $rs;
     }
 
+    function fetch_death_hosp($hospcode)
+    {
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->session->userdata('id'), 'Download ผู้เสียชีวิต hosp');
+        //$vaccine = $this->load->database('vaccine', TRUE);
+        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,
+        a.DEATH_DATE,a.DEATH_CAUSE
+        FROM t_person_cid a
+        LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
+        WHERE b.hoscode='".$hospcode."'AND a.DEATH_DATE IS NOT NULL
+        ORDER BY a.HOSPCODE,a.vhid;";
+        $rs = $this->db->query($sql)->result();
+        return $rs;
+    }
+
+
     public function get_cstatus_vaccine()
     {       $rs = $this->db
             ->get("cstatus_vaccine")
