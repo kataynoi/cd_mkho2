@@ -172,7 +172,7 @@ class Excel_export_model extends CI_Model
         $this->load->model('log_model');
         $this->log_model->save_log_view($this->session->userdata('id'), 'Download ผู้เสียชีวิต hosp');
         //$vaccine = $this->load->database('vaccine', TRUE);
-        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,
+        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,a.DISCHARGE,
         a.DEATH_DATE,a.DEATH_CAUSE
         FROM t_person_cid a
         LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
