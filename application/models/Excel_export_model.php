@@ -174,7 +174,7 @@ class Excel_export_model extends CI_Model
         //$vaccine = $this->load->database('vaccine', TRUE);
         $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,a.DISCHARGE,
         a.DEATH_DATE,a.DEATH_CAUSE
-        FROM t_person_cid a
+        FROM person a
         LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
         WHERE b.hoscode='".$hospcode."'AND a.DEATH_DATE IS NOT NULL
         ORDER BY a.HOSPCODE,a.vhid;";
