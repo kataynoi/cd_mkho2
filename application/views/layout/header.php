@@ -120,6 +120,12 @@
             <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine หน่วยบริการ</div>
         </a>
     </li>
+
+    <li>
+        <a href=<?php echo site_url('excel_export/vaccine_hosp_anc') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine หน่วยบริการ [หญิงตั้งครรภ์]</div>
+        </a>
+    </li>
     <li class="divider"></li>
     <li>
         <a href=<?php echo site_url('excel_export/death_hosp') ?> target="_blank">
