@@ -25,14 +25,27 @@ $('#btn-28').on('click', function() {
                 <select id="sl_ampur" name="ampurcode" style="width: 200px;" class="form-control">
                     <option value=""> อำเภอทั้งหมด </option>
                     <?php
+                        $sl_amp=$this->session->userdata("sl_amp");
                         foreach($amp as $v){
-                            echo '<option value='.$v->ampurcodefull.'>'.$v->ampurname.'</option>';
+                            $sl_amp == $v->ampurcodefull?$selected = 'selected ':$selected="";
+                            echo '<option value='.$v->ampurcodefull.' '.$selected.'>'.$v->ampurname.'</option>';
                         }
                         ?>
                 </select>
                 <label class="control-label"> ตำบล </label>
                 <select id="sl_tambon" name="tamboncode" style="width: 200px;" class="form-control">
 
+                </select>
+                <label class="control-label"> เข็มที่ </label>
+                <select id="vaccine_time" name="vaccine_time" style="width: 200px;" class="form-control">
+                <?php
+                $vaccine_time=$this->session->userdata("vaccine_time");
+                        for($x=1; $x<=4; $x++){
+                            $vaccine_time == $x?$selected = 'selected ':$selected="";
+                            echo "<option value='".$x."' ".$selected." > เข็มที่ $x </option>";
+                            //$x++;
+                        }
+                ?>
                 </select>
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary" id="btn_audit1" data-name='btn_show'>

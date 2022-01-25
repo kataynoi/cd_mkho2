@@ -56,12 +56,17 @@ class Report extends CI_Controller
     public function  person_vaccine_amp()
     {
         $ampur=$this->input->post('ampurcode');
+        $this->session->set_userdata('sl_amp',$ampur);
         $tambon=$this->input->post('tamboncode');
+        $this->session->set_userdata('sl_tamboncode',$tambon);
+        $vaccine_time=$this->input->post('vaccine_time');
+        $this->session->set_userdata('sl_vaccine_time',$vaccine_time);
+        if($vaccine_time==''){ $vaccine_time=1;}
        // echo "tambon".$tambon;
         $data['amp']=$this->basic->get_ampur_list('44');
         $this->load->model('log_model');
         $this->log_model->save_log_view($this->id, 'รายงาน กลุ่มเป้าหมายวัคซีน');
-        $data['report'] = $this->crud->person_vaccine_amp($ampur,$tambon);
+        $data['report'] = $this->crud->person_vaccine_amp($ampur,$tambon,$vaccine_time);
         $this->layout->view('reports/person_vaccine_amp', $data);
     }
 
