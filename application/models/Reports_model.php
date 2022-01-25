@@ -135,7 +135,7 @@ class Reports_model extends CI_Model
         }
         $sql = "select ".$select.", count(*) as person
         , SUM(IF(".$txt_hosp." IS NOT NULL,1,0)) as person_plan1
-        , SUM(IF(a.vaccine_provcode='44',1,0)) as person_plan1_mk
+        , SUM(IF(a.vaccine_provcode='44' AND ".$txt_hosp." IS NOT NULL,1,0)) as person_plan1_mk
         , SUM(IF(a.vaccine_provcode!='44' AND ".$txt_hosp." IS NOT NULL ,1,0 )) as person_plan1_notmk
         , SUM(IF( vaccine_status_survey='2' ,1,0 )) as wait
         , SUM(IF( vaccine_status_survey='3' ,1,0 )) as reject

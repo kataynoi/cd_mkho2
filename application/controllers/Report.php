@@ -60,7 +60,7 @@ class Report extends CI_Controller
         $tambon=$this->input->post('tamboncode');
         $this->session->set_userdata('sl_tamboncode',$tambon);
         $vaccine_time=$this->input->post('vaccine_time');
-        $this->session->set_userdata('sl_vaccine_time',$vaccine_time);
+        $this->session->set_userdata('vaccine_time',$vaccine_time);
         if($vaccine_time==''){ $vaccine_time=1;}
        // echo "tambon".$tambon;
         $data['amp']=$this->basic->get_ampur_list('44');
