@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="dropdown">
-        <a href="<?php echo base_url('person_vaccine_needle3/countdown'); ?>">
+        <a href="<?php echo site_url('person_vaccine_needle3/countdown'); ?>">
             <i class="fa fa-home fa-fw"></i>CountDown
         </a>
     </li>
