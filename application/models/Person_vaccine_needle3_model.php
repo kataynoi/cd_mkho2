@@ -120,7 +120,7 @@ class Person_vaccine_needle3_model extends CI_Model
                 $rs = $this->db
                 ->set('needle_3', date('Y-m-d'))
                 ->where('CID',$cid)
-                ->update('t_person_cid_hashx');
+                ->update('t_person_cid_hash');
 
                 return $rs;
 

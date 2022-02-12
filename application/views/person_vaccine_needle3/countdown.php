@@ -1,6 +1,7 @@
 ﻿<head>
-    <meta http-equiv="refresh" content="3">
+    <meta http-equiv="refresh" content="30">
 </head>
+
 <div class="col col-lg-6" style="padding-top: 16px;">
 
 </div>

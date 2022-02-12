@@ -27,7 +27,8 @@ class Person_vaccine_needle3 extends CI_Controller
 
         $data['summary'] = $this->dash->get_summary();
         $data['ampur'] = $this->dash->get_summary_ampur();
-        $this->layout->view('dashboard/index_view', $data);
+        $this->layout->view('person_vaccine_needle3/countdown', $data);
+        
     }
     function fetch_person_vaccine()
     {

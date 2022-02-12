@@ -778,6 +778,9 @@ $(document).on("change", "select[data-btn='sl_vaccine_status']", function (e) {
 
 $(document).on("click", "button[data-btn='btn_needle3']", function (e) {
   var cid = $(this).data("cid");
+  var x = $(this);
+  var date_now =app.date_now_thai();
+ 
   swal({
     title: "คำเตือน?",
     text: "คุณต้องการเพิ่ม การรับวัคซีนเข็ม 3 ",
@@ -787,6 +790,7 @@ $(document).on("click", "button[data-btn='btn_needle3']", function (e) {
   }).then(function (isConfirm) {
     if (isConfirm) {
       if (crud.set_vaccine_needle3(cid)) {
+        x.parent().html(date_now);
       }
     }
   });

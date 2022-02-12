@@ -284,11 +284,11 @@ app.date_now_thai = function () {
     mm = "0" + mm;
   }
   today = mm + "-" + dd + "-" + yyyy;
-  console.log(today);
+  //console.log(today);
   today = mm + "/" + dd + "/" + yyyy;
-  console.log(today);
+  //console.log(today);
   today = dd + "-" + mm + "-" + yyyy;
-  console.log(today);
+ // console.log(today);
   today = dd + "/" + mm + "/" + yyyy;
   return today;
 };
