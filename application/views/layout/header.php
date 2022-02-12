@@ -10,6 +10,11 @@
             <i class="fa fa-home fa-fw"></i> Home
         </a>
     </li>
+    <li class="dropdown">
+        <a href="<?php echo base_url('person_vaccine_needle3/countdown'); ?>">
+            <i class="fa fa-home fa-fw"></i>CountDown
+        </a>
+    </li>
 
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -33,6 +38,16 @@
                     <div> <i class="fa fa-save fa-fw"> </i>บันทึกข้อมูลสำรวจวัคซีน</div>
                 </a>
             </li>
+            <li>
+                <a href="<?php echo site_url('person_vaccine_needle3'); ?>">
+                    <div> <i class="fa fa-save fa-fw"> </i>บันทึกข้อมูลวัคซีนเข็ม 3 </div>
+                </a>
+            </li>
+            <li>
+                <a href=<?php echo site_url('excel_export/vaccine_hosp_needle3') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine เข็ม3</div>
+        </a>
+    </li>
 
         </ul>
 

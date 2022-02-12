@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Person_vaccine extends CI_Controller
+class Person_vaccine_needle3 extends CI_Controller
 {
     public $user_id;
     public function __construct()
@@ -10,55 +10,60 @@ class Person_vaccine extends CI_Controller
 
                 if(!$this->session->userdata("login"))
                     redirect(site_url("user/login"));
-        $this->load->model('Person_vaccine_model', 'crud');
+        $this->load->model('Person_vaccine_needle3_model', 'crud');
+        $this->load->model('Dashboard_model', 'dash');
     }
 
     public function index()
     {
         $data[] = '';
         $data["cvaccine_status"] = $this->crud->get_cvaccine_status();
-        $this->layout->view('person_vaccine/index', $data);
+        $this->layout->view('person_vaccine_needle3/index', $data);
     }
 
     
+    public function countdown()
+    { $this->layout->setLayout('print_layout');
 
+        $data['summary'] = $this->dash->get_summary();
+        $data['ampur'] = $this->dash->get_summary_ampur();
+        $this->layout->view('dashboard/index_view', $data);
+    }
     function fetch_person_vaccine()
     {
         $fetch_data = $this->crud->make_datatables();
         $data = array();
-        $cvaccine_status = $this->crud->get_cvaccine_status();
+        
         
         foreach ($fetch_data as $row) {
-            $option ="";
-            foreach($cvaccine_status as $r){
-                $selected='';
-                if($r['id']==$row->vaccine_status_survey){
-                    $selected='selected';
+            if($row->needle_3!=''){
+                if($row->vaccine_plan3_date!=''){
+                    $needle3 = to_thai_date($row->vaccine_plan3_date)."-".$row->vaccine_name3;  $sub_array[] = $row->HOSPCODE;
+                }else{
+                    $needle3 = to_thai_date($row->needle_3);
+            
                 }
-                    $option .="<option value='".$r['id']."' ".$selected.">".$r['name']."</option>";
+                    }else{
+                $needle3 ="<button class='btn btn-warning' data-btn='btn_needle3' data-cid='".$row->CID."'>ฉีดเข็ม 3 วันนี้</button>";
             }
+
+           $day_needle2 = get_current_age($row->vaccine_plan2_date);
             $sub_array = array();
-                $sub_array[] = "<select data-btn='sl_vaccine_status' data-cid='".$row->CID."' >".$option."</select>";
-                $sub_array[] = $row->HOSPCODE;
+                $sub_array[] = $needle3;
                 $sub_array[] = $row->CID;
                 $sub_array[] = $row->NAME;
                 $sub_array[] = $row->LNAME;
                 $sub_array[] = $row->SEX;
                 $sub_array[] = to_thai_date($row->BIRTH);
                 $sub_array[] = $row->TYPEAREA;
-                $sub_array[] = $row->vhid;
-                //$sub_array[] = $row->check_vhid;
+                $sub_array[] = $row->addr." ".get_address($row->vhid);
                 $sub_array[] = $row->age_y;
-               // $sub_array[] = $row->addr;
-                //$sub_array[] = $row->home;
-                $sub_array[] = to_thai_date($row->vaccine_plan1_date);
-                $sub_array[] = $row->vaccine_hosp1;
-                $sub_array[] = $row->vaccine_name1;
                 $sub_array[] = to_thai_date($row->vaccine_plan2_date);
                 $sub_array[] = $row->vaccine_hosp2;
-                $sub_array[] = $row->vaccine_name2;
-                //$sub_array[] = $cvaccine_status[$row->vaccine_status_survey - 1]["name"];
+                $sub_array[] = $row->vaccine_name1."/".$row->vaccine_name2;
                 $sub_array[] = $row->vaccine_provname;
+                $sub_array[] = $day_needle2['month']." เดือน ".$day_needle2['day']." วัน";
+                $sub_array[] = to_thai_date($row->vaccine_plan3_date)."-".$row->vaccine_name3;
                 
                 $data[] = $sub_array;
         }
@@ -85,9 +90,8 @@ class Person_vaccine extends CI_Controller
     }
     public function set_vaccine_status(){
         $cid = $this->input->post('cid');
-        $val = $this->input->post('val');
 
-        $rs=$this->crud->set_vaccine_status($cid,$val);
+        $rs=$this->crud->set_vaccine_status($cid);
         if($rs){
             $json = '{"success": true}';
         }else{

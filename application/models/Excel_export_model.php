@@ -167,6 +167,24 @@ class Excel_export_model extends CI_Model
         return $rs;
     }
 
+    function fetch_vaccine_hosp_needle3($hospcode)
+    {
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->session->userdata('id'), 'Download เป้าหมายวัคซีน hosp');
+        //$vaccine = $this->load->database('vaccine', TRUE);
+        $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,c.name as vaccine_status,vaccine_plan1_date ,vaccine_hosp1,vaccine_name1 
+        ,vaccine_plan2_date ,vaccine_hosp2,vaccine_name2 
+        ,vaccine_plan3_date ,vaccine_hosp3,vaccine_name3 
+        ,vaccine_plan4_date ,vaccine_hosp4,vaccine_name4
+        ,vaccine_provname  
+        FROM t_person_cid_hash a
+        LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
+        LEFT JOIN cvaccine_status c ON a.vaccine_status_survey = c.id
+        WHERE b.hoscode='".$hospcode."' AND a.DISCHARGE='9'
+        AND a.need_needle3 IS NOT NULL ORDER BY a.HOSPCODE,a.vhid;";
+        $rs = $this->db->query($sql)->result();
+        return $rs;
+    }
     function fetch_vaccine_hosp_anc($hospcode)
     {
         $this->load->model('log_model');

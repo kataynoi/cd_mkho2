@@ -17,17 +17,12 @@ class Welcome extends CI_Controller
 
     public function index()
     {
-       // $data['all_pc'] = $this->db->from('com_survey')->where('computertype',2)->count_all_results();
-        //$data['all_nb'] = $this->db->from('com_survey')->where('computertype',3)->count_all_results();
-        //$data['all_employee'] = $this->db->from('employee')->where('active',1)->count_all_results();
-        //$data['news1'] = $rs = $this->dash->get_news(1);
-        //$data['news2'] = $rs = $this->dash->get_news(2);
-        //$boss = $this->crud->get_boss();
-        //$this->session->set_userdata($boss);
-        //$data['office'] = $this->crud->get_office();
-        $data['ita_ebit'] = '';
+
+        $data['summary'] = $this->dash->get_summary();
+        $data['ampur'] = $this->dash->get_summary_ampur();
         $this->layout->view('dashboard/index_view', $data);
     }
+
     public function test(){
         $data[]='';
         $this->layout->view('test/index_view', $data);

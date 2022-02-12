@@ -25,14 +25,29 @@ class Dashboard_model extends CI_Model
             ->result();
         return $rs;
     }
-    public function get_news($id)
+    public function get_summary()
     {
-        $rs = $this->db
-            ->where('cat_id',$id)
-            ->limit(5)
-            ->order_by('date_sent','DESC')
-            ->get("news")
-            ->result();
+        $sql="SELECT 
+        SUM(IF(a.need_needle3 is NOT NULL,1,0)) as target
+        ,SUM(IF(a.needle_3 is NOT NULL,1,0)) as success
+
+         FROM t_person_cid_hash a 
+        LEFT JOIN chospital b ON a.HOSPCODE = b.hoscode";
+        $rs = $this->db->query($sql)->row_array();
+        return $rs;
+    }
+
+    public function get_summary_ampur()
+    {
+        $sql="SELECT b.hosname as name, count(CID) as total 
+        FROM t_person_cid_hash a
+        LEFT JOIN chospital b ON a.HOSPCODE = b.hoscode
+    
+        WHERE a.need_needle3 IS NOT NULL AND a.needle_3 IS NOT NULL
+        GROUP BY a.hospcode 
+        ORDER BY total DESC
+        ";
+        $rs = $this->db->query($sql)->result();
         return $rs;
     }
 
