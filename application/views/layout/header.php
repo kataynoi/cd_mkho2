@@ -40,6 +40,11 @@
             </li>
             <li>
                 <a href="<?php echo site_url('person_vaccine_needle3'); ?>">
+                    <div> <i class="fa fa-save fa-fw"> </i>กำหนดเป้าหมายเข็ม 3 </div>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('person_vaccine_needle3'); ?>">
                     <div> <i class="fa fa-save fa-fw"> </i>บันทึกข้อมูลวัคซีนเข็ม 3 </div>
                 </a>
             </li>

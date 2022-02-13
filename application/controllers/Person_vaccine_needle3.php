@@ -45,7 +45,7 @@ class Person_vaccine_needle3 extends CI_Controller
             
                 }
                     }else{
-                $needle3 ="<button class='btn btn-warning' data-btn='btn_needle3' data-cid='".$row->CID."'>ฉีดเข็ม 3 วันนี้</button>";
+                $needle3 ="<button class='btn btn-warning' data-btn='btn_needle3' data-cid='".$row->CID."'>ฉีดเข็ม 3 วันนี้</button><button class='btn btn-success'> กำหนดเป็นเป้าหมาย</button>";
             }
 
            $day_needle2 = get_current_age($row->vaccine_plan2_date);
