@@ -59,7 +59,7 @@ crud.ajax = {
     });
   },
   set_vaccine_status: function (cid, cb) {
-    var url = "/person_vaccine_needle3/set_vaccine_status",
+    var url = "/person_vaccine_needle3/set_need_vaccine3",
       params = {
         cid: cid
       };
@@ -783,7 +783,7 @@ $(document).on("click", "button[data-btn='btn_needle3']", function (e) {
  
   swal({
     title: "คำเตือน?",
-    text: "คุณต้องการเพิ่ม การรับวัคซีนเข็ม 3 ",
+    text: "คุณต้องการเพิ่มเป้าหมาย การรับวัคซีนเข็ม 3 ",
     icon: "warning",
     buttons: ["cancel !", "Yes !"],
     dangerMode: true,

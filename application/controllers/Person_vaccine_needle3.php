@@ -98,7 +98,7 @@ class Person_vaccine_needle3 extends CI_Controller
             
                 }
                     }else{
-                $needle3 ="<button class='btn btn-success'> กำหนดเป็นเป้าหมาย</button>";
+                $needle3 ="<button class='btn btn-success' data-btn='btn_needle3' data-cid='".$row->CID."'>กำหนดเป้าหมาย</button>";
             }
 
            $day_needle2 = get_current_age($row->vaccine_plan2_date);
@@ -153,6 +153,23 @@ class Person_vaccine_needle3 extends CI_Controller
 
         render_json($json);
     }
+
+    public function set_need_vaccine3(){
+        $cid = $this->input->post('cid');
+
+        $rs=$this->crud->set_need_vaccine3($cid);
+        if($rs){
+            $json = '{"success": true}';
+        }else{
+            $json = '{"success": false}';
+        }
+
+        render_json($json);
+    }
+
+
+
+   // set_need_vaccine3
     public function  save_person_vaccine()
     {
             $data = $this->input->post('items');

@@ -125,4 +125,15 @@ class Person_vaccine_needle3_model extends CI_Model
                 return $rs;
 
             }
+
+            public function set_need_vaccine3($cid)
+            {
+                $rs = $this->db
+                ->set('target_needle3_14','1')
+                ->where('CID',$cid)
+                ->update('t_person_cid_hash');
+
+                return $rs;
+
+            }
 }
