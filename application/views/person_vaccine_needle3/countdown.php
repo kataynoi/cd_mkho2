@@ -1,5 +1,5 @@
 ﻿<head>
-    <meta http-equiv="refresh" content="30">
+    <meta http-equiv="refresh" content="5000">
 </head>
 
 <div class="col col-lg-6" style="padding-top: 16px;">
