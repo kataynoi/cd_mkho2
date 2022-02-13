@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('person_vaccine_needle3'); ?>">
+                <a href="<?php echo site_url('person_vaccine_needle3/set_person'); ?>">
                     <div> <i class="fa fa-save fa-fw"> </i>กำหนดเป้าหมายเข็ม 3 </div>
                 </a>
             </li>
