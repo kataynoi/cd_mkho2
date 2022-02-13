@@ -28,8 +28,8 @@ class Dashboard_model extends CI_Model
     public function get_summary()
     {
         $sql="SELECT 
-        SUM(IF(a.need_needle3 is NOT NULL,1,0)) as target
-        ,SUM(IF(a.needle_3 is NOT NULL,1,0)) as success
+        SUM(IF(a.target_needle3_14=1,1,0)) as target
+        ,SUM(IF(a.target_needle3_14=1 AND a.needle_3 is NOT NULL,1,0)) as success
 
          FROM t_person_cid_hash a 
         LEFT JOIN chospital b ON a.HOSPCODE = b.hoscode";
@@ -43,7 +43,7 @@ class Dashboard_model extends CI_Model
         FROM t_person_cid_hash a
         LEFT JOIN chospital b ON a.HOSPCODE = b.hoscode
     
-        WHERE a.need_needle3 IS NOT NULL AND a.needle_3 IS NOT NULL
+        WHERE a.target_needle3_14=1 AND a.needle_3 is NOT NULL
         GROUP BY a.hospcode 
         ORDER BY total DESC
         ";

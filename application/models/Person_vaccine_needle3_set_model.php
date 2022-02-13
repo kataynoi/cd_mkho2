@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
 
  */
-class Person_vaccine_needle3_model extends CI_Model
+class Person_vaccine_needle3_set_model extends CI_Model
 {
     var $table = "t_person_cid_hash";
     var $order_column = Array('TYPEAREA','vhid','age_y');
@@ -23,7 +23,7 @@ class Person_vaccine_needle3_model extends CI_Model
         $this->db
         ->where('HOSPCODE',$hospcode)
         ->where('DISCHARGE','9')
-        ->where('target_needle3_14','1')
+        ->where('need_needle3 IS NOT NULL','',FALSE)
         ->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();

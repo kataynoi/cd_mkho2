@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     pageLength: 10,
     ajax: {
-      url: site_url + "/person_vaccine_needle3/fetch_person_vaccine_set",
+      url: site_url + "/person_vaccine_needle3_set/fetch_person_vaccine",
       data: {
         csrf_token: csrf_token,
       },
@@ -59,7 +59,7 @@ crud.ajax = {
     });
   },
   set_vaccine_status: function (cid, cb) {
-    var url = "/person_vaccine_needle3/set_need_vaccine3",
+    var url = "/person_vaccine_needle3_set/set_need_vaccine3",
       params = {
         cid: cid
       };
@@ -790,7 +790,7 @@ $(document).on("click", "button[data-btn='btn_needle3']", function (e) {
   }).then(function (isConfirm) {
     if (isConfirm) {
       if (crud.set_vaccine_needle3(cid)) {
-        x.parent().html(date_now);
+        x.parent().html("<div class='test-center'><button class='btn btn-info'><i class='fa fa-check'></i></button></div>");
       }
     }
   });
