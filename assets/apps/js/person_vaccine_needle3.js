@@ -68,6 +68,16 @@ crud.ajax = {
       err ? cb(err) : cb(null, data);
     });
   },
+  set_vaccine_status_cancle: function (cid, cb) {
+    var url = "/person_vaccine_needle3/set_vaccine_status_cancle",
+      params = {
+        cid: cid
+      };
+
+    app.ajax(url, params, function (err, data) {
+      err ? cb(err) : cb(null, data);
+    });
+  }
 };
 
 crud.del_data = function (id) {
@@ -759,6 +769,17 @@ crud.set_vaccine_needle3 = function (cid) {
   });
   return true;
 };
+
+crud.set_vaccine_needle3_cancle = function (cid) {
+  crud.ajax.set_vaccine_status_cancle(cid, function (err, data) {
+    if (err) {
+      $r = false;
+    } else {
+      $r = true;
+    }
+  });
+  return true;
+};
 $(document).on("change", "select[data-btn='sl_vaccine_status']", function (e) {
   var cid = $(this).data("cid");
   var val = $(this).val();
@@ -791,6 +812,26 @@ $(document).on("click", "button[data-btn='btn_needle3']", function (e) {
     if (isConfirm) {
       if (crud.set_vaccine_needle3(cid)) {
         x.parent().html(date_now);
+      }
+    }
+  });
+});
+
+$(document).on("click", "button[data-btn='btn_needle3_cancle']", function (e) {
+  var cid = $(this).data("cid");
+  var x = $(this);
+  var date_now =app.date_now_thai();
+ 
+  swal({
+    title: "คำเตือน?",
+    text: "คุณต้องยกเลิก การรับวัคซีนเข็ม 3 ",
+    icon: "warning",
+    buttons: ["cancel !", "Yes !"],
+    dangerMode: true,
+  }).then(function (isConfirm) {
+    if (isConfirm) {
+      if (crud.set_vaccine_needle3_cancle(cid)) {
+        x.parent().parent().hide();
       }
     }
   });

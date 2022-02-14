@@ -23,7 +23,9 @@ class Person_vaccine_needle3_set_model extends CI_Model
         $this->db
         ->where('HOSPCODE',$hospcode)
         ->where('DISCHARGE','9')
-        ->where('need_needle3 IS NOT NULL','',FALSE)
+        ->where('vaccine_hosp2 IS NOT NULL','',FALSE)
+        ->where('vaccine_hosp3 IS NULL','',FALSE)
+        ->where('vaccine_provcode ','44')
         ->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();

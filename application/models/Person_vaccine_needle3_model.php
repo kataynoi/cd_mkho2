@@ -125,6 +125,17 @@ class Person_vaccine_needle3_model extends CI_Model
                 return $rs;
 
             }
+    public function set_vaccine_status_cancle($cid)
+            {
+                $rs = $this->db
+                ->set('needle_3 ', 'NULL', FALSE)
+                ->set('target_needle3_14', 'NULL', FALSE)
+                ->where('CID',$cid)
+                ->update('t_person_cid_hash');
+
+                return $rs;
+
+            }
 
             public function set_need_vaccine3($cid)
             {

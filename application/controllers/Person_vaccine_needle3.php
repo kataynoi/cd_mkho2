@@ -44,14 +44,17 @@ class Person_vaccine_needle3 extends CI_Controller
         
         foreach ($fetch_data as $row) {
             if($row->needle_3!=''){
+                
                 if($row->vaccine_plan3_date!=''){
                     $needle3 = to_thai_date($row->vaccine_plan3_date)."-".$row->vaccine_name3;  $sub_array[] = $row->HOSPCODE;
                 }else{
                     $needle3 = to_thai_date($row->needle_3);
             
                 }
-                    }else{
+                }else{
                 $needle3 ="<button class='btn btn-warning' data-btn='btn_needle3' data-cid='".$row->CID."'>ฉีดเข็ม 3 วันนี้</button>";
+                $needle3 .="<button class='btn btn-danger' data-btn='btn_needle3_cancle' data-cid='".$row->CID."'>ยกเลิก</button>";
+       
             }
 
            $day_needle2 = get_current_age($row->vaccine_plan2_date);
@@ -153,6 +156,20 @@ class Person_vaccine_needle3 extends CI_Controller
 
         render_json($json);
     }
+
+    public function set_vaccine_status_cancle(){
+        $cid = $this->input->post('cid');
+
+        $rs=$this->crud->set_vaccine_status_cancle($cid);
+        if($rs){
+            $json = '{"success": true}';
+        }else{
+            $json = '{"success": false}';
+        }
+
+        render_json($json);
+    }
+
 
     public function set_need_vaccine3(){
         $cid = $this->input->post('cid');
