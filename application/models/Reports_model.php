@@ -200,6 +200,34 @@ class Reports_model extends CI_Model
 
         return $rs;
     }
+
+    public function countdown($ampur='')
+    {
+
+        if($ampur==''){
+            $where = " ";
+            $group=" b.distcode";
+            $select="c.ampurname as name";
+        }else if($ampur!='' ){
+            $where = "AND c.ampurcodefull= '".$ampur."' ";
+            $group=" a.hospcode";
+            $select="b.hosname as name";
+        }
+        
+        $sql = "select ".$select."
+        , SUM(IF(a.target_needle3_14 IS NOT NULL,1,0)) as target
+        , SUM(IF( a.target_needle3_14 IS NOT NULL AND a.needle_3 IS NOT NULL,1,0 )) as result
+        from t_person_cid_hash a
+        LEFT JOIN chospital b ON a.hospcode= b.hoscode
+        LEFT JOIN (SELECT * FROM campur WHERE changwatcode='44') c ON b.distcode = c.ampurcode
+        where 1=1  ".$where."
+        GROUP BY ".$group;
+        //echo $sql;
+        $rs = $this->db->query($sql)->result();
+        //echo $this->db->last_query();
+
+        return $rs;
+    }
 }
 /* End of file basic_model.php */
 /* Location: ./application/models/basic_model.php */

@@ -163,6 +163,11 @@
             <div> <i class="fa fa-save fa-fw"> </i>รายงานจำนวนกลุ่มเป้าหมายราย รพ.สต.</div>
         </a>
     </li>
+    <li>
+        <a href=<?php echo site_url('report/countdown') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>รายงานจำนวนกลุ่มเป้าหมายราย CountDown เข็ม3</div>
+        </a>
+    </li>
 
 </ul>
 

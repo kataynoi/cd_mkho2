@@ -69,6 +69,14 @@ class Report extends CI_Controller
         $data['report'] = $this->crud->person_vaccine_amp($ampur,$tambon,$vaccine_time);
         $this->layout->view('reports/person_vaccine_amp', $data);
     }
+    public function  countdown()
+    {
+        $ampur=$this->input->post('ampurcode');
+    
+        $data['amp']=$this->basic->get_ampur_list('44');
+        $data['report'] = $this->crud->countdown($ampur);
+        $this->layout->view('reports/countdown', $data);
+    }
 
     public function  person_vaccine_hosp()
     {
