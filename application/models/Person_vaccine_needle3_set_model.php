@@ -132,6 +132,7 @@ class Person_vaccine_needle3_set_model extends CI_Model
             {
                 $rs = $this->db
                 ->set('target_needle3_14','1')
+                ->set('need_needle3','1')
                 ->where('CID',$cid)
                 ->update('t_person_cid_hash');
 
