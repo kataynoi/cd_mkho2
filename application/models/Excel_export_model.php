@@ -200,7 +200,7 @@ class Excel_export_model extends CI_Model
         LEFT JOIN cvaccine_status c ON a.vaccine_status_survey = c.id
         WHERE b.hoscode='".$hospcode."' AND a.DISCHARGE='9' AND TYPEAREA in(1,2,3)
         AND a.cid in (SELECT a.CID FROM anc a 
-        WHERE DATE_SERV >= DATE_SUB(NOW(), INTERVAL 3 MONTH)  AND CID IS NOT NULL GROUP BY CID) ORDER BY a.HOSPCODE,a.vhid";
+        WHERE DATE_SERV >= DATE_SUB(NOW(), INTERVAL 6 MONTH)  AND CID IS NOT NULL GROUP BY CID) ORDER BY a.HOSPCODE,a.vhid";
         $rs = $this->db->query($sql)->result();
         return $rs;
     }
