@@ -818,6 +818,36 @@ if(!function_exists('get_address'))
         return $address;
     }
 }
+
+if(!function_exists('get_short_address'))
+{
+    /**
+     * @param $addr_code    Address code in ccaattmm
+     *
+     * @return string
+     */
+    function get_short_address($addr_code)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Basic_model', 'basic');
+
+        $chw = substr($addr_code, 0, 2);
+        $amp = substr($addr_code, 2, 2);
+        $tmb = substr($addr_code, 4, 2);
+        $moo = substr($addr_code, 6, 2);
+
+        //$chw_name = $ci->basic->get_province_name($chw);
+        //$amp_name = $ci->basic->get_ampur_name($chw, $amp);
+        $tmb_name = $ci->basic->get_tmb_name($chw, $amp, $tmb);
+        //$moo_name = $ci->basic->get_moo_name($chw, $amp, $tmb, $moo);
+
+        $address = 'หมู่ ' . $moo . ' ' . ' ต.' . $tmb_name;
+
+        return $address;
+    }
+}
+
+
 if(!function_exists('get_sex'))
 {
     function get_sex($id)

@@ -44,6 +44,16 @@ $(document).ready(function () {
         err ? cb(err) : cb(null, data);
       });
     },
+    do_auth_asm: function (username, password, cb) {
+      var url = "/user/do_auth_asm",
+        params = {
+          username: username,
+          password: password,
+        };
+      app.ajax(url, params, function (err, data) {
+        err ? cb(err) : cb(null, data);
+      });
+    },
     do_auth_mobile: function (tel, cb) {
       var url = "/user/do_auth_mobile",
         params = {
@@ -115,6 +125,19 @@ $(document).ready(function () {
         if (data.success) {
           //swal('Login Success');
           window.location = site_url + "/person_comeback";
+        }
+      }
+    });
+  };
+  users.do_auth_asm = function (username, password) {
+    users.ajax.do_auth_asm(username, password, function (err, data) {
+      if (err) {
+        //swal(err);
+        window.location = site_url + "/person_asm";
+      } else {
+        if (data.success) {
+          //swal('Login Success');
+          window.location = site_url + "/person_asm";
         }
       }
     });
@@ -197,6 +220,18 @@ $(document).ready(function () {
       return false;
     }
     users.do_auth_comeback(username, password);
+  });
+  $("#btn_login_asm").on("click", function (e) {
+    e.preventDefault();
+    console.log("click");
+    var username = $("#username").val();
+    var password = $("#password").val();
+
+    if (!username || !password) {
+      swal("ระบุ Username Password ให้ครบถ้วน");
+      return false;
+    }
+    users.do_auth_asm(username, password);
   });
   $("#btn_login_mobile").on("click", function (e) {
     e.preventDefault();

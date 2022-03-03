@@ -56,6 +56,18 @@ class User_model extends CI_Model
         //echo $this->db->last_query();
         return $rs;
     }
+    function do_auth_asm($username, $password)
+    {
+        $password = $password-543;
+        $rs = $this->db
+            ->select('cid,name,lname,hospcode')
+            ->where('cid', $username)
+            ->where('DATE_FORMAT(BIRTH,"%Y")', $password)
+            ->get('t_person_cid_hash')
+            ->row_array();
+        //echo $this->db->last_query();
+        return $rs;
+    }
     function do_auth_hospital($username, $password)
     {
         $rs = $this->db

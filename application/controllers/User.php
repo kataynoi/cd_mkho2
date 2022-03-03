@@ -78,6 +78,17 @@ class User extends CI_Controller
         }
 
     }
+    public function login_asm()
+    {
+        if ($this->session->userdata('asm_login')==1) {
+            redirect(site_url("person_asm"), 'refresh');
+           console_log('login'.$this->session->userdata('asm_login'));
+        } else {
+            $this->load->view('user/login_asm');
+            console_log($this->session->userdata('fullname'));
+        }
+
+    }
     public function register()
     {
         //Register Users
@@ -149,6 +160,11 @@ class User extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(site_url('user/login_hospital'), 'refresh');
+    }
+    public function logout_asm()
+    {
+        $this->session->sess_destroy();
+        redirect(site_url('user/login_asm'), 'refresh');
     }
     public function do_auth()
     {
@@ -234,6 +250,28 @@ class User extends CI_Controller
             $rs['user_level'] = $rs['user_level'];
             $this->session->set_userdata($rs);
             $json = '{"success": true, "msg": "" }';
+        } else {
+            $json = '{"success": false, "msg": "Username หรือ Password ไม่ถูกต้อง"}';
+        }
+
+        render_json($json);
+    }
+
+    
+    public function do_auth_asm()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        
+        $rs = $this->user->do_auth_asm($username, $password);
+  
+        if ($rs['cid']) {
+            $rs['id'] = $rs['cid'];
+            $rs['asm_login'] = true;
+            $rs['fullname'] = $rs['name']." ".$rs['lname'];
+            $rs['user_level'] = $rs['user_level'];
+            $this->session->set_userdata($rs);
+            $json = '{"success": true, "msg": "Login Success" }';
         } else {
             $json = '{"success": false, "msg": "Username หรือ Password ไม่ถูกต้อง"}';
         }
