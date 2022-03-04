@@ -90,4 +90,17 @@ class Report extends CI_Controller
         $this->layout->view('reports/person_vaccine_hosp', $data);
     }
 
+    public function  asm_hosp()
+    {
+
+        $hospcode = $this->session->userdata('hospcode');
+        $ampur=$this->input->post('ampurcode');
+        $tambon=$this->input->post('tamboncode');
+       // echo "tambon".$tambon;
+        $data['amp']=$this->basic->get_ampur_list('44');
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->id, 'รายงาน กลุ่มเป้าหมายวัคซีน');
+        $data['report'] = $this->crud->asm_hosp($hospcode);
+        $this->layout->view('reports/asm_hosp', $data);
+    }
 }

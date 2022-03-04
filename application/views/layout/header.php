@@ -168,6 +168,12 @@
             <div> <i class="fa fa-save fa-fw"> </i>รายงานจำนวนกลุ่มเป้าหมายราย CountDown เข็ม3</div>
         </a>
     </li>
+    <li class="divider"></li>
+    <li>
+        <a href=<?php echo site_url('report/asm_hosp') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i> อสม. หยิบ 10 หน่วยบริการ</div>
+        </a>
+    </li>
 
 </ul>
 
