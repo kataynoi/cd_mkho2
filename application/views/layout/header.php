@@ -174,6 +174,11 @@
             <div> <i class="fa fa-save fa-fw"> </i> อสม. หยิบ 10 หน่วยบริการ</div>
         </a>
     </li>
+    <li>
+        <a href=<?php echo site_url('report/asm_province') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i> อสม. หยิบ 10 ทั้งจังหวัด</div>
+        </a>
+    </li>
 
 </ul>
 
