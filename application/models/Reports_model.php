@@ -229,7 +229,7 @@ class Reports_model extends CI_Model
         return $rs;
     }
 
-    public function asm_hosp($ampur='')
+    public function asm_hosp($hospcode)
     {
 
 
@@ -237,8 +237,26 @@ class Reports_model extends CI_Model
         ,SUM(IF(a.vaccine_hosp3 IS NOT NULL,1,0)) as result
         FROM (SELECT * FROM t_person_cid_hash WHERE invite IS NOT NULL) a 
         LEFT JOIN t_person_cid_hash b ON a.invite = b.CID
-        WHERE a.invite IS NOT NULL AND b.HOSPCODE='04922'
+        WHERE a.invite IS NOT NULL AND b.HOSPCODE='".$hospcode."'
         GROUP BY a.invite ORDER BY target";
+        //echo $sql;
+        $rs = $this->db->query($sql)->result();
+        //echo $this->db->last_query();
+
+        return $rs;
+    }
+
+    
+    public function asm_province()
+    {
+
+
+        $sql = "SELECT b.`NAME`,b.LNAME,b.vhid,count(a.CID) as target
+        ,SUM(IF(a.vaccine_hosp3 IS NOT NULL,1,0)) as result
+        FROM (SELECT * FROM t_person_cid_hash WHERE invite IS NOT NULL) a 
+        LEFT JOIN t_person_cid_hash b ON a.invite = b.CID
+        WHERE a.invite IS NOT NULL 
+        GROUP BY a.invite ORDER BY result DESC";
         //echo $sql;
         $rs = $this->db->query($sql)->result();
         //echo $this->db->last_query();
