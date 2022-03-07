@@ -38,7 +38,7 @@ $('#btn-28').on('click', function() {
                 echo "<tr>";
                 echo "<td>$n</td>
                     <td>$r->NAME $r->LNAME </td>
-                    <td>".$r->vhid." </td>
+                    <td>".get_address($r->vhid)." </td>
                     <td>".number_format($r->target)." </td>
                     <td>".number_format($r->result)." </td>
                     <td>".number_format($r->result*100/$r->target,2)." </td>
@@ -48,9 +48,6 @@ $('#btn-28').on('click', function() {
                     $n++;
                     $total1 +=$r->target;
                     $total2 +=$r->result;
-             
-               
-            
             }
             echo "<tr>
                   <td colspan='4'> รวม</td>
