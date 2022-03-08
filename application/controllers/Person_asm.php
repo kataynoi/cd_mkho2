@@ -8,8 +8,8 @@ class Person_asm extends CI_Controller
     {
         parent::__construct();
 
-                if(!$this->session->userdata("asm_login"))
-                    redirect(site_url("user/login_asm"));
+        if(!$this->session->userdata("asm_login"))
+             redirect(site_url("user/login_asm"));
         $this->load->model('Person_asm_model', 'crud');
         $this->layout->setHeader('layout/header_asm');
         $this->layout->setLayout('asm_layout');

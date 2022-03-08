@@ -263,6 +263,35 @@ class Reports_model extends CI_Model
 
         return $rs;
     }
+
+    public function asm_ampur($ampur='')
+    {
+        if($ampur==''){
+            $where = " ";
+            $group=" c.distcode";
+            $select="d.ampurname as name";
+        }else if($ampur!='' ){
+            $where = "AND d.ampurcodefull= '".$ampur."' ";
+            $group=" a.hospcode";
+            $select="c.hosname as name";
+        }
+
+        $sql = "SELECT ".$select.",count(DISTINCT a.CID) asm 
+        ,count( DISTINCT b.invite) as asm_10,count(b.invite) as target 
+        ,SUM(IF(b.vaccine_hosp3 IS NOT NULL,1,0)) as result  FROM t_person_cid_hash a 
+        LEFT JOIN (SELECT invite,vaccine_hosp3  FROM t_person_cid_hash WHERE invite IS NOT NULL) b ON a.CID = b.invite
+        LEFT JOIN chospital c ON a.HOSPCODE = c.hoscode
+        LEFT JOIN (SELECT * FROM campur WHERE changwatcode=44) d ON c.distcode = d.ampurcode
+        WHERE aorsormor IS NOT NULL ".$where."
+        GROUP BY ".$group."
+        ORDER BY result DESC;
+        ";
+        //echo $sql;
+        $rs = $this->db->query($sql)->result();
+        //echo $this->db->last_query();
+
+        return $rs;
+    }
 }
 /* End of file basic_model.php */
 /* Location: ./application/models/basic_model.php */
