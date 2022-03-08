@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li>
-                <a href=<?php echo site_url('excel_export/vaccine_hosp_needle3') ?> target="_blank">
+                <a href=<?php echo site_url('excel_export/vaccine_hosp') ?> target="_blank">
             <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine เข็ม3</div>
         </a>
     </li>

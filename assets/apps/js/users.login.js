@@ -132,8 +132,8 @@ $(document).ready(function () {
   users.do_auth_asm = function (username, password) {
     users.ajax.do_auth_asm(username, password, function (err, data) {
       if (err) {
-        swal(err);
-        //window.location = site_url + "/person_asm";
+        //swal(err);
+        window.location = site_url + "/person_asm";
       } else {
         if (data.success) {
           //swal('Login Success');
