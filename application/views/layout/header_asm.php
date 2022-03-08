@@ -7,7 +7,7 @@
 <ul class="nav navbar-top-links w3-theme ">
     <li class="dropdown">
         <a href="<?php echo site_url('/person_asm'); ?>">
-            <i class="fa fa-home fa-fw"></i> Home
+            <i class="fa fa-home fa-fw"></i> หน้าแรก
         </a>
     </li>
     <li>
@@ -29,14 +29,12 @@
 <a class='dropdown-toggle' data-toggle='dropdown'' href='#'>
             <i class='fa fa-user fa-fw'></i> <i class='fa fa-caret-down'></i></a>
             <ul class='dropdown-menu dropdown-user'>
-            <li><a href=" . site_url('#') . $this->session->userdata('cid') . "><i class='fa fa-user fa-fw'></i> User Profile</a>
-            </li>
             <li class='divider'></li>
-            <li><a href=" . site_url('user/logout_asm') . "><i class='fa fa-sign-out fa-fw'></i> Logout</a>
+            <li><a href=" . site_url('user/logout_asm') . "><i class='fa fa-sign-out fa-fw'></i> ออกจากระบบ</a>
             </li>
         </ul> ";
         } else {
-            echo "<a href='" . site_url('user/login_asm') . "'>Login</a>";
+            echo "<a href='" . site_url('user/login_asm') . "'>เข้าสู่ระบบ</a>";
         }
         ?>
     </li>
