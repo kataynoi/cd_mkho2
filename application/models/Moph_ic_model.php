@@ -32,7 +32,7 @@ class Moph_ic_model extends CI_Model
         //->where_in('TYPEAREA',['1','2','3'])
         //->where('hospcode',$hospcode)
         ->order_by('rand()')
-        ->limit(20)
+        ->limit(50)
         ->get('t_person_cid_hash')
         ->result();
         return $rs;
