@@ -43,6 +43,7 @@ header("Cache-Control: private",false);
                         <th>รหัสที่อยู่</th>
                         <th>บ้านเลขที่</th>
                         <th>TypeArea</th>
+                        <th>กลุ่มเป้าหมาย</th>
                         <th>สถานะการรับวัคซีน</th>
                         <th>วันที่รับวัคซีนเข็ม1</th>
                         <th>สถานที่รับวัคซีนเข็ม1</th>
@@ -75,6 +76,7 @@ header("Cache-Control: private",false);
                 echo "<td>".$r->vhid."</td>";
                 echo "<td>".$r->addr."</td>";
                 echo "<td>".$r->TYPEAREA."</td>";
+                echo "<td>".$r->person_risk_type_name."</td>";
                 echo "<td>".$r->vaccine_status."</td>";
                 echo "<td>".$r->vaccine_plan1_date."</td>";
                 echo "<td>".$r->vaccine_hosp1."</td>";
