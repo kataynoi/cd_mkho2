@@ -26,13 +26,13 @@ class Moph_ic_model extends CI_Model
         $rs = $this->db
         ->select('cid')
         ->where('vaccine_status','2')
-        ->where('invite IS NOT NULL','',false)
+        //->where('invite IS NOT NULL','',false)
         //->where('vaccine_plan1_date IS NULL','',false)
         ->where('age_y >=','5', false)
-        //->where_in('TYPEAREA',['1','2','3'])
+        ->where_in('TYPEAREA',['1','2','3'])
         //->where('hospcode',$hospcode)
         ->order_by('rand()')
-        ->limit(50)
+        ->limit(30)
         ->get('t_person_cid_hash')
         ->result();
         return $rs;
