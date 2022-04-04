@@ -30,7 +30,7 @@ class Moph_ic extends CI_Controller
       $data['n']=$n;
       $data['callAll']= $this->session->userdata('callApiAll');
       $data['callSuccess'] = $this->session->userdata('callSuccess');
-        $this->layout->view('moph_ic/index',$data);
+        $this->load->view('moph_ic/index',$data);
         
     }
     function call_visit_immun($cid){
@@ -43,8 +43,8 @@ class Moph_ic extends CI_Controller
       //$cid = $this->input->post('cid');
       $history = $this->get_data_from_api($cid);
       //echo "Resule->".$history->result;
-      print($cid);
-      print_r($history)."<br>";
+      //print($cid);
+      //print_r($history)."<br>";
       if($history->MessageCode ==200){
 
         if( isset($history->result->patient->visit) ){
