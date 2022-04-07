@@ -233,7 +233,7 @@ class Reports_model extends CI_Model
     {
 
 
-        $sql = "SELECT a.`NAME`,a.LNAME,a.vhid ,count(b.cid) as target,SUM(IF(b.vaccine_hosp3 IS NOT NULL,1,0)) as result
+        $sql = "SELECT a.`NAME`,a.LNAME,a.CID ,a.BIRTH,a.vhid ,count(b.cid) as target,SUM(IF(b.vaccine_hosp3 IS NOT NULL,1,0)) as result
         FROM t_person_cid_hash a 
         LEFT JOIN (SELECT * FROM t_person_cid_hash WHERE invite IS NOT NULL) b ON a.CID = b.invite
         WHERE a.aorsormor=1 AND a.hospcode='".$hospcode."' GROUP BY a.CID ORDER BY result DESC";

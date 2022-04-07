@@ -23,6 +23,8 @@ $('#btn-28').on('click', function() {
                 <tr>
                     <th>#</th>
                     <th>ชื่อ อสม.</th>
+                    <th>บัตรประชาชน</th>
+                    <th>วันเกิด</th>
                     <th>หมู่บ้าน</th>
                     <th>จำนวนเป้าหมาย</th>
                     <th>จำนวนเข็ม 3</th>
@@ -39,6 +41,8 @@ $('#btn-28').on('click', function() {
                 echo "<tr>";
                 echo "<td>$n</td>
                     <td>$r->NAME $r->LNAME </td>
+                    <td>".$r->CID." </td>
+                    <td>".to_thai_date($r->BIRTH)." </td>
                     <td>".get_address($r->vhid)." </td>
                     <td>".number_format($r->target)." </td>
                     <td>".number_format($r->result)." </td>
@@ -51,10 +55,11 @@ $('#btn-28').on('click', function() {
                     $total2 +=$r->result;
             }
             echo "<tr>
-                  <td colspan='4'> รวม</td>
+                  <td colspan='5'> รวม</td>
                     
                     <td class='text-center'>" . number_format($total1) . "</td>
                     <td class='text-center'>" . number_format($total2) . "</td>
+                    <td class='text-center'>" . number_format($total2*100/$total1,2) . "</td>
   
                     </tr>"
             ?>
