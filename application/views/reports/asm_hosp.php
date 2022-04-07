@@ -35,13 +35,14 @@ $('#btn-28').on('click', function() {
                 <?php
                 $n=1;$total1=0;$total2=0;
                 foreach ($report as $r) {
+                    $percent=($r->result==0)? 0 :$r->result*100/$r->target;
                 echo "<tr>";
                 echo "<td>$n</td>
                     <td>$r->NAME $r->LNAME </td>
                     <td>".get_address($r->vhid)." </td>
                     <td>".number_format($r->target)." </td>
                     <td>".number_format($r->result)." </td>
-                    <td>".number_format($r->result*100/$r->target,2)." </td>
+                    <td>".number_format($percent,2)." </td>
 
                     "
                     ;
