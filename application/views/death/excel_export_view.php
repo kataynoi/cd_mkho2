@@ -39,9 +39,6 @@ header("Cache-Control: private",false);
                         <th>ชื่อ</th>
                         <th>สกุล</th>
                         <th>วันเกิด</th>
-                        <th>อายุ</th>
-                        <th>รหัสที่อยู่</th>
-                        <th>บ้านเลขที่</th>
                         <th>TypeArea</th>
                         <th>สถานการจำหน่าย</th>
                         <th>วันที่เสียชีวิต</th>
@@ -56,17 +53,14 @@ header("Cache-Control: private",false);
                 echo "<tr>";
                 echo "<td>".$r->hoscode."</td>";
                 echo "<td>".$r->hosname."</td>";
-                echo "<td>".$r->cid."</td>";
+                echo "<td>".$r->CID."</td>";
                 echo "<td>".$r->NAME."</td>";
                 echo "<td>".$r->LNAME."</td>";
                 echo "<td>".$r->BIRTH."</td>";
-                echo "<td>".$r->age_y."</td>";
-                echo "<td>".$r->vhid."</td>";
-                echo "<td>".$r->addr."</td>";
                 echo "<td>".$r->TYPEAREA."</td>";
                 echo "<td>".$r->DISCHARGE."</td>";
-                echo "<td>".$r->DEATH_DATE."</td>";
-                echo "<td>".$r->DEATH_CAUSE."</td>";
+                echo "<td>".$r->DATE_DEATH_MOI."</td>";
+                echo "<td>".$r->DEATH_CAUSE_MOI."</td>";
             
                 echo "</tr>";
 
