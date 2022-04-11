@@ -52,19 +52,37 @@ class Excel_export extends CI_Controller
         $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_amp($ampcode);
         $this->load->view("vaccine/excel_export_view", $data);
     }
-    function excel_vaccine_hosp(){
+    function excel_vaccine_hosp($hospcode){
 
        // $hospcode = $this->input->post('hospcode');
-        $hospcode=$this->session->userdata('hospcode');
-        $group = $this->input->post('group');
-        //$hospcode= $this->session->userdata('hospcode');
-        $this->load->model("excel_export_model");
-        $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp($hospcode);
+        $user_hoscode=$this->session->userdata('hospcode');
+        $user_type= $this->session->userdata('user_type');
+        $data['hospcode']=$hospcode;
+        if($user_type==3 && $user_hoscode != $hospcode){
+            redirect('/excel_export/vaccine_hosp', 'refresh');
+        }else{
+            $group = $this->input->post('group');
+            //$hospcode= $this->session->userdata('hospcode');
+            $this->load->model("excel_export_model");
+            $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp($hospcode);
+        }
+
         $this->load->view("vaccine/excel_export_view", $data);
-        //$this->layout->view("vaccine/index", $data);
+
     }
     function vaccine_hosp(){
-        $data['hospcode'] = 
+        $this->load->model("excel_export_model");
+        $user_type= $this->session->userdata('user_type');
+        //echo 'Usertype'.$user_type;
+        if($user_type=='2'){
+            $ampurcode= $this->session->userdata('ampurcode');
+            $data['hospcode'] =$this->excel_export_model->get_hosp_amp($ampurcode); 
+        }else if($user_type=='3'){
+            $hospcode=$this->session->userdata('hospcode');
+            $data['hospcode'] =$this->excel_export_model->get_hosp($hospcode); 
+        }
+       
+        
         $this->layout->view("vaccine/index", $data);
     }
     function vaccine_hosp_needle3()

@@ -138,8 +138,8 @@
     <li>
         <a href=<?php 
         
-        echo site_url('excel_export/excel_vaccine_hosp') ?> target="_blank">
-            <div> <i class="fa fa-save fa-fw"> </i>Download เป้าหมาย Vaccine หน่วยบริการ</div>
+        echo site_url('excel_export/vaccine_hosp') ?> target="_blank">
+            <div> <i class="fa fa-download fa-fw"> </i>Download เป้าหมาย Vaccine หน่วยบริการทุกกลุ่มเป้าหมาย</div>
         </a>
     </li>
 

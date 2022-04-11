@@ -232,6 +232,22 @@ class Excel_export_model extends CI_Model
             ->result();
         return $rs;
     }
+    public function get_hosp($hospcode)
+    {       $rs = $this->db
+            ->where('hoscode',$hospcode)
+            ->get("chospital")
+            ->result();
+        return $rs;
+    }
+    public function get_hosp_amp($ampurcode)
+    {       $rs = $this->db
+                ->where('distcode',$ampurcode)
+                ->where('provcode','44')
+                ->where_in('hostype',['18','06','07','13','08'])
+                ->get("chospital")
+                ->result();
+            return $rs;
+    }
 
 
 }
