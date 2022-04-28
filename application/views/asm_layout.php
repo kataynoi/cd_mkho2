@@ -12,7 +12,7 @@
     <meta name="author" content="">
 
     <title></title>
-    <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
+   
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url()?>assets/vendor/css/bootstrap.css" rel="stylesheet">

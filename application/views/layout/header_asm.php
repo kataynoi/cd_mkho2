@@ -10,6 +10,47 @@
             <i class="fa fa-home fa-fw"></i> หน้าแรก
         </a>
     </li>
+  
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-save fa-fw"></i> ก้าวท้าใจ <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+            <li>
+                <a href="<?php echo site_url('report/person_bypass_last7day') ?>">
+                    <div> <i class="fa fa-save fa-fw"></i>ลงทะเบียนก้าวท้าใจ </div>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('report/person_bypass_last7day') ?>">
+                    <div> <i class="fa fa-save fa-fw"></i>ลงทะเบียนก้าวท้าใจ </div>
+                </a>
+            </li>
+        </ul>
+
+    </li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-save fa-fw"></i> อสม.หยิบ10 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+            <li>
+                <a href=<?php echo site_url('report/asm_hosp') ?> target="_blank">
+                    <div> <i class="fa fa-save fa-fw"> </i> อสม. หยิบ 10 หน่วยบริการ</div>
+                </a>
+            </li>
+            <li>
+                <a href=<?php echo site_url('report/asm_province') ?> target="_blank">
+                    <div> <i class="fa fa-save fa-fw"> </i> อสม. หยิบ 10 ทั้งจังหวัด</div>
+                </a>
+            </li>
+            <li>
+                <a href=<?php echo site_url('report/asm_ampur') ?> target="_blank">
+                    <div> <i class="fa fa-save fa-fw"> </i> อสม.หยิบ 10 รายอำเภอ</div>
+                </a>
+            </li>
+        </ul>
+    </li>
     <li>
         <a href=<?php echo site_url('report/asm_hosp') ?> target="_blank">
             <div> <i class="fa fa-save fa-fw"> </i> อสม. หยิบ 10 หน่วยบริการ</div>
@@ -46,7 +87,7 @@
 </ul>
 
 <script>
-$("#back").on("click", function() {
-    history.go(-1);
-});
+    $("#back").on("click", function() {
+        history.go(-1);
+    });
 </script>

@@ -80,13 +80,7 @@ class User extends CI_Controller
     }
     public function login_asm()
     {
-        if ($this->session->userdata('asm_login')==1) {
-            redirect(site_url("person_asm"), 'refresh');
-           console_log('login'.$this->session->userdata('asm_login'));
-        } else {
-            $this->load->view('user/login_asm');
-            console_log($this->session->userdata('fullname'));
-        }
+        redirect( base_url().'/asm/index.php/user/login', 'refresh');
 
     }
     public function register()

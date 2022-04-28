@@ -52,19 +52,22 @@ class Excel_export extends CI_Controller
         $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_amp($ampcode);
         $this->load->view("vaccine/excel_export_view", $data);
     }
-    function excel_vaccine_hosp($hospcode){
+    function excel_vaccine_hosp($hospcode,$group=""){
 
-       // $hospcode = $this->input->post('hospcode');
+        $this->load->model("excel_export_model");
         $user_hoscode=$this->session->userdata('hospcode');
         $user_type= $this->session->userdata('user_type');
         $data['hospcode']=$hospcode;
         if($user_type==3 && $user_hoscode != $hospcode){
             redirect('/excel_export/vaccine_hosp', 'refresh');
         }else{
-            $group = $this->input->post('group');
-            //$hospcode= $this->session->userdata('hospcode');
-            $this->load->model("excel_export_model");
+        
+           if($group==""){
             $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp($hospcode);
+           }else if($group=="anc"){
+            $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp_anc($hospcode);
+           }
+            
         }
 
         $this->load->view("vaccine/excel_export_view", $data);
@@ -90,13 +93,6 @@ class Excel_export extends CI_Controller
         $hospcode= $this->session->userdata('hospcode');
         $this->load->model("excel_export_model");
         $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp_needle3($hospcode);
-        $this->load->view("vaccine/excel_export_view", $data);
-    }
-    function vaccine_hosp_anc()
-    {
-        $hospcode= $this->session->userdata('hospcode');
-        $this->load->model("excel_export_model");
-        $data['vaccine_amp'] = $this->excel_export_model->fetch_vaccine_hosp_anc($hospcode);
         $this->load->view("vaccine/excel_export_view", $data);
     }
     function death_hosp()

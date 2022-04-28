@@ -176,6 +176,7 @@ class Excel_export_model extends CI_Model
         $this->log_model->save_log_view($this->session->userdata('id'), 'Download เป้าหมายวัคซีน hosp');
         //$vaccine = $this->load->database('vaccine', TRUE);
         $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,c.name as vaccine_status,vaccine_plan1_date ,vaccine_hosp1,vaccine_name1 
+        ,d.person_risk_type_name
         ,vaccine_plan2_date ,vaccine_hosp2,vaccine_name2 
         ,vaccine_plan3_date ,vaccine_hosp3,vaccine_name3 
         ,vaccine_plan4_date ,vaccine_hosp4,vaccine_name4
@@ -183,6 +184,7 @@ class Excel_export_model extends CI_Model
         FROM t_person_cid_hash a
         LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
         LEFT JOIN cvaccine_status c ON a.vaccine_status_survey = c.id
+        LEFT JOIN person_risk_type d ON a.risk_type_id = d.person_risk_type_id
         WHERE b.hoscode='".$hospcode."' AND a.DISCHARGE='9'
         AND a.need_needle3 IS NOT NULL ORDER BY a.HOSPCODE,a.vhid;";
         $rs = $this->db->query($sql)->result();
@@ -194,6 +196,7 @@ class Excel_export_model extends CI_Model
         $this->log_model->save_log_view($this->session->userdata('id'), 'Download เป้าหมายวัคซีน ANC hosp');
         //$vaccine = $this->load->database('vaccine', TRUE);
         $sql = "SELECT b.hoscode,b.hosname,a.cid, a.`NAME`,a.LNAME,a.BIRTH,a.age_y,a.vhid,a.addr,a.TYPEAREA,c.name as vaccine_status,vaccine_plan1_date ,vaccine_hosp1,vaccine_name1 
+        ,d.person_risk_type_name
         ,vaccine_plan2_date ,vaccine_hosp2,vaccine_name2 
         ,vaccine_plan3_date ,vaccine_hosp3,vaccine_name3 
         ,vaccine_plan4_date ,vaccine_hosp4,vaccine_name4
@@ -201,6 +204,7 @@ class Excel_export_model extends CI_Model
         FROM t_person_cid_hash a
         LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
         LEFT JOIN cvaccine_status c ON a.vaccine_status_survey = c.id
+        LEFT JOIN person_risk_type d ON a.risk_type_id = d.person_risk_type_id
         WHERE b.hoscode='".$hospcode."' AND a.DISCHARGE='9' AND TYPEAREA in(1,2,3)
         AND a.cid in (SELECT a.CID FROM anc a 
         WHERE DATE_SERV >= DATE_SUB(NOW(), INTERVAL 6 MONTH)  AND CID IS NOT NULL GROUP BY CID) ORDER BY a.HOSPCODE,a.vhid";
