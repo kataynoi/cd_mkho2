@@ -80,7 +80,7 @@ class User extends CI_Controller
     }
     public function login_asm()
     {
-        redirect( base_url().'/asm/index.php/user/login', 'refresh');
+        redirect( 'http://203.157.185.28/asm/index.php/user/login', 'refresh');
 
     }
     public function register()
