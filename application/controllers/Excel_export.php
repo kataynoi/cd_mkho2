@@ -102,6 +102,13 @@ class Excel_export extends CI_Controller
         $data['death_hosp'] = $this->excel_export_model->fetch_death_hosp($hospcode);
         $this->load->view("death/excel_export_view", $data);
     }
+    function runner_hosp()
+    {
+        $hospcode= $this->session->userdata('hospcode');
+        $this->load->model("excel_export_model");
+        $data['runner_hosp'] = $this->excel_export_model->fetch_runner_hosp($hospcode);
+        $this->load->view("runner/excel_export_view", $data);
+    }
 
 
     function action()

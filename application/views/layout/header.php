@@ -149,6 +149,11 @@
             <div> <i class="fa fa-save fa-fw"> </i>Download รายชื่อผู้เสียชีวิตเพื่อปรับปรุงข้อมูลการตาย</div>
         </a>
     </li>
+    <li>
+        <a href=<?php echo site_url('excel_export/runner_hosp') ?> target="_blank">
+            <div> <i class="fa fa-save fa-fw"> </i>ส่งออกรายชื่อผู้ลงทะเบียนก้าวท้าใจ </div>
+        </a>
+    </li>
     <li class="divider"></li>
     <li>
         <a href=<?php echo site_url('report/person_vaccine_amp') ?> target="_blank">

@@ -229,6 +229,22 @@ class Excel_export_model extends CI_Model
         return $rs;
     }
 
+    
+    function fetch_runner_hosp($hospcode)
+    {
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->session->userdata('id'), 'Download Runner hosp');
+        //$vaccine = $this->load->database('vaccine', TRUE);
+        $sql = "SELECT b.hoscode,b.hosname,a.CID, a.`NAME`,a.LNAME,a.BIRTH,
+        a.bib,a.age_y,sex,a.addr,a.vhid,a.mobile,a.weight,a.height,a.runner_type
+        FROM t_person_cid_hash a
+        LEFT JOIN (SELECT * FROM chospital WHERE provcode='44') as b ON a.HOSPCODE = b.hoscode
+        WHERE b.hoscode='".$hospcode."'AND a.invite_runner IS NOT NULL
+        ORDER BY a.HOSPCODE";
+        $rs = $this->db->query($sql)->result();
+        return $rs;
+    }
+
 
     public function get_cstatus_vaccine()
     {       $rs = $this->db
