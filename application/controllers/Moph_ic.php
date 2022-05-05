@@ -36,6 +36,7 @@ class Moph_ic extends CI_Controller
   }
   public function vaccine_check()
   {
+
     $this->layout->view('moph_ic/vaccine_check');
   }
   function call_visit_immun($cid)
@@ -94,7 +95,8 @@ class Moph_ic extends CI_Controller
         $rs = $this->moph_ic->set_vaccine($cid, '7');
       }
     } else {
-      $token_key = $this->get_token_from_api();
+      $user_id = $this->session->userdata('id');
+      $token_key = $this->get_token_from_api($user_id);
       $this->session->set_userdata('token_moph_ic', $token_key);
     }
   }
@@ -119,10 +121,12 @@ class Moph_ic extends CI_Controller
         $rows = json_encode($arr_result);
         $json = '{"success": true, "rows": ' . $rows . '}';
       }else {
-        $json = '{"success": false, "msg": "ไม่พบข้อมูล"}';
+        $json = '{"success": false, "msg": "ไม่พบข้อมูลวัคซีน"}';
       }
 
-    } 
+    }else if($history->MessageCode == 501){
+      $json = '{"success": false, "msg": "เลขบัตรประชาชนไม่ถูกต้อง"}';
+    }
     render_json($json);
   }
 
