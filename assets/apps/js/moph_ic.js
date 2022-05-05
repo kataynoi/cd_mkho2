@@ -15,7 +15,7 @@ crud.ajax = {
 
 };
 crud.vaccine_check = function (cid) {
-
+    $('#tbl_list > tbody').empty();
     crud.ajax.vaccine_check(cid, function (err, data) {
         if (err) {
             swal(err)
