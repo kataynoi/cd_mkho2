@@ -133,6 +133,11 @@ class Moph_ic extends CI_Controller
 
     // Run the function that will make a POST request and return the token 
     $token = $this->session->userdata('token_moph_ic');
+    if($token==""){
+      $user_id= $this->session->userdata('id');
+      $token=$this->get_token_from_api($user_id);
+      $this->session->set_userdata('token_moph_ic',$token);
+    }
     $url = "https://cvp1.moph.go.th/api/ImmunizationHistory?cid=" . $cid;
     $authorization = "Authorization: Bearer " . $token;
     $ch =  curl_init($url);
@@ -150,12 +155,12 @@ class Moph_ic extends CI_Controller
   }
 
 
-  protected  function get_token_from_api($user_id = 2)
+  protected  function get_token_from_api($user_id)
   {
 
     $rs = $this->moph_ic->get_user($user_id);
     $url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=" . $rs['user_moph_ic'] . "&password_hash=" . $rs['password_hash'] . "&hospital_code=" . $rs['hospcode'];
-    echo $url;
+    //echo $url;
     //$url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=u11056&password_hash=523D70B072507FA47B71B15A5CEE83A9186ACDA5358D6190BDF936F6FFEDD043&hospital_code=11056";
     $ch =  curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -165,7 +170,7 @@ class Moph_ic extends CI_Controller
     curl_setopt($ch, CURLOPT_TIMEOUT, 3);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
     $result = curl_exec($ch);
-    print_r($result);
+    //print_r($result);
 
     curl_close($ch);
     return $result;
