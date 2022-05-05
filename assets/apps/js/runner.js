@@ -189,9 +189,6 @@ function validate(items) {
   } else if (!items.weight) {
     swal("กรุณาระบุน้ำหนัก");
     $("#weight").focus();
-  } else if (items.bib != 0 && items.bib <= 3500000) {
-    swal("หมายเลขไม่ถูกต้อง");
-    $("#bib").focus();
   }  else if (!items.height) {
     swal("กรุณาระบุส่วนสูง");
     $("#height").focus();

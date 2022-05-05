@@ -1,57 +1,58 @@
 $(document).ready(function () {
   var crud = {};
-  $("#btn_login_moph_ic").on("click", function () {
-    crud.login_moph_ic();
-  });
-  $("#btn_check_vaccine").on("click", function () {
-    crud.check_vaccine();
+
+crud.ajax = {
+    vaccine_check: function (id, cb) {
+        var url = '/moph_ic/get_visit_immun',
+            params = {
+                cid: cid
+            }
+
+        app.ajax(url, params, function (err, data) {
+            err ? cb(err) : cb(null, data);
+        });
+    }
+
+};
+crud.vaccine_check = function (cid) {
+
+    crud.ajax.vaccine_check(cid, function (err, data) {
+        if (err) {
+            swal(err)
+            $('#tbl_list > tbody').append('<tr><td colspan="8">ไม่พบรายการ</td></tr>');
+        }else {
+            crud.set_data(data);
+        }
+    });
+}
+crud.set_data = function (data) {
+
+    $('#tbl_list > tbody').empty();
+    if (_.size(data.rows) > 0) {
+        _.each(data.rows, function (v) {
+           $('#tbl_list > tbody').append(
+                '<tr>' +
+                    '<td>' + v.vaccine_plan_no + '</td>' +
+                    '<td>' + app.mysql_to_thai_date(v.immunization_date) + '</td>' +
+                    '<td>' + v.ref_patient_name + '</td>' +
+                    '<td>' + v.vaccine_ref_name + '</td>' +
+                    '<td>' + v.hospital_name + '</td>' +
+                    '</tr>'
+            );
+
+        });
+    }
+    else {
+        $('#tbl_list > tbody').append('<tr><td colspan="8">ไม่พบรายการ</td></tr>');
+    }
+};
+
+
+  $("#btn_vaccine_check").on("click", function () {
+    
+      cid = $("#cid").val();
+      crud.vaccine_check(cid);
+    
   });
 
-  crud.login_moph_ic = function () {
-    var username = $("#username").val();
-    var password = $("#password").val();
-    var hospcode = $("#hospcode").val();
-    $.ajax({
-      method: "GET",
-      url: "https://cvp1.moph.go.th/token",
-      dataType: "json",
-      data: {
-        Action: "get_moph_access_token",
-        user: username,
-        password_hash: password,
-        hospital_code: hospcode,
-      },
-      success: function (data) {
-        $("#token").val(data);
-        window.localStorage.setItem("token_moph_ic", data);
-        //console.log(data);
-      },
-      error: function (status) {
-        console.log("Error occured");
-      },
-    });
-  };
-
-  crud.check_vaccine = function () {
-    var token = $("#token").val();
-    var cid = $("#cid").val();
-    $.ajax({
-      method: "GET",
-      url: "https://cloud4.hosxp.net/api/moph/ImmunizationHistory",
-      dataType: "json",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token_moph_ic"),
-        "Access-Control-Allow-Origin": "*",
-      },
-      data: {
-        cid: cid,
-      },
-      success: function (data) {
-        console.log(data);
-      },
-      error: function (status) {
-        console.log("Error occured");
-      },
-    });
-  };
 });

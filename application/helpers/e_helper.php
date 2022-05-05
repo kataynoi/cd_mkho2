@@ -498,7 +498,7 @@ if (!function_exists('get_hospital_name')) {
     {
         $ci = &get_instance();
         $rs = $ci->db
-            ->where(array('id' => $code))
+            ->where(array('hoscode' => $code))
             ->get('chospital')
             ->row();
         return $rs ? $rs->hosname : '-';

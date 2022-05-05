@@ -80,6 +80,15 @@ class User_model extends CI_Model
         //echo $this->db->last_query();
         return $rs;
     }
+    function do_auth_moph_ic($username, $password)
+    {
+        $rs = $this->db
+            ->where('username', $username)
+            ->where('password', $password)
+            ->get('user_moph_ic')
+            ->row_array();
+        return $rs;
+    }
     function do_auth_mobile($tel)
     {
         $rs = $this->db

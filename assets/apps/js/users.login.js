@@ -54,6 +54,16 @@ $(document).ready(function () {
         err ? cb(err) : cb(null, data);
       });
     },
+    do_auth_moph_ic: function (username, password, cb) {
+      var url = "/user/do_auth_moph_ic",
+        params = {
+          username: username,
+          password: password,
+        };
+      app.ajax(url, params, function (err, data) {
+        err ? cb(err) : cb(null, data);
+      });
+    },
     do_auth_mobile: function (tel, cb) {
       var url = "/user/do_auth_mobile",
         params = {
@@ -142,7 +152,19 @@ $(document).ready(function () {
       }
     });
   };
-
+  users.do_auth_moph_ic = function (username, password) {
+    users.ajax.do_auth_moph_ic(username, password, function (err, data) {
+      if (err) {
+        swal(err);
+        //window.location = site_url + "/moph_ic/vaccine_check";
+      } else {
+        if (data.success) {
+          //swal('Login Success');
+          window.location = site_url + "/moph_ic/vaccine_check";
+        }
+      }
+    });
+  };
   users.do_auth_mobile = function (tel) {
     users.ajax.do_auth_mobile(tel, function (err, data) {
       if (err) {
@@ -244,7 +266,18 @@ $(document).ready(function () {
     users.do_auth_mobile(tel);
   });
   //regis_login_mobile
+  $("#btn_login_moph_ic").on("click", function (e) {
+    e.preventDefault();
+    console.log("click");
+    var username = $("#username").val();
+    var password = $("#password").val();
 
+    if (!username || !password) {
+      swal("ระบุ Username Password ให้ครบถ้วน");
+      return false;
+    }
+    users.do_auth_moph_ic(username, password);
+  });
   $("#regis_login_mobile").on("click", function (e) {
     e.preventDefault();
 

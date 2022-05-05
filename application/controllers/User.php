@@ -43,6 +43,17 @@ class User extends CI_Controller
         }
 
     }
+
+    public function login_moph_ic()
+    {
+        if ($this->session->userdata('moph_ic_login')) {
+            redirect(site_url(), 'refresh');
+        } else {
+            $this->load->view('user/login_moph_ic');
+            console_log($this->session->userdata('fullname'));
+        }
+
+    }
     public function login_org()
     {
         if ($this->session->userdata('org_login')==1) {
@@ -52,7 +63,6 @@ class User extends CI_Controller
             $this->load->view('user/login_org');
             console_log($this->session->userdata('fullname'));
         }
-
     }
 
     public function login_hospital()
@@ -64,7 +74,6 @@ class User extends CI_Controller
             $this->load->view('user/login_hospital');
             console_log($this->session->userdata('fullname'));
         }
-
     }
 
     public function login_comeback()
@@ -188,10 +197,6 @@ class User extends CI_Controller
         $password = $this->input->post('password');
         if(1==1){
             $rs = $this->user->do_auth_org($username, $password);
-             //echo $rs['id'];
-             /*$rs['id']='55';
-             $rs['org_name']='Admin';
-                $org = "false";*/
         if ($rs['id']) {
             $rs['org_login'] = true;
             $rs['fullname'] = $rs['org_name'];
@@ -221,6 +226,26 @@ class User extends CI_Controller
             $rs['hospital_login'] = true;
             $rs['fullname'] = $rs['hosname'];
             $rs['user_level'] = $rs['user_level'];
+            $this->session->set_userdata($rs);
+            $json = '{"success": true, "msg": "" }';
+        } else {
+            $json = '{"success": false, "msg": "Username หรือ Password ไม่ถูกต้อง"}';
+        }
+
+        render_json($json);
+    }
+    public function do_auth_moph_ic()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        
+        $rs = $this->user->do_auth_moph_ic($username, $password);
+  
+        if ($rs['id']) {
+            $rs['id'] = $rs['id'];
+            $rs['hospcode'] = $rs['hospcode'];
+            $rs['moph_ic_login'] = true;
+            $rs['fullname'] = $rs['name'];
             $this->session->set_userdata($rs);
             $json = '{"success": true, "msg": "" }';
         } else {
