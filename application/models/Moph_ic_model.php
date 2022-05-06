@@ -62,7 +62,7 @@ class Moph_ic_model extends CI_Model
         $rs = $this->db
             ->set("user_id", $user_id)
             ->set("person_cid", $cid)
-            ->set("date_log", date('Y-m-d h:i:s'))
+            ->set("date_log", date('Y-m-d H:i:s'))
             ->insert('log_moph_ic');
 
         return $rs;
