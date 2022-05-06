@@ -10,6 +10,7 @@ class Moph_ic extends CI_Controller
     if (!$this->session->userdata("moph_ic_login"))
       redirect(site_url("user/login_moph_ic"));
     $this->load->model('Moph_ic_model', 'moph_ic');
+    $this->user_id = $this->session->userdata('id');
   }
 
   public function call_api()
@@ -36,7 +37,7 @@ class Moph_ic extends CI_Controller
   }
   public function vaccine_check()
   {
-
+    $this->layout->setHeader('layout/header_vaccine_check');
     $this->layout->view('moph_ic/vaccine_check');
   }
   function call_visit_immun($cid)
@@ -104,6 +105,7 @@ class Moph_ic extends CI_Controller
   function get_visit_immun()
   {
     $cid = $this->input->post('cid');
+    $this->moph_ic->save_log_moph_ic($this->user_id,$cid);
     $history = $this->get_data_from_api($cid);
     if ($history->MessageCode == 200) {
       if (isset($history->result->patient->visit)) {

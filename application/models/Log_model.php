@@ -17,7 +17,7 @@ class Log_model extends CI_Model
         $rs = $this->db
             ->set("user_id", $id)
             ->set("item_name", $name)
-            ->set("d_update", date('Y-m-d H:m:s'))
+            ->set("d_update", date('Y-m-d h:i:s'))
             ->insert('log_download');
 
         return $rs;
@@ -29,7 +29,7 @@ class Log_model extends CI_Model
         $rs = $this->db
             ->set("user_id", $id)
             ->set("item_name", $name)
-            ->set("d_update", date('Y-m-d H:m:s'))
+            ->set("d_update", date('Y-m-d h:i:s'))
             ->insert('log_view');
 
         return $rs;

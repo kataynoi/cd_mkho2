@@ -57,4 +57,15 @@ class Moph_ic_model extends CI_Model
             ->row_array();
         return $rs;
     }
+    public function save_log_moph_ic($user_id, $cid)
+    {
+        $rs = $this->db
+            ->set("user_id", $user_id)
+            ->set("person_cid", $cid)
+            ->set("date_log", date('Y-m-d H:m:s'))
+            ->insert('log_moph_ic');
+
+        return $rs;
+
+    }
 }

@@ -154,6 +154,11 @@ class User extends CI_Controller
         $this->session->sess_destroy();
         redirect(site_url('user/login_org'), 'refresh');
     }
+    public function logout_moph_ic()
+    {
+        $this->session->sess_destroy();
+        redirect(site_url('user/login_moph_ic'), 'refresh');
+    }
     public function logout_comeback()
     {
         $this->session->sess_destroy();
