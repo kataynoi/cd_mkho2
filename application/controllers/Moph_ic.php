@@ -105,8 +105,9 @@ class Moph_ic extends CI_Controller
   function get_visit_immun()
   {
     $cid = $this->input->post('cid');
-    $this->moph_ic->save_log_moph_ic($this->user_id,$cid);
+    $this->moph_ic->save_log_moph_ic($this->user_id, $cid);
     $history = $this->get_data_from_api($cid);
+    //echo $history;
     if ($history->MessageCode == 200) {
       if (isset($history->result->patient->visit)) {
         $arr_result = array();
@@ -122,11 +123,10 @@ class Moph_ic extends CI_Controller
         }
         $rows = json_encode($arr_result);
         $json = '{"success": true, "rows": ' . $rows . '}';
-      }else {
+      } else {
         $json = '{"success": false, "msg": "ไม่พบข้อมูลวัคซีน"}';
       }
-
-    }else if($history->MessageCode == 501){
+    } else if ($history->MessageCode == 501) {
       $json = '{"success": false, "msg": "เลขบัตรประชาชนไม่ถูกต้อง"}';
     }
     render_json($json);
@@ -136,13 +136,12 @@ class Moph_ic extends CI_Controller
 
   function get_data_from_api($cid)
   {
-
     // Run the function that will make a POST request and return the token 
     $token = $this->session->userdata('token_moph_ic');
-    if($token==""){
-      $user_id= $this->session->userdata('id');
-      $token=$this->get_token_from_api($user_id);
-      $this->session->set_userdata('token_moph_ic',$token);
+    if ($token == "") {
+      $user_id = $this->session->userdata('id');
+      $token = $this->get_token_from_api($user_id);
+      $this->session->set_userdata('token_moph_ic', $token);
     }
     $url = "https://cvp1.moph.go.th/api/ImmunizationHistory?cid=" . $cid;
     $authorization = "Authorization: Bearer " . $token;
@@ -166,8 +165,6 @@ class Moph_ic extends CI_Controller
 
     $rs = $this->moph_ic->get_user($user_id);
     $url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=" . $rs['user_moph_ic'] . "&password_hash=" . $rs['password_hash'] . "&hospital_code=" . $rs['hospcode'];
-    //echo $url;
-    //$url = "https://cvp1.moph.go.th/token?Action=get_moph_access_token&user=u11056&password_hash=523D70B072507FA47B71B15A5CEE83A9186ACDA5358D6190BDF936F6FFEDD043&hospital_code=11056";
     $ch =  curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -183,4 +180,5 @@ class Moph_ic extends CI_Controller
   }
 
   // Run the initial function
+ 
 }

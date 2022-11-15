@@ -39,6 +39,11 @@
                 </a>
             </li>
             <li>
+                <a href="<?php echo site_url('person_vaccine_epi1'); ?>">
+                    <div> <i class="fa fa-save fa-fw"> </i>บันทึกข้อมูลสำรวจวัคซีน กลุ่ม 6 เดือน - 4 ปี</div>
+                </a>
+            </li>
+            <li>
                 <a href="<?php echo site_url('person_vaccine_needle3_set'); ?>">
                     <div> <i class="fa fa-save fa-fw"> </i>กำหนดเป้าหมายเข็ม 3 </div>
                 </a>

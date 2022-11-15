@@ -7,12 +7,10 @@ crud.ajax = {
             params = {
                 cid: cid
             }
-
         app.ajax(url, params, function (err, data) {
             err ? cb(err) : cb(null, data);
         });
     }
-
 };
 crud.vaccine_check = function (cid) {
     $('#tbl_list > tbody').empty();
@@ -39,20 +37,15 @@ crud.set_data = function (data) {
                     '<td>' + v.hospital_name + '</td>' +
                     '</tr>'
             );
-
         });
     }
     else {
         $('#tbl_list > tbody').append('<tr><td colspan="8">ไม่พบรายการ</td></tr>');
     }
 };
-
-
   $("#btn_vaccine_check").on("click", function () {
     
       cid = $("#cid").val();
       crud.vaccine_check(cid);
-    
   });
-
 });
