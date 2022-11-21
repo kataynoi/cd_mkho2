@@ -72,7 +72,7 @@ $('#btn-28').on('click', function() {
                     <th>เสียชีวิตแล้ว</th>
                     <th>ต้องการฉีดวัคซีน</th>
                     <th>ร้อยละการตรวจสอบ</th>
-                    <th>อายุต่ำกว่า 5 ปี</th>
+
 
                 </tr>
             </thead>
@@ -80,7 +80,7 @@ $('#btn-28').on('click', function() {
                 <?php
                 $n=1;
            $total1=0;$total1=0;$total2=0;$total3=0;$total4=0;$total5=0;
-           $total6=0;$total7=0;$total8=0;$total9=0;$total10=0;$total11=0;$total12=0;$total13=0;
+           $total6=0;$total7=0;$total8=0;$total9=0;$total10=0;$total12=0;$total13=0;
             foreach ($report as $r) {
                 $all_recheck = $r->wait+$r->reject+$r->out_province+$r->out_country+$r->death+$r->need_vaccine;
                 $recheck = $r->reject+$r->out_province+$r->out_country+$r->death+$r->need_vaccine;
@@ -104,8 +104,7 @@ $('#btn-28').on('click', function() {
                     <td>".number_format($r->out_country)." </td>
                     <td>".number_format($r->death)." </td>
                     <td>".number_format($r->need_vaccine)." </td>
-                    <td>".number_format($percent_recheck,2)." </td>
-                    <td>".number_format($r->out_target)." </td></tr>
+                    <td>".number_format($percent_recheck,2)." </td></tr>
                     "
                     ;
                     $n++;
@@ -119,7 +118,7 @@ $('#btn-28').on('click', function() {
                     $total8 +=$r->out_country;
                     $total9 +=$r->death;
                     $total10 +=$r->need_vaccine;
-                    $total11 +=$r->out_target;
+                   
                     $total12 +=$all_recheck;
                     $total13 +=$recheck;
             
@@ -140,7 +139,6 @@ $('#btn-28').on('click', function() {
                    
                     <td class='text-center'>" . number_format($total10) . "</td>
                     <td class='text-center'>" . number_format($total13*100/$total12,2) . "</td>
-                    <td class='text-center'>" . number_format($total11) . "</td>
                     </tr>"
             ?>
             </tbody>

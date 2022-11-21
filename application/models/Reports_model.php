@@ -203,7 +203,6 @@ class Reports_model extends CI_Model
         , SUM(IF( vaccine_status_survey='5' ,1,0 )) as out_country
         , SUM(IF( vaccine_status_survey='6' ,1,0 )) as death
         , SUM(IF( vaccine_status_survey='8' ,1,0 )) as need_vaccine
-        , SUM(IF( vaccine_status_survey='9' ,1,0 )) as out_target
         from t_person_cid_hash a
         LEFT JOIN (SELECT  * FROM cvillage WHERE changwatcode='44') b ON a.vhid= b.villagecodefull
         LEFT JOIN (SELECT * FROM campur WHERE changwatcode='44') c ON b.ampurcode = c.ampurcodefull
