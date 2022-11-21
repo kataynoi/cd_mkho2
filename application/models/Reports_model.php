@@ -158,6 +158,66 @@ class Reports_model extends CI_Model
         return $rs;
     }
 
+    public function person_vaccine_064($ampur='',$tambon='',$vaccine_time=1)
+    {
+
+        if($ampur==''){
+            $where = " ";
+            $group=" left(a.vhid,4)";
+            $select="c.ampurname as name";
+        }else if($ampur!='' && $tambon=='' ){
+            $where = "AND left(a.vhid,4)= '".$ampur."' ";
+            $group=" left(a.vhid,6)";
+            $select="d.tambonname as name";
+        }else if($ampur!='' && $tambon!=''){
+            $where = "AND left(a.vhid,6)= '".$tambon."' ";
+            $group=" left(a.vhid,8)";
+            $select="CONCAT(b.villagename,'[',b.villagecode,']') as name";
+        }
+        $txt_hosp ='';
+        switch ($vaccine_time){
+            case 1:
+                $txt_hosp = 'a.vaccine_hosp1';
+                break;
+            case 2:
+                $txt_hosp = 'a.vaccine_hosp2';
+                break;
+            case 3 :
+                $txt_hosp = 'a.vaccine_hosp3';
+                break;
+            case 4:
+                $txt_hosp = 'a.vaccine_hosp4';
+                break;
+            case 5:
+                $txt_hosp = 'a.vaccine_hosp5';
+                break;
+
+        }
+        $sql = "select ".$select.", count(*) as person
+        , SUM(IF(".$txt_hosp." IS NOT NULL,1,0)) as person_plan1
+        , SUM(IF(a.vaccine_provcode='44' AND ".$txt_hosp." IS NOT NULL,1,0)) as person_plan1_mk
+        , SUM(IF(a.vaccine_provcode!='44' AND ".$txt_hosp." IS NOT NULL ,1,0 )) as person_plan1_notmk
+        , SUM(IF( vaccine_status_survey='2' ,1,0 )) as wait
+        , SUM(IF( vaccine_status_survey='3' ,1,0 )) as reject
+        , SUM(IF( vaccine_status_survey='4' ,1,0 )) as out_province
+        , SUM(IF( vaccine_status_survey='5' ,1,0 )) as out_country
+        , SUM(IF( vaccine_status_survey='6' ,1,0 )) as death
+        , SUM(IF( vaccine_status_survey='8' ,1,0 )) as need_vaccine
+        , SUM(IF( vaccine_status_survey='9' ,1,0 )) as out_target
+        from t_person_cid_hash a
+        LEFT JOIN (SELECT  * FROM cvillage WHERE changwatcode='44') b ON a.vhid= b.villagecodefull
+        LEFT JOIN (SELECT * FROM campur WHERE changwatcode='44') c ON b.ampurcode = c.ampurcodefull
+        LEFT JOIN (SELECT * FROM ctambon WHERE changwatcode='44') d ON left(a.vhid,6) = d.tamboncodefull
+        
+        where  a.DISCHARGE=9 AND TYPEAREA in(1,2,3)  AND age_y <=4
+        AND vaccine_status_survey <>9 AND LEFT(a.vhid,2)='44'".$where."
+        GROUP BY ".$group;
+        //echo $sql;
+        $rs = $this->db->query($sql)->result();
+        //echo $this->db->last_query();
+
+        return $rs;
+    }
     
     public function person_vaccine_hosp($ampur='',$tambon='')
     {
