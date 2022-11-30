@@ -86,6 +86,23 @@ class Report extends CI_Controller
         $data['report'] = $this->crud->person_vaccine_064($ampur,$tambon,$vaccine_time);
         $this->layout->view('reports/person_vaccine_064', $data);
     }
+
+    public function  person_vaccine_asm()
+    {
+        $ampur=$this->input->post('ampurcode');
+        $this->session->set_userdata('sl_amp',$ampur);
+        $tambon=$this->input->post('tamboncode');
+        $this->session->set_userdata('sl_tamboncode',$tambon);
+        $vaccine_time=$this->input->post('vaccine_time');
+        $this->session->set_userdata('vaccine_time',$vaccine_time);
+        if($vaccine_time==''){ $vaccine_time=1;}
+       // echo "tambon".$tambon;
+        $data['amp']=$this->basic->get_ampur_list('44');
+        $this->load->model('log_model');
+        $this->log_model->save_log_view($this->id, 'รายงาน กลุ่มเป้าหมายวัคซีน อสม.');
+        $data['report'] = $this->crud->person_vaccine_asm($ampur,$tambon,$vaccine_time);
+        $this->layout->view('reports/person_vaccine_asm', $data);
+    }
     public function  countdown()
     {
         $ampur=$this->input->post('ampurcode');
